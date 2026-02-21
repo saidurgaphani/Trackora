@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const categories = [
     {
@@ -60,6 +61,12 @@ const categories = [
 ];
 
 const ProgrammingSection = () => {
+    const navigate = useNavigate();
+
+    const handleNavigation = () => {
+        navigate("/login", { state: { from: "/student/courses" } });
+    };
+
     return (
         <section className="mx-auto max-w-7xl px-4 py-20 lg:px-8">
             <div className="mb-12 text-center">
@@ -74,6 +81,7 @@ const ProgrammingSection = () => {
                 {categories.map((cat, i) => (
                     <motion.div
                         key={cat.title}
+                        onClick={handleNavigation}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}

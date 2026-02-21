@@ -45,6 +45,7 @@ export const AuthProvider = ({ children }) => {
     const logout = async () => {
         try {
             await signOut(auth);
+            localStorage.removeItem('token');
             window.location.replace('/');
         } catch (error) {
             console.error("Error signing out:", error);

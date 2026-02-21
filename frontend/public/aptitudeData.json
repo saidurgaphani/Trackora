@@ -1,0 +1,121 @@
+[
+    {
+        "id": 1,
+        "title": "Quantitative Aptitude",
+        "icon": "🔢",
+        "topics": [
+            {
+                "title": "Number System",
+                "difficulty": "Easy",
+                "concepts": [
+                    "LCM & HCF",
+                    "Divisibility Rules",
+                    "Unit Digit",
+                    "Remainder Theorem"
+                ],
+                "problems": [
+                    {
+                        "id": "apt_num_1",
+                        "title": "Numbers Practice - IndiaBIX",
+                        "url": "https://www.indiabix.com/aptitude/numbers/",
+                        "platform": "ibix"
+                    },
+                    {
+                        "id": "apt_num_2",
+                        "title": "HCF & LCM - GeeksforGeeks",
+                        "url": "https://www.geeksforgeeks.org/problems/lcm-and-hcf2157/1",
+                        "platform": "gfg"
+                    }
+                ]
+            },
+            {
+                "title": "Percentage & Profit Loss",
+                "difficulty": "Medium",
+                "concepts": [
+                    "Basic Percentages",
+                    "Successive Change",
+                    "Cost Price & Selling Price",
+                    "Discount"
+                ],
+                "problems": [
+                    {
+                        "id": "apt_perc_1",
+                        "title": "Percentage Sets - IndiaBIX",
+                        "url": "https://www.indiabix.com/aptitude/percentage/",
+                        "platform": "ibix"
+                    },
+                    {
+                        "id": "apt_perc_2",
+                        "title": "Profit and Loss - Javatpoint",
+                        "url": "https://www.javatpoint.com/aptitude-profit-and-loss",
+                        "platform": "jtp"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "title": "Logical Reasoning",
+        "icon": "🧠",
+        "topics": [
+            {
+                "title": "Coding-Decoding",
+                "difficulty": "Medium",
+                "concepts": [
+                    "Letter Coding",
+                    "Number Coding",
+                    "Mixed Coding"
+                ],
+                "problems": [
+                    {
+                        "id": "apt_log_1",
+                        "title": "Coding-Decoding - IndiaBIX",
+                        "url": "https://www.indiabix.com/logical-reasoning/coding-and-decoding/",
+                        "platform": "ibix"
+                    }
+                ]
+            },
+            {
+                "title": "Blood Relations",
+                "difficulty": "Easy",
+                "concepts": [
+                    "Family Tree",
+                    "Direct Relations",
+                    "Coded Relations"
+                ],
+                "problems": [
+                    {
+                        "id": "apt_log_2",
+                        "title": "Blood Relation - GeeksforGeeks",
+                        "url": "https://www.geeksforgeeks.org/logical-reasoning-blood-relations/",
+                        "platform": "gfg"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "title": "Verbal Ability",
+        "icon": "🗣️",
+        "topics": [
+            {
+                "title": "Synonyms & Antonyms",
+                "difficulty": "Medium",
+                "concepts": [
+                    "Vocabulary Building",
+                    "Contextual Usage"
+                ],
+                "problems": [
+                    {
+                        "id": "apt_verb_1",
+                        "title": "Synonyms - IndiaBIX",
+                        "url": "https://www.indiabix.com/verbal-ability/synonyms/",
+                        "platform": "ibix"
+                    }
+                ]
+            }
+        ]
+    }
+]

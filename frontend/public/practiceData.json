@@ -1,0 +1,2327 @@
+[
+  {
+    "id": 1,
+    "title": "Data Types & Variables",
+    "icon": "🔤",
+    "topics": [
+      {
+        "title": "Basic Types & Type Casting",
+        "difficulty": "Easy",
+        "code": "<span class=\"cm\"># Primitive types</span>\n<span class=\"var\">x</span><span class=\"op\">=</span><span class=\"num\">42</span>       <span class=\"cm\"># int</span>\n<span class=\"var\">y</span><span class=\"op\">=</span><span class=\"num\">3.14</span>     <span class=\"cm\"># float</span>\n<span class=\"var\">s</span><span class=\"op\">=</span><span class=\"str\">\"hello\"</span>   <span class=\"cm\"># str</span>\n<span class=\"var\">b</span><span class=\"op\">=</span><span class=\"kw\">True</span>      <span class=\"cm\"># bool</span>\n<span class=\"var\">c</span><span class=\"op\">=</span><span class=\"num\">2</span><span class=\"op\">+</span><span class=\"num\">3j</span>      <span class=\"cm\"># complex</span>\n<span class=\"cm\"># Casting</span>\n<span class=\"fn\">int</span>(<span class=\"str\">\"42\"</span>)    <span class=\"cm\"># 42</span>\n<span class=\"fn\">float</span>(<span class=\"num\">7</span>)    <span class=\"cm\"># 7.0</span>\n<span class=\"fn\">str</span>(<span class=\"num\">3.14</span>)   <span class=\"cm\"># \"3.14\"</span>\n<span class=\"fn\">bool</span>(<span class=\"num\">0</span>)     <span class=\"cm\"># False</span>\n<span class=\"fn\">bin</span>(<span class=\"num\">10</span>)     <span class=\"cm\"># \"0b1010\"</span>\n<span class=\"fn\">hex</span>(<span class=\"num\">255</span>)    <span class=\"cm\"># \"0xff\"</span>",
+        "problems": [
+          {
+            "url": "https://www.hackerrank.com/challenges/python-arithmetic-operators/problem",
+            "platform": "hr",
+            "title": "HR: Arithmetic Ops",
+            "id": "https://www.hackerrank.com/challenges/python-arithmetic-operators/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-print/problem",
+            "platform": "hr",
+            "title": "HR: Python Print",
+            "id": "https://www.hackerrank.com/challenges/python-print/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-integers-come-in-all-sizes/problem",
+            "platform": "hr",
+            "title": "HR: Integer Sizes",
+            "id": "https://www.hackerrank.com/challenges/python-integers-come-in-all-sizes/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-float/problem",
+            "platform": "hr",
+            "title": "HR: Float",
+            "id": "https://www.hackerrank.com/challenges/python-float/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-division/problem",
+            "platform": "hr",
+            "title": "HR: Division",
+            "id": "https://www.hackerrank.com/challenges/python-division/problem"
+          },
+          {
+            "url": "https://leetcode.com/problems/number-of-1-bits/",
+            "platform": "lc",
+            "title": "LC: Count 1 Bits",
+            "id": "https://leetcode.com/problems/number-of-1-bits/"
+          },
+          {
+            "url": "https://leetcode.com/problems/reverse-bits/",
+            "platform": "lc",
+            "title": "LC: Reverse Bits",
+            "id": "https://leetcode.com/problems/reverse-bits/"
+          },
+          {
+            "url": "https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/",
+            "platform": "lc",
+            "title": "LC: Binary to Int",
+            "id": "https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/sum-of-digits1742/1",
+            "platform": "gfg",
+            "title": "GFG: Sum of Digits",
+            "id": "https://www.geeksforgeeks.org/problems/sum-of-digits1742/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/convert-to-binary-string/1",
+            "platform": "gfg",
+            "title": "GFG: To Binary String",
+            "id": "https://www.geeksforgeeks.org/problems/convert-to-binary-string/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/START01",
+            "platform": "cc",
+            "title": "CC: Getting Started",
+            "id": "https://www.codechef.com/problems/START01"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1/A",
+            "platform": "cf",
+            "title": "CF: Theatre Square",
+            "id": "https://codeforces.com/problemset/problem/1/A"
+          }
+        ],
+        "concepts": [
+          "int",
+          "float",
+          "str",
+          "bool",
+          "complex",
+          "type()",
+          "bin/hex/oct"
+        ]
+      },
+      {
+        "title": "String Operations & Methods",
+        "difficulty": "Easy",
+        "code": "<span class=\"var\">s</span> <span class=\"op\">=</span> <span class=\"str\">\"Python Rocks\"</span>\n<span class=\"var\">s</span><span class=\"op\">.</span><span class=\"fn\">upper</span>()         <span class=\"cm\"># \"PYTHON ROCKS\"</span>\n<span class=\"var\">s</span><span class=\"op\">.</span><span class=\"fn\">lower</span>()         <span class=\"cm\"># \"python rocks\"</span>\n<span class=\"var\">s</span><span class=\"op\">.</span><span class=\"fn\">split</span>()         <span class=\"cm\"># [\"Python\",\"Rocks\"]</span>\n<span class=\"var\">s</span><span class=\"op\">.</span><span class=\"fn\">replace</span>(<span class=\"str\">\"Rocks\"</span>,<span class=\"str\">\"Rules\"</span>)\n<span class=\"var\">s</span>[<span class=\"num\">0</span><span class=\"op\">:</span><span class=\"num\">6</span>]            <span class=\"cm\"># \"Python\" (slice)</span>\n<span class=\"var\">s</span>[<span class=\"op\">::</span><span class=\"op\">-</span><span class=\"num\">1</span>]           <span class=\"cm\"># reverse</span>\n<span class=\"fn\">f</span><span class=\"str\">\"Name:{s}\"</span>       <span class=\"cm\"># f-string</span>\n<span class=\"str\">\" hi \"</span><span class=\"op\">.</span><span class=\"fn\">strip</span>()   <span class=\"cm\"># \"hi\"</span>\n<span class=\"str\">\",\"</span><span class=\"op\">.</span><span class=\"fn\">join</span>([<span class=\"str\">\"a\"</span>,<span class=\"str\">\"b\"</span>])<span class=\"cm\"># \"a,b\"</span>\n<span class=\"var\">s</span><span class=\"op\">.</span><span class=\"fn\">count</span>(<span class=\"str\">\"o\"</span>)      <span class=\"cm\"># 2</span>\n<span class=\"var\">s</span><span class=\"op\">.</span><span class=\"fn\">startswith</span>(<span class=\"str\">\"Py\"</span>)<span class=\"cm\"># True</span>",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/reverse-string/",
+            "platform": "lc",
+            "title": "LC: Reverse String",
+            "id": "https://leetcode.com/problems/reverse-string/"
+          },
+          {
+            "url": "https://leetcode.com/problems/valid-anagram/",
+            "platform": "lc",
+            "title": "LC: Valid Anagram",
+            "id": "https://leetcode.com/problems/valid-anagram/"
+          },
+          {
+            "url": "https://leetcode.com/problems/first-unique-character-in-a-string/",
+            "platform": "lc",
+            "title": "LC: First Unique Char",
+            "id": "https://leetcode.com/problems/first-unique-character-in-a-string/"
+          },
+          {
+            "url": "https://leetcode.com/problems/palindrome-number/",
+            "platform": "lc",
+            "title": "LC: Palindrome",
+            "id": "https://leetcode.com/problems/palindrome-number/"
+          },
+          {
+            "url": "https://leetcode.com/problems/longest-common-prefix/",
+            "platform": "lc",
+            "title": "LC: Longest Common Prefix",
+            "id": "https://leetcode.com/problems/longest-common-prefix/"
+          },
+          {
+            "url": "https://leetcode.com/problems/reverse-words-in-a-string/",
+            "platform": "lc",
+            "title": "LC: Reverse Words",
+            "id": "https://leetcode.com/problems/reverse-words-in-a-string/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/mutations/problem",
+            "platform": "hr",
+            "title": "HR: Mutations",
+            "id": "https://www.hackerrank.com/challenges/mutations/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-string-split-and-join/problem",
+            "platform": "hr",
+            "title": "HR: Split & Join",
+            "id": "https://www.hackerrank.com/challenges/python-string-split-and-join/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/whats-your-name/problem",
+            "platform": "hr",
+            "title": "HR: What's Your Name",
+            "id": "https://www.hackerrank.com/challenges/whats-your-name/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/string-formatting/problem",
+            "platform": "hr",
+            "title": "HR: String Formatting",
+            "id": "https://www.hackerrank.com/challenges/string-formatting/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/reverse-words-in-a-given-string5459/1",
+            "platform": "gfg",
+            "title": "GFG: Reverse Words",
+            "id": "https://www.geeksforgeeks.org/problems/reverse-words-in-a-given-string5459/1"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/96/A",
+            "platform": "cf",
+            "title": "CF: Football Kit",
+            "id": "https://codeforces.com/problemset/problem/96/A"
+          }
+        ],
+        "concepts": [
+          "slice",
+          "f-string",
+          "strip",
+          "split/join",
+          "count",
+          "startswith",
+          "zfill"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Data Structures",
+    "icon": "📦",
+    "topics": [
+      {
+        "title": "Lists & Comprehensions",
+        "difficulty": "Easy",
+        "code": "<span class=\"var\">lst</span><span class=\"op\">=</span>[<span class=\"num\">1</span>,<span class=\"num\">2</span>,<span class=\"num\">3</span>]\n<span class=\"var\">lst</span><span class=\"op\">.</span><span class=\"fn\">append</span>(<span class=\"num\">6</span>)    <span class=\"cm\"># O(1)</span>\n<span class=\"var\">lst</span><span class=\"op\">.</span><span class=\"fn\">insert</span>(<span class=\"num\">0</span>,<span class=\"num\">0</span>)  <span class=\"cm\"># O(n)</span>\n<span class=\"var\">lst</span><span class=\"op\">.</span><span class=\"fn\">pop</span>()        <span class=\"cm\"># O(1)</span>\n<span class=\"var\">lst</span><span class=\"op\">.</span><span class=\"fn\">sort</span>()       <span class=\"cm\"># Timsort O(n log n)</span>\n<span class=\"fn\">sorted</span>(<span class=\"var\">lst</span>,<span class=\"var\">key</span><span class=\"op\">=</span><span class=\"kw\">lambda</span> <span class=\"var\">x</span>:<span class=\"op\">-</span><span class=\"var\">x</span>)\n<span class=\"cm\"># Comprehensions</span>\n<span class=\"var\">evens</span>  <span class=\"op\">=</span>[<span class=\"var\">x</span> <span class=\"kw\">for</span> <span class=\"var\">x</span> <span class=\"kw\">in</span> <span class=\"var\">lst</span> <span class=\"kw\">if</span> <span class=\"var\">x</span><span class=\"op\">%</span><span class=\"num\">2</span><span class=\"op\">==</span><span class=\"num\">0</span>]\n<span class=\"var\">squares</span><span class=\"op\">=</span>[<span class=\"var\">x</span><span class=\"op\">**</span><span class=\"num\">2</span> <span class=\"kw\">for</span> <span class=\"var\">x</span> <span class=\"kw\">in</span> <span class=\"fn\">range</span>(<span class=\"num\">10</span>)]\n<span class=\"var\">flat</span>   <span class=\"op\">=</span>[<span class=\"var\">n</span> <span class=\"kw\">for</span> <span class=\"var\">r</span> <span class=\"kw\">in</span> <span class=\"var\">mat</span> <span class=\"kw\">for</span> <span class=\"var\">n</span> <span class=\"kw\">in</span> <span class=\"var\">r</span>]",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/two-sum/",
+            "platform": "lc",
+            "title": "LC: Two Sum",
+            "id": "https://leetcode.com/problems/two-sum/"
+          },
+          {
+            "url": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
+            "platform": "lc",
+            "title": "LC: Stock Profit",
+            "id": "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/"
+          },
+          {
+            "url": "https://leetcode.com/problems/contains-duplicate/",
+            "platform": "lc",
+            "title": "LC: Contains Duplicate",
+            "id": "https://leetcode.com/problems/contains-duplicate/"
+          },
+          {
+            "url": "https://leetcode.com/problems/product-of-array-except-self/",
+            "platform": "lc",
+            "title": "LC: Product Except Self",
+            "id": "https://leetcode.com/problems/product-of-array-except-self/"
+          },
+          {
+            "url": "https://leetcode.com/problems/maximum-subarray/",
+            "platform": "lc",
+            "title": "LC: Max Subarray (Kadane)",
+            "id": "https://leetcode.com/problems/maximum-subarray/"
+          },
+          {
+            "url": "https://leetcode.com/problems/move-zeroes/",
+            "platform": "lc",
+            "title": "LC: Move Zeroes",
+            "id": "https://leetcode.com/problems/move-zeroes/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/list-comprehensions/problem",
+            "platform": "hr",
+            "title": "HR: List Comprehensions",
+            "id": "https://www.hackerrank.com/challenges/list-comprehensions/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/nested-list/problem",
+            "platform": "hr",
+            "title": "HR: Nested List",
+            "id": "https://www.hackerrank.com/challenges/nested-list/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/find-second-maximum-number-in-a-list/problem",
+            "platform": "hr",
+            "title": "HR: 2nd Maximum",
+            "id": "https://www.hackerrank.com/challenges/find-second-maximum-number-in-a-list/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1",
+            "platform": "gfg",
+            "title": "GFG: Sort 0s 1s 2s",
+            "id": "https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/rotate-array-by-n-elements-1587115621/1",
+            "platform": "gfg",
+            "title": "GFG: Rotate Array",
+            "id": "https://www.geeksforgeeks.org/problems/rotate-array-by-n-elements-1587115621/1"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1760/B",
+            "platform": "cf",
+            "title": "CF: Array Decrements",
+            "id": "https://codeforces.com/problemset/problem/1760/B"
+          }
+        ],
+        "concepts": [
+          "append",
+          "pop",
+          "insert",
+          "sort",
+          "comprehension",
+          "slice",
+          "flatten"
+        ]
+      },
+      {
+        "title": "Dictionaries, Counter & defaultdict",
+        "difficulty": "Medium",
+        "code": "<span class=\"kw\">from</span> <span class=\"cls\">collections</span> <span class=\"kw\">import</span> <span class=\"cls\">Counter</span>, <span class=\"cls\">defaultdict</span>\n<span class=\"var\">d</span><span class=\"op\">=</span>{<span class=\"str\">\"a\"</span>:<span class=\"num\">1</span>}\n<span class=\"var\">d</span><span class=\"op\">.</span><span class=\"fn\">get</span>(<span class=\"str\">\"c\"</span>,<span class=\"num\">0</span>)      <span class=\"cm\"># safe access</span>\n<span class=\"var\">d</span><span class=\"op\">.</span><span class=\"fn\">setdefault</span>(<span class=\"str\">\"d\"</span>,[])\n{<span class=\"op\">**</span><span class=\"var\">d1</span>,<span class=\"op\">**</span><span class=\"var\">d2</span>}        <span class=\"cm\"># merge dicts</span>\n<span class=\"cm\"># Counter</span>\n<span class=\"var\">cnt</span><span class=\"op\">=</span><span class=\"cls\">Counter</span>(<span class=\"str\">\"abracadabra\"</span>)\n<span class=\"var\">cnt</span><span class=\"op\">.</span><span class=\"fn\">most_common</span>(<span class=\"num\">3</span>) <span class=\"cm\"># top 3</span>\n<span class=\"cm\"># defaultdict</span>\n<span class=\"var\">g</span><span class=\"op\">=</span><span class=\"cls\">defaultdict</span>(<span class=\"fn\">list</span>)\n<span class=\"var\">g</span>[<span class=\"str\">\"a\"</span>]<span class=\"op\">.</span><span class=\"fn\">append</span>(<span class=\"str\">\"b\"</span>)\n<span class=\"cm\"># Dict comprehension</span>\n<span class=\"var\">sq</span><span class=\"op\">=</span>{<span class=\"var\">x</span>:<span class=\"var\">x</span><span class=\"op\">**</span><span class=\"num\">2</span> <span class=\"kw\">for</span> <span class=\"var\">x</span> <span class=\"kw\">in</span> <span class=\"fn\">range</span>(<span class=\"num\">6</span>)}",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/group-anagrams/",
+            "platform": "lc",
+            "title": "LC: Group Anagrams",
+            "id": "https://leetcode.com/problems/group-anagrams/"
+          },
+          {
+            "url": "https://leetcode.com/problems/top-k-frequent-elements/",
+            "platform": "lc",
+            "title": "LC: Top K Frequent",
+            "id": "https://leetcode.com/problems/top-k-frequent-elements/"
+          },
+          {
+            "url": "https://leetcode.com/problems/ransom-note/",
+            "platform": "lc",
+            "title": "LC: Ransom Note",
+            "id": "https://leetcode.com/problems/ransom-note/"
+          },
+          {
+            "url": "https://leetcode.com/problems/find-all-anagrams-in-a-string/",
+            "platform": "lc",
+            "title": "LC: Find All Anagrams",
+            "id": "https://leetcode.com/problems/find-all-anagrams-in-a-string/"
+          },
+          {
+            "url": "https://leetcode.com/problems/word-pattern/",
+            "platform": "lc",
+            "title": "LC: Word Pattern",
+            "id": "https://leetcode.com/problems/word-pattern/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/collections-counter/problem",
+            "platform": "hr",
+            "title": "HR: Counter",
+            "id": "https://www.hackerrank.com/challenges/collections-counter/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/defaultdict-tutorial/problem",
+            "platform": "hr",
+            "title": "HR: defaultdict",
+            "id": "https://www.hackerrank.com/challenges/defaultdict-tutorial/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/collections-ordereddict/problem",
+            "platform": "hr",
+            "title": "HR: OrderedDict",
+            "id": "https://www.hackerrank.com/challenges/collections-ordereddict/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/word-order/problem",
+            "platform": "hr",
+            "title": "HR: Word Order",
+            "id": "https://www.hackerrank.com/challenges/word-order/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/frequency-of-array-elements-1587115620/1",
+            "platform": "gfg",
+            "title": "GFG: Frequency of Elements",
+            "id": "https://www.geeksforgeeks.org/problems/frequency-of-array-elements-1587115620/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/LAPIN",
+            "platform": "cc",
+            "title": "CC: LAPIN",
+            "id": "https://www.codechef.com/problems/LAPIN"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/4/C",
+            "platform": "cf",
+            "title": "CF: Registration System",
+            "id": "https://codeforces.com/problemset/problem/4/C"
+          }
+        ],
+        "concepts": [
+          "Counter",
+          "defaultdict",
+          "setdefault",
+          "merge",
+          "dict comp",
+          "most_common"
+        ]
+      },
+      {
+        "title": "Sets & Frozensets",
+        "difficulty": "Easy",
+        "code": "<span class=\"var\">s1</span><span class=\"op\">=</span>{<span class=\"num\">1</span>,<span class=\"num\">2</span>,<span class=\"num\">3</span>}; <span class=\"var\">s2</span><span class=\"op\">=</span>{<span class=\"num\">3</span>,<span class=\"num\">4</span>,<span class=\"num\">5</span>}\n<span class=\"var\">s1</span><span class=\"op\">.</span><span class=\"fn\">add</span>(<span class=\"num\">7</span>)          <span class=\"cm\"># O(1)</span>\n<span class=\"var\">s1</span><span class=\"op\">.</span><span class=\"fn\">discard</span>(<span class=\"num\">99</span>)     <span class=\"cm\"># no error if absent</span>\n<span class=\"var\">s1</span> <span class=\"op\">&amp;</span> <span class=\"var\">s2</span>            <span class=\"cm\"># intersection</span>\n<span class=\"var\">s1</span> <span class=\"op\">|</span> <span class=\"var\">s2</span>            <span class=\"cm\"># union</span>\n<span class=\"var\">s1</span> <span class=\"op\">-</span> <span class=\"var\">s2</span>            <span class=\"cm\"># difference</span>\n<span class=\"var\">s1</span> <span class=\"op\">^</span> <span class=\"var\">s2</span>            <span class=\"cm\"># symmetric diff</span>\n<span class=\"var\">s1</span><span class=\"op\">.</span><span class=\"fn\">issubset</span>(<span class=\"var\">s2</span>)\n<span class=\"cm\"># Frozenset (hashable)</span>\n<span class=\"var\">fs</span><span class=\"op\">=</span><span class=\"fn\">frozenset</span>([<span class=\"num\">1</span>,<span class=\"num\">2</span>])\n<span class=\"cm\"># Dedup preserving order</span>\n<span class=\"fn\">list</span>(<span class=\"fn\">dict</span><span class=\"op\">.</span><span class=\"fn\">fromkeys</span>(<span class=\"var\">lst</span>))",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/intersection-of-two-arrays/",
+            "platform": "lc",
+            "title": "LC: Intersection of Arrays",
+            "id": "https://leetcode.com/problems/intersection-of-two-arrays/"
+          },
+          {
+            "url": "https://leetcode.com/problems/single-number/",
+            "platform": "lc",
+            "title": "LC: Single Number",
+            "id": "https://leetcode.com/problems/single-number/"
+          },
+          {
+            "url": "https://leetcode.com/problems/missing-number/",
+            "platform": "lc",
+            "title": "LC: Missing Number",
+            "id": "https://leetcode.com/problems/missing-number/"
+          },
+          {
+            "url": "https://leetcode.com/problems/happy-number/",
+            "platform": "lc",
+            "title": "LC: Happy Number (cycle)",
+            "id": "https://leetcode.com/problems/happy-number/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/py-set-add/problem",
+            "platform": "hr",
+            "title": "HR: Set .add()",
+            "id": "https://www.hackerrank.com/challenges/py-set-add/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/py-set-discard-remove-pop/problem",
+            "platform": "hr",
+            "title": "HR: discard/remove/pop",
+            "id": "https://www.hackerrank.com/challenges/py-set-discard-remove-pop/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/py-set-union/problem",
+            "platform": "hr",
+            "title": "HR: Set Union",
+            "id": "https://www.hackerrank.com/challenges/py-set-union/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/py-set-intersection-operation/problem",
+            "platform": "hr",
+            "title": "HR: Set Intersection",
+            "id": "https://www.hackerrank.com/challenges/py-set-intersection-operation/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/py-set-difference-operation/problem",
+            "platform": "hr",
+            "title": "HR: Set Difference",
+            "id": "https://www.hackerrank.com/challenges/py-set-difference-operation/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/py-set-symmetric-difference-operation/problem",
+            "platform": "hr",
+            "title": "HR: Symmetric Diff",
+            "id": "https://www.hackerrank.com/challenges/py-set-symmetric-difference-operation/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/count-distinct-elements0152/1",
+            "platform": "gfg",
+            "title": "GFG: Count Distinct",
+            "id": "https://www.geeksforgeeks.org/problems/count-distinct-elements0152/1"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1367/B",
+            "platform": "cf",
+            "title": "CF: Even Array",
+            "id": "https://codeforces.com/problemset/problem/1367/B"
+          }
+        ],
+        "concepts": [
+          "set ops",
+          "frozenset",
+          "discard",
+          "union/intersection",
+          "dedup",
+          "O(1) lookup"
+        ]
+      },
+      {
+        "title": "Stack, Queue, Deque & Heap",
+        "difficulty": "Medium",
+        "code": "<span class=\"kw\">from</span> <span class=\"cls\">collections</span> <span class=\"kw\">import</span> <span class=\"cls\">deque</span>\n<span class=\"kw\">import</span> <span class=\"cls\">heapq</span>\n<span class=\"cm\"># Stack (LIFO)</span>\n<span class=\"var\">stk</span><span class=\"op\">=</span>[]; <span class=\"var\">stk</span><span class=\"op\">.</span><span class=\"fn\">append</span>(<span class=\"num\">1</span>); <span class=\"var\">stk</span><span class=\"op\">.</span><span class=\"fn\">pop</span>()\n<span class=\"cm\"># Queue (FIFO)</span>\n<span class=\"var\">q</span><span class=\"op\">=</span><span class=\"cls\">deque</span>()\n<span class=\"var\">q</span><span class=\"op\">.</span><span class=\"fn\">append</span>(<span class=\"num\">1</span>)    <span class=\"cm\"># enqueue</span>\n<span class=\"var\">q</span><span class=\"op\">.</span><span class=\"fn\">popleft</span>()    <span class=\"cm\"># dequeue</span>\n<span class=\"var\">q</span><span class=\"op\">.</span><span class=\"fn\">appendleft</span>(<span class=\"num\">0</span>)<span class=\"cm\"># prepend</span>\n<span class=\"cm\"># Min-Heap</span>\n<span class=\"var\">h</span><span class=\"op\">=</span>[<span class=\"num\">3</span>,<span class=\"num\">1</span>,<span class=\"num\">4</span>]; <span class=\"cls\">heapq</span><span class=\"op\">.</span><span class=\"fn\">heapify</span>(<span class=\"var\">h</span>)\n<span class=\"cls\">heapq</span><span class=\"op\">.</span><span class=\"fn\">heappush</span>(<span class=\"var\">h</span>,<span class=\"num\">2</span>)\n<span class=\"cls\">heapq</span><span class=\"op\">.</span><span class=\"fn\">heappop</span>(<span class=\"var\">h</span>)  <span class=\"cm\"># → 1</span>\n<span class=\"cm\"># Max-heap: negate</span>\n<span class=\"cls\">heapq</span><span class=\"op\">.</span><span class=\"fn\">heappush</span>(<span class=\"var\">h</span>,<span class=\"op\">-</span><span class=\"num\">5</span>)",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/valid-parentheses/",
+            "platform": "lc",
+            "title": "LC: Valid Parentheses",
+            "id": "https://leetcode.com/problems/valid-parentheses/"
+          },
+          {
+            "url": "https://leetcode.com/problems/min-stack/",
+            "platform": "lc",
+            "title": "LC: Min Stack",
+            "id": "https://leetcode.com/problems/min-stack/"
+          },
+          {
+            "url": "https://leetcode.com/problems/implement-queue-using-stacks/",
+            "platform": "lc",
+            "title": "LC: Queue via Stacks",
+            "id": "https://leetcode.com/problems/implement-queue-using-stacks/"
+          },
+          {
+            "url": "https://leetcode.com/problems/kth-largest-element-in-a-stream/",
+            "platform": "lc",
+            "title": "LC: Kth Largest (Heap)",
+            "id": "https://leetcode.com/problems/kth-largest-element-in-a-stream/"
+          },
+          {
+            "url": "https://leetcode.com/problems/find-median-from-data-stream/",
+            "platform": "lc",
+            "title": "LC: Median from Stream",
+            "id": "https://leetcode.com/problems/find-median-from-data-stream/"
+          },
+          {
+            "url": "https://leetcode.com/problems/daily-temperatures/",
+            "platform": "lc",
+            "title": "LC: Daily Temperatures",
+            "id": "https://leetcode.com/problems/daily-temperatures/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/equal-stacks/problem",
+            "platform": "hr",
+            "title": "HR: Equal Stacks",
+            "id": "https://www.hackerrank.com/challenges/equal-stacks/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/ctci-queue-using-two-stacks/problem",
+            "platform": "hr",
+            "title": "HR: Queue via 2 Stacks",
+            "id": "https://www.hackerrank.com/challenges/ctci-queue-using-two-stacks/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/collections-deque/problem",
+            "platform": "hr",
+            "title": "HR: deque",
+            "id": "https://www.hackerrank.com/challenges/collections-deque/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/implement-stack-using-array/1",
+            "platform": "gfg",
+            "title": "GFG: Stack Array",
+            "id": "https://www.geeksforgeeks.org/problems/implement-stack-using-array/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/COMPILER",
+            "platform": "cc",
+            "title": "CC: Compiler Brackets",
+            "id": "https://www.codechef.com/problems/COMPILER"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/797/C",
+            "platform": "cf",
+            "title": "CF: Minimal String",
+            "id": "https://codeforces.com/problemset/problem/797/C"
+          }
+        ],
+        "concepts": [
+          "LIFO",
+          "FIFO",
+          "deque",
+          "heapq",
+          "max-heap trick",
+          "monotonic stack"
+        ]
+      },
+      {
+        "title": "Linked List",
+        "difficulty": "Medium",
+        "code": "<span class=\"kw\">class</span> <span class=\"cls\">Node</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">__init__</span>(<span class=\"var\">self</span>,<span class=\"var\">v</span>):\n        <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">val</span><span class=\"op\">=</span><span class=\"var\">v</span>; <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">next</span><span class=\"op\">=</span><span class=\"kw\">None</span>\n\n<span class=\"cm\"># Reverse</span>\n<span class=\"kw\">def</span> <span class=\"fn\">reverse</span>(<span class=\"var\">head</span>):\n    <span class=\"var\">prev</span>,<span class=\"var\">cur</span><span class=\"op\">=</span><span class=\"kw\">None</span>,<span class=\"var\">head</span>\n    <span class=\"kw\">while</span> <span class=\"var\">cur</span>:\n        <span class=\"var\">nxt</span><span class=\"op\">=</span><span class=\"var\">cur</span><span class=\"op\">.</span><span class=\"var\">next</span>\n        <span class=\"var\">cur</span><span class=\"op\">.</span><span class=\"var\">next</span><span class=\"op\">=</span><span class=\"var\">prev</span>\n        <span class=\"var\">prev</span>,<span class=\"var\">cur</span><span class=\"op\">=</span><span class=\"var\">cur</span>,<span class=\"var\">nxt</span>\n    <span class=\"kw\">return</span> <span class=\"var\">prev</span>\n\n<span class=\"cm\"># Fast/slow pointer (cycle)</span>\n<span class=\"kw\">def</span> <span class=\"fn\">has_cycle</span>(<span class=\"var\">h</span>):\n    <span class=\"var\">s</span><span class=\"op\">=</span><span class=\"var\">f</span><span class=\"op\">=</span><span class=\"var\">h</span>\n    <span class=\"kw\">while</span> <span class=\"var\">f</span> <span class=\"kw\">and</span> <span class=\"var\">f</span><span class=\"op\">.</span><span class=\"var\">next</span>:\n        <span class=\"var\">s</span><span class=\"op\">=</span><span class=\"var\">s</span><span class=\"op\">.</span><span class=\"var\">next</span>; <span class=\"var\">f</span><span class=\"op\">=</span><span class=\"var\">f</span><span class=\"op\">.</span><span class=\"var\">next</span><span class=\"op\">.</span><span class=\"var\">next</span>\n        <span class=\"kw\">if</span> <span class=\"var\">s</span><span class=\"op\">==</span><span class=\"var\">f</span>: <span class=\"kw\">return</span> <span class=\"kw\">True</span>",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/reverse-linked-list/",
+            "platform": "lc",
+            "title": "LC: Reverse Linked List",
+            "id": "https://leetcode.com/problems/reverse-linked-list/"
+          },
+          {
+            "url": "https://leetcode.com/problems/merge-two-sorted-lists/",
+            "platform": "lc",
+            "title": "LC: Merge Two Lists",
+            "id": "https://leetcode.com/problems/merge-two-sorted-lists/"
+          },
+          {
+            "url": "https://leetcode.com/problems/linked-list-cycle/",
+            "platform": "lc",
+            "title": "LC: Detect Cycle",
+            "id": "https://leetcode.com/problems/linked-list-cycle/"
+          },
+          {
+            "url": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/",
+            "platform": "lc",
+            "title": "LC: Remove Nth from End",
+            "id": "https://leetcode.com/problems/remove-nth-node-from-end-of-list/"
+          },
+          {
+            "url": "https://leetcode.com/problems/palindrome-linked-list/",
+            "platform": "lc",
+            "title": "LC: Palindrome LL",
+            "id": "https://leetcode.com/problems/palindrome-linked-list/"
+          },
+          {
+            "url": "https://leetcode.com/problems/intersection-of-two-linked-lists/",
+            "platform": "lc",
+            "title": "LC: Intersection of Lists",
+            "id": "https://leetcode.com/problems/intersection-of-two-linked-lists/"
+          },
+          {
+            "url": "https://leetcode.com/problems/odd-even-linked-list/",
+            "platform": "lc",
+            "title": "LC: Odd Even LL",
+            "id": "https://leetcode.com/problems/odd-even-linked-list/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/insert-a-node-at-the-tail-of-a-linked-list/problem",
+            "platform": "hr",
+            "title": "HR: Insert at Tail",
+            "id": "https://www.hackerrank.com/challenges/insert-a-node-at-the-tail-of-a-linked-list/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/reverse-a-doubly-linked-list/problem",
+            "platform": "hr",
+            "title": "HR: Reverse Doubly LL",
+            "id": "https://www.hackerrank.com/challenges/reverse-a-doubly-linked-list/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/reverse-a-linked-list/1",
+            "platform": "gfg",
+            "title": "GFG: Reverse LL",
+            "id": "https://www.geeksforgeeks.org/problems/reverse-a-linked-list/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/detect-loop-in-linked-list/1",
+            "platform": "gfg",
+            "title": "GFG: Detect Loop",
+            "id": "https://www.geeksforgeeks.org/problems/detect-loop-in-linked-list/1"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/25/E",
+            "platform": "cf",
+            "title": "CF: Test for Plagiarism",
+            "id": "https://codeforces.com/problemset/problem/25/E"
+          }
+        ],
+        "concepts": [
+          "Node",
+          "head/tail",
+          "fast-slow pointer",
+          "reverse",
+          "cycle detection"
+        ]
+      },
+      {
+        "title": "Trees & Binary Search Tree",
+        "difficulty": "Hard",
+        "code": "<span class=\"kw\">class</span> <span class=\"cls\">TreeNode</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">__init__</span>(<span class=\"var\">self</span>,<span class=\"var\">v</span><span class=\"op\">=</span><span class=\"num\">0</span>):\n        <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">val</span><span class=\"op\">=</span><span class=\"var\">v</span>; <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">left</span><span class=\"op\">=</span><span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">right</span><span class=\"op\">=</span><span class=\"kw\">None</span>\n\n<span class=\"cm\"># Inorder (sorted for BST)</span>\n<span class=\"kw\">def</span> <span class=\"fn\">inorder</span>(<span class=\"var\">r</span>):\n    <span class=\"kw\">if</span> <span class=\"kw\">not</span> <span class=\"var\">r</span>: <span class=\"kw\">return</span> []\n    <span class=\"kw\">return</span> <span class=\"fn\">inorder</span>(<span class=\"var\">r</span><span class=\"op\">.</span><span class=\"var\">left</span>)<span class=\"op\">+</span>[<span class=\"var\">r</span><span class=\"op\">.</span><span class=\"var\">val</span>]<span class=\"op\">+</span><span class=\"fn\">inorder</span>(<span class=\"var\">r</span><span class=\"op\">.</span><span class=\"var\">right</span>)\n\n<span class=\"cm\"># Level-order BFS</span>\n<span class=\"kw\">from</span> <span class=\"cls\">collections</span> <span class=\"kw\">import</span> <span class=\"cls\">deque</span>\n<span class=\"kw\">def</span> <span class=\"fn\">bfs</span>(<span class=\"var\">root</span>):\n    <span class=\"var\">q</span><span class=\"op\">=</span><span class=\"cls\">deque</span>([<span class=\"var\">root</span>])\n    <span class=\"kw\">while</span> <span class=\"var\">q</span>:\n        <span class=\"var\">n</span><span class=\"op\">=</span><span class=\"var\">q</span><span class=\"op\">.</span><span class=\"fn\">popleft</span>()\n        <span class=\"kw\">if</span> <span class=\"var\">n</span><span class=\"op\">.</span><span class=\"var\">left</span>:  <span class=\"var\">q</span><span class=\"op\">.</span><span class=\"fn\">append</span>(<span class=\"var\">n</span><span class=\"op\">.</span><span class=\"var\">left</span>)\n        <span class=\"kw\">if</span> <span class=\"var\">n</span><span class=\"op\">.</span><span class=\"var\">right</span>: <span class=\"var\">q</span><span class=\"op\">.</span><span class=\"fn\">append</span>(<span class=\"var\">n</span><span class=\"op\">.</span><span class=\"var\">right</span>)",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/maximum-depth-of-binary-tree/",
+            "platform": "lc",
+            "title": "LC: Max Depth",
+            "id": "https://leetcode.com/problems/maximum-depth-of-binary-tree/"
+          },
+          {
+            "url": "https://leetcode.com/problems/invert-binary-tree/",
+            "platform": "lc",
+            "title": "LC: Invert Tree",
+            "id": "https://leetcode.com/problems/invert-binary-tree/"
+          },
+          {
+            "url": "https://leetcode.com/problems/symmetric-tree/",
+            "platform": "lc",
+            "title": "LC: Symmetric Tree",
+            "id": "https://leetcode.com/problems/symmetric-tree/"
+          },
+          {
+            "url": "https://leetcode.com/problems/binary-tree-level-order-traversal/",
+            "platform": "lc",
+            "title": "LC: Level Order",
+            "id": "https://leetcode.com/problems/binary-tree-level-order-traversal/"
+          },
+          {
+            "url": "https://leetcode.com/problems/validate-binary-search-tree/",
+            "platform": "lc",
+            "title": "LC: Validate BST",
+            "id": "https://leetcode.com/problems/validate-binary-search-tree/"
+          },
+          {
+            "url": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",
+            "platform": "lc",
+            "title": "LC: LCA",
+            "id": "https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/"
+          },
+          {
+            "url": "https://leetcode.com/problems/path-sum/",
+            "platform": "lc",
+            "title": "LC: Path Sum",
+            "id": "https://leetcode.com/problems/path-sum/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/tree-height-of-a-binary-tree/problem",
+            "platform": "hr",
+            "title": "HR: Tree Height",
+            "id": "https://www.hackerrank.com/challenges/tree-height-of-a-binary-tree/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/binary-search-tree-lowest-common-ancestor/problem",
+            "platform": "hr",
+            "title": "HR: BST LCA",
+            "id": "https://www.hackerrank.com/challenges/binary-search-tree-lowest-common-ancestor/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/height-of-binary-tree/1",
+            "platform": "gfg",
+            "title": "GFG: Height of Tree",
+            "id": "https://www.geeksforgeeks.org/problems/height-of-binary-tree/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/ISBST",
+            "platform": "cc",
+            "title": "CC: Is BST",
+            "id": "https://www.codechef.com/problems/ISBST"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1017/C",
+            "platform": "cf",
+            "title": "CF: Recursive Queries",
+            "id": "https://codeforces.com/problemset/problem/1017/C"
+          }
+        ],
+        "concepts": [
+          "inorder",
+          "preorder",
+          "postorder",
+          "BFS",
+          "height",
+          "BST",
+          "LCA"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Control Flow & Functions",
+    "icon": "🔀",
+    "topics": [
+      {
+        "title": "Loops, Enumerate, zip & Comprehensions",
+        "difficulty": "Easy",
+        "code": "<span class=\"kw\">for</span> <span class=\"var\">i</span>,<span class=\"var\">v</span> <span class=\"kw\">in</span> <span class=\"fn\">enumerate</span>([<span class=\"str\">\"a\"</span>,<span class=\"str\">\"b\"</span>]):\n    <span class=\"fn\">print</span>(<span class=\"var\">i</span>,<span class=\"var\">v</span>)\n<span class=\"kw\">for</span> <span class=\"var\">a</span>,<span class=\"var\">b</span> <span class=\"kw\">in</span> <span class=\"fn\">zip</span>([<span class=\"num\">1</span>,<span class=\"num\">2</span>],[<span class=\"num\">3</span>,<span class=\"num\">4</span>]):\n    <span class=\"fn\">print</span>(<span class=\"var\">a</span>,<span class=\"var\">b</span>)\n<span class=\"cm\"># while + else</span>\n<span class=\"kw\">while</span> <span class=\"var\">n</span><span class=\"op\">&gt;</span><span class=\"num\">0</span>: <span class=\"var\">n</span><span class=\"op\">//=</span><span class=\"num\">2</span>\n<span class=\"kw\">else</span>: <span class=\"fn\">print</span>(<span class=\"str\">\"done\"</span>)\n<span class=\"cm\"># Walrus operator :=</span>\n<span class=\"kw\">while</span> (<span class=\"var\">n</span><span class=\"op\">:=</span><span class=\"fn\">int</span>(<span class=\"fn\">input</span>()))<span class=\"op\">!=</span><span class=\"num\">0</span>:\n    <span class=\"fn\">print</span>(<span class=\"var\">n</span>)\n<span class=\"cm\"># Dict / set comprehension</span>\n<span class=\"var\">sq</span><span class=\"op\">=</span>{<span class=\"var\">x</span>:<span class=\"var\">x</span><span class=\"op\">**</span><span class=\"num\">2</span> <span class=\"kw\">for</span> <span class=\"var\">x</span> <span class=\"kw\">in</span> <span class=\"fn\">range</span>(<span class=\"num\">5</span>)}\n<span class=\"cm\"># Generator (lazy)</span>\n<span class=\"var\">g</span><span class=\"op\">=</span>(<span class=\"var\">x</span><span class=\"op\">**</span><span class=\"num\">2</span> <span class=\"kw\">for</span> <span class=\"var\">x</span> <span class=\"kw\">in</span> <span class=\"fn\">range</span>(<span class=\"num\">1000</span>))",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/fizz-buzz/",
+            "platform": "lc",
+            "title": "LC: FizzBuzz",
+            "id": "https://leetcode.com/problems/fizz-buzz/"
+          },
+          {
+            "url": "https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/",
+            "platform": "lc",
+            "title": "LC: Count Odd Numbers",
+            "id": "https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/"
+          },
+          {
+            "url": "https://leetcode.com/problems/running-sum-of-1d-array/",
+            "platform": "lc",
+            "title": "LC: Running Sum",
+            "id": "https://leetcode.com/problems/running-sum-of-1d-array/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/list-comprehensions/problem",
+            "platform": "hr",
+            "title": "HR: List Comprehensions",
+            "id": "https://www.hackerrank.com/challenges/list-comprehensions/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-loops/problem",
+            "platform": "hr",
+            "title": "HR: Loops",
+            "id": "https://www.hackerrank.com/challenges/python-loops/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/for-loop-in-python/problem",
+            "platform": "hr",
+            "title": "HR: For Loop",
+            "id": "https://www.hackerrank.com/challenges/for-loop-in-python/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/itertools-product/problem",
+            "platform": "hr",
+            "title": "HR: itertools.product",
+            "id": "https://www.hackerrank.com/challenges/itertools-product/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/sum-of-numbers-in-string-1587115621/1",
+            "platform": "gfg",
+            "title": "GFG: Sum in String",
+            "id": "https://www.geeksforgeeks.org/problems/sum-of-numbers-in-string-1587115621/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/print-pattern3227/1",
+            "platform": "gfg",
+            "title": "GFG: Print Pattern",
+            "id": "https://www.geeksforgeeks.org/problems/print-pattern3227/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/FLOW001",
+            "platform": "cc",
+            "title": "CC: Add Two Numbers",
+            "id": "https://www.codechef.com/problems/FLOW001"
+          },
+          {
+            "url": "https://www.codechef.com/problems/INTEST",
+            "platform": "cc",
+            "title": "CC: I/O Speed Test",
+            "id": "https://www.codechef.com/problems/INTEST"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/282/A",
+            "platform": "cf",
+            "title": "CF: Bit++",
+            "id": "https://codeforces.com/problemset/problem/282/A"
+          }
+        ],
+        "concepts": [
+          "enumerate",
+          "zip",
+          "walrus :=",
+          "generator",
+          "dict comp",
+          "while/else"
+        ]
+      },
+      {
+        "title": "Functions, Lambda & Higher-Order",
+        "difficulty": "Medium",
+        "code": "<span class=\"kw\">def</span> <span class=\"fn\">greet</span>(<span class=\"var\">name</span>,<span class=\"var\">msg</span><span class=\"op\">=</span><span class=\"str\">\"Hi\"</span>):\n    <span class=\"kw\">return</span> <span class=\"fn\">f</span><span class=\"str\">\"{msg},{name}\"</span>\n\n<span class=\"kw\">def</span> <span class=\"fn\">total</span>(<span class=\"op\">*</span><span class=\"var\">args</span>,<span class=\"op\">**</span><span class=\"var\">kw</span>):\n    <span class=\"kw\">return</span> <span class=\"fn\">sum</span>(<span class=\"var\">args</span>),<span class=\"var\">kw</span>\n\n<span class=\"cm\"># Lambda + HOF</span>\n<span class=\"var\">sq</span><span class=\"op\">=</span><span class=\"kw\">lambda</span> <span class=\"var\">x</span>:<span class=\"var\">x</span><span class=\"op\">**</span><span class=\"num\">2</span>\n<span class=\"fn\">list</span>(<span class=\"fn\">map</span>(<span class=\"var\">sq</span>,[<span class=\"num\">1</span>,<span class=\"num\">2</span>,<span class=\"num\">3</span>]))  <span class=\"cm\"># [1,4,9]</span>\n<span class=\"fn\">list</span>(<span class=\"fn\">filter</span>(<span class=\"kw\">lambda</span> <span class=\"var\">x</span>:<span class=\"var\">x</span><span class=\"op\">&gt;</span><span class=\"num\">2</span>,[<span class=\"num\">1</span>,<span class=\"num\">2</span>,<span class=\"num\">3</span>]))\n\n<span class=\"cm\"># Sort with multi-key</span>\n<span class=\"fn\">sorted</span>(<span class=\"var\">words</span>,<span class=\"var\">key</span><span class=\"op\">=</span><span class=\"kw\">lambda</span> <span class=\"var\">w</span>:(<span class=\"fn\">len</span>(<span class=\"var\">w</span>),<span class=\"var\">w</span>))\n\n<span class=\"cm\"># Unpack</span>\n<span class=\"var\">a</span>,<span class=\"op\">*</span><span class=\"var\">b</span>,<span class=\"var\">c</span><span class=\"op\">=</span>[<span class=\"num\">1</span>,<span class=\"num\">2</span>,<span class=\"num\">3</span>,<span class=\"num\">4</span>,<span class=\"num\">5</span>]",
+        "problems": [
+          {
+            "url": "https://www.hackerrank.com/challenges/python-sort-sort/problem",
+            "platform": "hr",
+            "title": "HR: Sort with Lambda",
+            "id": "https://www.hackerrank.com/challenges/python-sort-sort/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/map-and-lambda-expression/problem",
+            "platform": "hr",
+            "title": "HR: Map & Lambda",
+            "id": "https://www.hackerrank.com/challenges/map-and-lambda-expression/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-functionals/problem",
+            "platform": "hr",
+            "title": "HR: Functionals",
+            "id": "https://www.hackerrank.com/challenges/python-functionals/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/validate-list-of-email-address-with-filter/problem",
+            "platform": "hr",
+            "title": "HR: Filter Emails",
+            "id": "https://www.hackerrank.com/challenges/validate-list-of-email-address-with-filter/problem"
+          },
+          {
+            "url": "https://leetcode.com/problems/sort-the-people/",
+            "platform": "lc",
+            "title": "LC: Sort the People",
+            "id": "https://leetcode.com/problems/sort-the-people/"
+          },
+          {
+            "url": "https://leetcode.com/problems/sort-array-by-parity/",
+            "platform": "lc",
+            "title": "LC: Sort by Parity",
+            "id": "https://leetcode.com/problems/sort-array-by-parity/"
+          },
+          {
+            "url": "https://leetcode.com/problems/custom-sort-string/",
+            "platform": "lc",
+            "title": "LC: Custom Sort",
+            "id": "https://leetcode.com/problems/custom-sort-string/"
+          },
+          {
+            "url": "https://leetcode.com/problems/apply-operations-to-an-array/",
+            "platform": "lc",
+            "title": "LC: Apply Operations",
+            "id": "https://leetcode.com/problems/apply-operations-to-an-array/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/sort-by-set-bit-count1153/1",
+            "platform": "gfg",
+            "title": "GFG: Sort by Set Bits",
+            "id": "https://www.geeksforgeeks.org/problems/sort-by-set-bit-count1153/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/lambda-recursion/1",
+            "platform": "gfg",
+            "title": "GFG: Lambda Recursion",
+            "id": "https://www.geeksforgeeks.org/problems/lambda-recursion/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/FCTRL",
+            "platform": "cc",
+            "title": "CC: Factorial",
+            "id": "https://www.codechef.com/problems/FCTRL"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/670/A",
+            "platform": "cf",
+            "title": "CF: Holidays",
+            "id": "https://codeforces.com/problemset/problem/670/A"
+          }
+        ],
+        "concepts": [
+          "*args",
+          "**kwargs",
+          "lambda",
+          "map/filter",
+          "key sort",
+          "unpacking"
+        ]
+      },
+      {
+        "title": "Decorators, Closures & functools",
+        "difficulty": "Hard",
+        "code": "<span class=\"kw\">from</span> <span class=\"cls\">functools</span> <span class=\"kw\">import</span> <span class=\"fn\">wraps</span>,<span class=\"fn\">lru_cache</span>,<span class=\"fn\">partial</span>,<span class=\"fn\">reduce</span>\n\n<span class=\"cm\"># Closure</span>\n<span class=\"kw\">def</span> <span class=\"fn\">counter</span>():\n    <span class=\"var\">n</span><span class=\"op\">=</span><span class=\"num\">0</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">inc</span>(): <span class=\"kw\">nonlocal</span> <span class=\"var\">n</span>; <span class=\"var\">n</span><span class=\"op\">+=</span><span class=\"num\">1</span>; <span class=\"kw\">return</span> <span class=\"var\">n</span>\n    <span class=\"kw\">return</span> <span class=\"fn\">inc</span>\n\n<span class=\"cm\"># Decorator with @wraps</span>\n<span class=\"kw\">def</span> <span class=\"fn\">log</span>(<span class=\"var\">f</span>):\n    <span class=\"op\">@</span><span class=\"fn\">wraps</span>(<span class=\"var\">f</span>)\n    <span class=\"kw\">def</span> <span class=\"fn\">wrapper</span>(<span class=\"op\">*</span><span class=\"var\">a</span>,<span class=\"op\">**</span><span class=\"var\">kw</span>):\n        <span class=\"fn\">print</span>(<span class=\"var\">f</span><span class=\"op\">.</span><span class=\"var\">__name__</span>)\n        <span class=\"kw\">return</span> <span class=\"fn\">f</span>(<span class=\"op\">*</span><span class=\"var\">a</span>,<span class=\"op\">**</span><span class=\"var\">kw</span>)\n    <span class=\"kw\">return</span> <span class=\"fn\">wrapper</span>\n\n<span class=\"op\">@</span><span class=\"fn\">lru_cache</span>(<span class=\"var\">maxsize</span><span class=\"op\">=</span><span class=\"num\">128</span>)\n<span class=\"kw\">def</span> <span class=\"fn\">fib</span>(<span class=\"var\">n</span>): <span class=\"kw\">return</span> <span class=\"var\">n</span> <span class=\"kw\">if</span> <span class=\"var\">n</span><span class=\"op\">&lt;=</span><span class=\"num\">1</span> <span class=\"kw\">else</span> <span class=\"fn\">fib</span>(<span class=\"var\">n</span><span class=\"op\">-</span><span class=\"num\">1</span>)<span class=\"op\">+</span><span class=\"fn\">fib</span>(<span class=\"var\">n</span><span class=\"op\">-</span><span class=\"num\">2</span>)\n<span class=\"var\">double</span><span class=\"op\">=</span><span class=\"fn\">partial</span>(<span class=\"fn\">pow</span>,<span class=\"var\">exp</span><span class=\"op\">=</span><span class=\"num\">2</span>)",
+        "problems": [
+          {
+            "url": "https://www.hackerrank.com/challenges/decorators-2-name-directory/problem",
+            "platform": "hr",
+            "title": "HR: Decorators",
+            "id": "https://www.hackerrank.com/challenges/decorators-2-name-directory/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/reduce-function/problem",
+            "platform": "hr",
+            "title": "HR: reduce()",
+            "id": "https://www.hackerrank.com/challenges/reduce-function/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/closures-and-decorators/problem",
+            "platform": "hr",
+            "title": "HR: Closures",
+            "id": "https://www.hackerrank.com/challenges/closures-and-decorators/problem"
+          },
+          {
+            "url": "https://leetcode.com/problems/memoize/",
+            "platform": "lc",
+            "title": "LC: Memoize",
+            "id": "https://leetcode.com/problems/memoize/"
+          },
+          {
+            "url": "https://leetcode.com/problems/curry/",
+            "platform": "lc",
+            "title": "LC: Curry Function",
+            "id": "https://leetcode.com/problems/curry/"
+          },
+          {
+            "url": "https://leetcode.com/problems/function-composition/",
+            "platform": "lc",
+            "title": "LC: Function Composition",
+            "id": "https://leetcode.com/problems/function-composition/"
+          },
+          {
+            "url": "https://leetcode.com/problems/memoize-ii/",
+            "platform": "lc",
+            "title": "LC: Memoize II",
+            "id": "https://leetcode.com/problems/memoize-ii/"
+          },
+          {
+            "url": "https://leetcode.com/problems/cache-with-time-limit/",
+            "platform": "lc",
+            "title": "LC: Cache w/ Time Limit",
+            "id": "https://leetcode.com/problems/cache-with-time-limit/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/decorators-in-python/",
+            "platform": "gfg",
+            "title": "GFG: Decorator Practice",
+            "id": "https://www.geeksforgeeks.org/decorators-in-python/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/count-number-of-substrings4528/1",
+            "platform": "gfg",
+            "title": "GFG: Substrings Count",
+            "id": "https://www.geeksforgeeks.org/problems/count-number-of-substrings4528/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/FCTRL2",
+            "platform": "cc",
+            "title": "CC: Large Factorial",
+            "id": "https://www.codechef.com/problems/FCTRL2"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1064/A",
+            "platform": "cf",
+            "title": "CF: Make a Triangle",
+            "id": "https://codeforces.com/problemset/problem/1064/A"
+          }
+        ],
+        "concepts": [
+          "closure",
+          "nonlocal",
+          "@wraps",
+          "lru_cache",
+          "partial",
+          "reduce"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "OOP — Object-Oriented Programming",
+    "icon": "🏗️",
+    "topics": [
+      {
+        "title": "Classes, Inheritance & Dunder Methods",
+        "difficulty": "Medium",
+        "code": "<span class=\"kw\">class</span> <span class=\"cls\">Animal</span>:\n    <span class=\"var\">count</span><span class=\"op\">=</span><span class=\"num\">0</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">__init__</span>(<span class=\"var\">self</span>,<span class=\"var\">n</span>):\n        <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">name</span><span class=\"op\">=</span><span class=\"var\">n</span>; <span class=\"cls\">Animal</span><span class=\"op\">.</span><span class=\"var\">count</span><span class=\"op\">+=</span><span class=\"num\">1</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">__repr__</span>(<span class=\"var\">self</span>):\n        <span class=\"kw\">return</span> <span class=\"fn\">f</span><span class=\"str\">\"Animal({self.name})\"</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">__eq__</span>(<span class=\"var\">self</span>,<span class=\"var\">o</span>):\n        <span class=\"kw\">return</span> <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">name</span><span class=\"op\">==</span><span class=\"var\">o</span><span class=\"op\">.</span><span class=\"var\">name</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">__len__</span>(<span class=\"var\">self</span>):\n        <span class=\"kw\">return</span> <span class=\"fn\">len</span>(<span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">name</span>)\n    <span class=\"kw\">def</span> <span class=\"fn\">speak</span>(<span class=\"var\">self</span>): <span class=\"kw\">raise</span> <span class=\"cls\">NotImplementedError</span>\n\n<span class=\"kw\">class</span> <span class=\"cls\">Dog</span>(<span class=\"cls\">Animal</span>):\n    <span class=\"kw\">def</span> <span class=\"fn\">speak</span>(<span class=\"var\">self</span>): <span class=\"kw\">return</span> <span class=\"str\">\"Woof!\"</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">__add__</span>(<span class=\"var\">self</span>,<span class=\"var\">o</span>):\n        <span class=\"kw\">return</span> <span class=\"cls\">Dog</span>(<span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">name</span><span class=\"op\">+</span><span class=\"var\">o</span><span class=\"op\">.</span><span class=\"var\">name</span>)",
+        "problems": [
+          {
+            "url": "https://www.hackerrank.com/challenges/class-1-dealing-with-complex-numbers/problem",
+            "platform": "hr",
+            "title": "HR: Complex Numbers",
+            "id": "https://www.hackerrank.com/challenges/class-1-dealing-with-complex-numbers/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/class-2-find-the-torsional-angle/problem",
+            "platform": "hr",
+            "title": "HR: Torsional Angle",
+            "id": "https://www.hackerrank.com/challenges/class-2-find-the-torsional-angle/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/abstract-classes-polymorphism/problem",
+            "platform": "hr",
+            "title": "HR: Polymorphism",
+            "id": "https://www.hackerrank.com/challenges/abstract-classes-polymorphism/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/magic-class/problem",
+            "platform": "hr",
+            "title": "HR: Magic Class",
+            "id": "https://www.hackerrank.com/challenges/magic-class/problem"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-hashmap/",
+            "platform": "lc",
+            "title": "LC: Design HashMap",
+            "id": "https://leetcode.com/problems/design-hashmap/"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-linked-list/",
+            "platform": "lc",
+            "title": "LC: Design Linked List",
+            "id": "https://leetcode.com/problems/design-linked-list/"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-stack-with-increment-operation/",
+            "platform": "lc",
+            "title": "LC: Design Stack",
+            "id": "https://leetcode.com/problems/design-stack-with-increment-operation/"
+          },
+          {
+            "url": "https://leetcode.com/problems/lru-cache/",
+            "platform": "lc",
+            "title": "LC: LRU Cache",
+            "id": "https://leetcode.com/problems/lru-cache/"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-parking-system/",
+            "platform": "lc",
+            "title": "LC: Parking System",
+            "id": "https://leetcode.com/problems/design-parking-system/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/implementing-a-stack-using-linked-list/1",
+            "platform": "gfg",
+            "title": "GFG: Stack via LL",
+            "id": "https://www.geeksforgeeks.org/problems/implementing-a-stack-using-linked-list/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/BANK2",
+            "platform": "cc",
+            "title": "CC: Bank Problem",
+            "id": "https://www.codechef.com/problems/BANK2"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1148/A",
+            "platform": "cf",
+            "title": "CF: Palindrome Game",
+            "id": "https://codeforces.com/problemset/problem/1148/A"
+          }
+        ],
+        "concepts": [
+          "__init__",
+          "__repr__",
+          "__str__",
+          "__eq__",
+          "__add__",
+          "inheritance",
+          "class var"
+        ]
+      },
+      {
+        "title": "Dataclasses, ABC & Properties",
+        "difficulty": "Hard",
+        "code": "<span class=\"kw\">from</span> <span class=\"cls\">dataclasses</span> <span class=\"kw\">import</span> <span class=\"fn\">dataclass</span>,<span class=\"fn\">field</span>\n<span class=\"kw\">from</span> <span class=\"cls\">abc</span> <span class=\"kw\">import</span> <span class=\"cls\">ABC</span>,<span class=\"fn\">abstractmethod</span>\n\n<span class=\"op\">@</span><span class=\"fn\">dataclass</span>(<span class=\"var\">order</span><span class=\"op\">=</span><span class=\"kw\">True</span>,<span class=\"var\">frozen</span><span class=\"op\">=</span><span class=\"kw\">True</span>)\n<span class=\"kw\">class</span> <span class=\"cls\">Point</span>:\n    <span class=\"var\">x</span>: <span class=\"fn\">float</span>\n    <span class=\"var\">y</span>: <span class=\"fn\">float</span>\n    <span class=\"var\">tags</span>: <span class=\"fn\">list</span> <span class=\"op\">=</span> <span class=\"fn\">field</span>(<span class=\"var\">default_factory</span><span class=\"op\">=</span><span class=\"fn\">list</span>)\n\n<span class=\"cm\"># Abstract Base Class</span>\n<span class=\"kw\">class</span> <span class=\"cls\">Shape</span>(<span class=\"cls\">ABC</span>):\n    <span class=\"op\">@</span><span class=\"fn\">abstractmethod</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">area</span>(<span class=\"var\">self</span>)<span class=\"op\">-&gt;</span><span class=\"fn\">float</span>: ...\n\n<span class=\"kw\">class</span> <span class=\"cls\">Circle</span>(<span class=\"cls\">Shape</span>):\n    <span class=\"kw\">def</span> <span class=\"fn\">__init__</span>(<span class=\"var\">self</span>,<span class=\"var\">r</span>): <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">_r</span><span class=\"op\">=</span><span class=\"var\">r</span>\n    <span class=\"op\">@</span><span class=\"fn\">property</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">area</span>(<span class=\"var\">self</span>):\n        <span class=\"kw\">return</span> <span class=\"num\">3.14159</span><span class=\"op\">*</span><span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">_r</span><span class=\"op\">**</span><span class=\"num\">2</span>\n    <span class=\"op\">@</span><span class=\"var\">area</span><span class=\"op\">.</span><span class=\"fn\">setter</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">area</span>(<span class=\"var\">self</span>,<span class=\"var\">v</span>):\n        <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">_r</span><span class=\"op\">=</span>(<span class=\"var\">v</span><span class=\"op\">/</span><span class=\"num\">3.14159</span>)<span class=\"op\">**</span><span class=\"num\">.5</span>",
+        "problems": [
+          {
+            "url": "https://www.hackerrank.com/challenges/abstract-classes-polymorphism/problem",
+            "platform": "hr",
+            "title": "HR: Abstract Classes",
+            "id": "https://www.hackerrank.com/challenges/abstract-classes-polymorphism/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/hotel-prices/problem",
+            "platform": "hr",
+            "title": "HR: Hotel Prices",
+            "id": "https://www.hackerrank.com/challenges/hotel-prices/problem"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-an-atm-machine/",
+            "platform": "lc",
+            "title": "LC: ATM Machine",
+            "id": "https://leetcode.com/problems/design-an-atm-machine/"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-browser-history/",
+            "platform": "lc",
+            "title": "LC: Browser History",
+            "id": "https://leetcode.com/problems/design-browser-history/"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-underground-system/",
+            "platform": "lc",
+            "title": "LC: Underground System",
+            "id": "https://leetcode.com/problems/design-underground-system/"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-twitter/",
+            "platform": "lc",
+            "title": "LC: Design Twitter",
+            "id": "https://leetcode.com/problems/design-twitter/"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-hit-counter/",
+            "platform": "lc",
+            "title": "LC: Design Hit Counter",
+            "id": "https://leetcode.com/problems/design-hit-counter/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/python-dataclasses/1",
+            "platform": "gfg",
+            "title": "GFG: Dataclasses",
+            "id": "https://www.geeksforgeeks.org/problems/python-dataclasses/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/abstract-base-class/1",
+            "platform": "gfg",
+            "title": "GFG: ABC",
+            "id": "https://www.geeksforgeeks.org/problems/abstract-base-class/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/python-property-function/1",
+            "platform": "gfg",
+            "title": "GFG: @property",
+            "id": "https://www.geeksforgeeks.org/problems/python-property-function/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/OOP1",
+            "platform": "cc",
+            "title": "CC: OOP Practice",
+            "id": "https://www.codechef.com/problems/OOP1"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1829/D",
+            "platform": "cf",
+            "title": "CF: Gold & Silver",
+            "id": "https://codeforces.com/problemset/problem/1829/D"
+          }
+        ],
+        "concepts": [
+          "@dataclass",
+          "frozen",
+          "ABC",
+          "@abstractmethod",
+          "@property",
+          "setter"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Algorithms & Problem Solving",
+    "icon": "🌲",
+    "topics": [
+      {
+        "title": "Sorting Algorithms",
+        "difficulty": "Medium",
+        "code": "<span class=\"cm\"># Merge Sort O(n log n)</span>\n<span class=\"kw\">def</span> <span class=\"fn\">merge_sort</span>(<span class=\"var\">a</span>):\n    <span class=\"kw\">if</span> <span class=\"fn\">len</span>(<span class=\"var\">a</span>)<span class=\"op\">&lt;=</span><span class=\"num\">1</span>: <span class=\"kw\">return</span> <span class=\"var\">a</span>\n    <span class=\"var\">m</span><span class=\"op\">=</span><span class=\"fn\">len</span>(<span class=\"var\">a</span>)<span class=\"op\">//</span><span class=\"num\">2</span>\n    <span class=\"var\">L</span>,<span class=\"var\">R</span><span class=\"op\">=</span><span class=\"fn\">merge_sort</span>(<span class=\"var\">a</span>[:<span class=\"var\">m</span>]),<span class=\"fn\">merge_sort</span>(<span class=\"var\">a</span>[<span class=\"var\">m</span>:])\n    <span class=\"kw\">return</span> <span class=\"fn\">merge</span>(<span class=\"var\">L</span>,<span class=\"var\">R</span>)\n\n<span class=\"cm\"># Quick Sort O(n log n) avg</span>\n<span class=\"kw\">def</span> <span class=\"fn\">qsort</span>(<span class=\"var\">a</span>):\n    <span class=\"kw\">if</span> <span class=\"fn\">len</span>(<span class=\"var\">a</span>)<span class=\"op\">&lt;=</span><span class=\"num\">1</span>: <span class=\"kw\">return</span> <span class=\"var\">a</span>\n    <span class=\"var\">p</span><span class=\"op\">=</span><span class=\"var\">a</span>[<span class=\"fn\">len</span>(<span class=\"var\">a</span>)<span class=\"op\">//</span><span class=\"num\">2</span>]\n    <span class=\"kw\">return</span>(<span class=\"fn\">qsort</span>([<span class=\"var\">x</span> <span class=\"kw\">for</span> <span class=\"var\">x</span> <span class=\"kw\">in</span> <span class=\"var\">a</span> <span class=\"kw\">if</span> <span class=\"var\">x</span><span class=\"op\">&lt;</span><span class=\"var\">p</span>])<span class=\"op\">+</span>\n          [<span class=\"var\">x</span> <span class=\"kw\">for</span> <span class=\"var\">x</span> <span class=\"kw\">in</span> <span class=\"var\">a</span> <span class=\"kw\">if</span> <span class=\"var\">x</span><span class=\"op\">==</span><span class=\"var\">p</span>]<span class=\"op\">+</span>\n          <span class=\"fn\">qsort</span>([<span class=\"var\">x</span> <span class=\"kw\">for</span> <span class=\"var\">x</span> <span class=\"kw\">in</span> <span class=\"var\">a</span> <span class=\"kw\">if</span> <span class=\"var\">x</span><span class=\"op\">&gt;</span><span class=\"var\">p</span>]))",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/sort-an-array/",
+            "platform": "lc",
+            "title": "LC: Sort an Array",
+            "id": "https://leetcode.com/problems/sort-an-array/"
+          },
+          {
+            "url": "https://leetcode.com/problems/merge-sorted-array/",
+            "platform": "lc",
+            "title": "LC: Merge Sorted Array",
+            "id": "https://leetcode.com/problems/merge-sorted-array/"
+          },
+          {
+            "url": "https://leetcode.com/problems/sort-colors/",
+            "platform": "lc",
+            "title": "LC: Sort Colors (Dutch Flag)",
+            "id": "https://leetcode.com/problems/sort-colors/"
+          },
+          {
+            "url": "https://leetcode.com/problems/kth-largest-element-in-an-array/",
+            "platform": "lc",
+            "title": "LC: Kth Largest",
+            "id": "https://leetcode.com/problems/kth-largest-element-in-an-array/"
+          },
+          {
+            "url": "https://leetcode.com/problems/largest-number/",
+            "platform": "lc",
+            "title": "LC: Largest Number",
+            "id": "https://leetcode.com/problems/largest-number/"
+          },
+          {
+            "url": "https://leetcode.com/problems/sort-list/",
+            "platform": "lc",
+            "title": "LC: Sort List (Merge Sort)",
+            "id": "https://leetcode.com/problems/sort-list/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/ctci-merge-sort/problem",
+            "platform": "hr",
+            "title": "HR: Merge Sort",
+            "id": "https://www.hackerrank.com/challenges/ctci-merge-sort/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/ctci-bubble-sort/problem",
+            "platform": "hr",
+            "title": "HR: Bubble Sort",
+            "id": "https://www.hackerrank.com/challenges/ctci-bubble-sort/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/countingsort1/problem",
+            "platform": "hr",
+            "title": "HR: Counting Sort",
+            "id": "https://www.hackerrank.com/challenges/countingsort1/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/merge-sort/1",
+            "platform": "gfg",
+            "title": "GFG: Merge Sort",
+            "id": "https://www.geeksforgeeks.org/problems/merge-sort/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/TSORT",
+            "platform": "cc",
+            "title": "CC: Turbo Sort",
+            "id": "https://www.codechef.com/problems/TSORT"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1374/C",
+            "platform": "cf",
+            "title": "CF: Move Brackets",
+            "id": "https://codeforces.com/problemset/problem/1374/C"
+          }
+        ],
+        "concepts": [
+          "merge sort",
+          "quick sort",
+          "counting sort",
+          "Timsort",
+          "O(n log n)",
+          "in-place"
+        ]
+      },
+      {
+        "title": "Binary Search & bisect",
+        "difficulty": "Medium",
+        "code": "<span class=\"kw\">import</span> <span class=\"cls\">bisect</span>\n\n<span class=\"cm\"># Classic binary search O(log n)</span>\n<span class=\"kw\">def</span> <span class=\"fn\">bsearch</span>(<span class=\"var\">a</span>,<span class=\"var\">t</span>):\n    <span class=\"var\">lo</span>,<span class=\"var\">hi</span><span class=\"op\">=</span><span class=\"num\">0</span>,<span class=\"fn\">len</span>(<span class=\"var\">a</span>)<span class=\"op\">-</span><span class=\"num\">1</span>\n    <span class=\"kw\">while</span> <span class=\"var\">lo</span><span class=\"op\">&lt;=</span><span class=\"var\">hi</span>:\n        <span class=\"var\">m</span><span class=\"op\">=</span><span class=\"var\">lo</span><span class=\"op\">+</span>(<span class=\"var\">hi</span><span class=\"op\">-</span><span class=\"var\">lo</span>)<span class=\"op\">//</span><span class=\"num\">2</span>\n        <span class=\"kw\">if</span>   <span class=\"var\">a</span>[<span class=\"var\">m</span>]<span class=\"op\">==</span><span class=\"var\">t</span>: <span class=\"kw\">return</span> <span class=\"var\">m</span>\n        <span class=\"kw\">elif</span> <span class=\"var\">a</span>[<span class=\"var\">m</span>]<span class=\"op\">&lt;</span><span class=\"var\">t</span>:  <span class=\"var\">lo</span><span class=\"op\">=</span><span class=\"var\">m</span><span class=\"op\">+</span><span class=\"num\">1</span>\n        <span class=\"kw\">else</span>: <span class=\"var\">hi</span><span class=\"op\">=</span><span class=\"var\">m</span><span class=\"op\">-</span><span class=\"num\">1</span>\n    <span class=\"kw\">return</span> <span class=\"op\">-</span><span class=\"num\">1</span>\n\n<span class=\"cm\"># Python stdlib bisect</span>\n<span class=\"cls\">bisect</span><span class=\"op\">.</span><span class=\"fn\">bisect_left</span>(<span class=\"var\">a</span>,<span class=\"var\">t</span>)  <span class=\"cm\"># left insertion pt</span>\n<span class=\"cls\">bisect</span><span class=\"op\">.</span><span class=\"fn\">bisect_right</span>(<span class=\"var\">a</span>,<span class=\"var\">t</span>) <span class=\"cm\"># right insertion pt</span>\n<span class=\"cls\">bisect</span><span class=\"op\">.</span><span class=\"fn\">insort</span>(<span class=\"var\">a</span>,<span class=\"var\">v</span>)       <span class=\"cm\"># sorted insert</span>",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/binary-search/",
+            "platform": "lc",
+            "title": "LC: Binary Search",
+            "id": "https://leetcode.com/problems/binary-search/"
+          },
+          {
+            "url": "https://leetcode.com/problems/search-in-rotated-sorted-array/",
+            "platform": "lc",
+            "title": "LC: Rotated Array Search",
+            "id": "https://leetcode.com/problems/search-in-rotated-sorted-array/"
+          },
+          {
+            "url": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",
+            "platform": "lc",
+            "title": "LC: Min in Rotated",
+            "id": "https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/"
+          },
+          {
+            "url": "https://leetcode.com/problems/search-a-2d-matrix/",
+            "platform": "lc",
+            "title": "LC: Search 2D Matrix",
+            "id": "https://leetcode.com/problems/search-a-2d-matrix/"
+          },
+          {
+            "url": "https://leetcode.com/problems/koko-eating-bananas/",
+            "platform": "lc",
+            "title": "LC: Koko Bananas",
+            "id": "https://leetcode.com/problems/koko-eating-bananas/"
+          },
+          {
+            "url": "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/",
+            "platform": "lc",
+            "title": "LC: Ship Packages",
+            "id": "https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/"
+          },
+          {
+            "url": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",
+            "platform": "lc",
+            "title": "LC: First & Last Position",
+            "id": "https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/binary-search-ice-cream-parlor/problem",
+            "platform": "hr",
+            "title": "HR: Ice Cream Parlor",
+            "id": "https://www.hackerrank.com/challenges/binary-search-ice-cream-parlor/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/sherlock-and-array/problem",
+            "platform": "hr",
+            "title": "HR: Sherlock Array",
+            "id": "https://www.hackerrank.com/challenges/sherlock-and-array/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/binary-search-1587115620/1",
+            "platform": "gfg",
+            "title": "GFG: Binary Search",
+            "id": "https://www.geeksforgeeks.org/problems/binary-search-1587115620/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/BSEARCH",
+            "platform": "cc",
+            "title": "CC: Binary Search",
+            "id": "https://www.codechef.com/problems/BSEARCH"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1201/C",
+            "platform": "cf",
+            "title": "CF: Maximum Median",
+            "id": "https://codeforces.com/problemset/problem/1201/C"
+          }
+        ],
+        "concepts": [
+          "binary search",
+          "bisect",
+          "O(log n)",
+          "search on answer",
+          "rotated array"
+        ]
+      },
+      {
+        "title": "Dynamic Programming",
+        "difficulty": "Hard",
+        "code": "<span class=\"kw\">from</span> <span class=\"cls\">functools</span> <span class=\"kw\">import</span> <span class=\"fn\">lru_cache</span>\n\n<span class=\"cm\"># Top-down (memoization)</span>\n<span class=\"op\">@</span><span class=\"fn\">lru_cache</span>(<span class=\"var\">maxsize</span><span class=\"op\">=</span><span class=\"kw\">None</span>)\n<span class=\"kw\">def</span> <span class=\"fn\">fib</span>(<span class=\"var\">n</span>):\n    <span class=\"kw\">if</span> <span class=\"var\">n</span><span class=\"op\">&lt;=</span><span class=\"num\">1</span>: <span class=\"kw\">return</span> <span class=\"var\">n</span>\n    <span class=\"kw\">return</span> <span class=\"fn\">fib</span>(<span class=\"var\">n</span><span class=\"op\">-</span><span class=\"num\">1</span>)<span class=\"op\">+</span><span class=\"fn\">fib</span>(<span class=\"var\">n</span><span class=\"op\">-</span><span class=\"num\">2</span>)\n\n<span class=\"cm\"># Bottom-up tabulation (LCS)</span>\n<span class=\"kw\">def</span> <span class=\"fn\">lcs</span>(<span class=\"var\">a</span>,<span class=\"var\">b</span>):\n    <span class=\"var\">m</span>,<span class=\"var\">n</span><span class=\"op\">=</span><span class=\"fn\">len</span>(<span class=\"var\">a</span>),<span class=\"fn\">len</span>(<span class=\"var\">b</span>)\n    <span class=\"var\">dp</span><span class=\"op\">=</span>[[<span class=\"num\">0</span>]<span class=\"op\">*</span>(<span class=\"var\">n</span><span class=\"op\">+</span><span class=\"num\">1</span>) <span class=\"kw\">for</span> <span class=\"var\">_</span> <span class=\"kw\">in</span> <span class=\"fn\">range</span>(<span class=\"var\">m</span><span class=\"op\">+</span><span class=\"num\">1</span>)]\n    <span class=\"kw\">for</span> <span class=\"var\">i</span> <span class=\"kw\">in</span> <span class=\"fn\">range</span>(<span class=\"num\">1</span>,<span class=\"var\">m</span><span class=\"op\">+</span><span class=\"num\">1</span>):\n        <span class=\"kw\">for</span> <span class=\"var\">j</span> <span class=\"kw\">in</span> <span class=\"fn\">range</span>(<span class=\"num\">1</span>,<span class=\"var\">n</span><span class=\"op\">+</span><span class=\"num\">1</span>):\n            <span class=\"kw\">if</span> <span class=\"var\">a</span>[<span class=\"var\">i</span><span class=\"op\">-</span><span class=\"num\">1</span>]<span class=\"op\">==</span><span class=\"var\">b</span>[<span class=\"var\">j</span><span class=\"op\">-</span><span class=\"num\">1</span>]:\n                <span class=\"var\">dp</span>[<span class=\"var\">i</span>][<span class=\"var\">j</span>]<span class=\"op\">=</span><span class=\"var\">dp</span>[<span class=\"var\">i</span><span class=\"op\">-</span><span class=\"num\">1</span>][<span class=\"var\">j</span><span class=\"op\">-</span><span class=\"num\">1</span>]<span class=\"op\">+</span><span class=\"num\">1</span>\n            <span class=\"kw\">else</span>:\n                <span class=\"var\">dp</span>[<span class=\"var\">i</span>][<span class=\"var\">j</span>]<span class=\"op\">=</span><span class=\"fn\">max</span>(<span class=\"var\">dp</span>[<span class=\"var\">i</span><span class=\"op\">-</span><span class=\"num\">1</span>][<span class=\"var\">j</span>],<span class=\"var\">dp</span>[<span class=\"var\">i</span>][<span class=\"var\">j</span><span class=\"op\">-</span><span class=\"num\">1</span>])\n    <span class=\"kw\">return</span> <span class=\"var\">dp</span>[<span class=\"var\">m</span>][<span class=\"var\">n</span>]",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/climbing-stairs/",
+            "platform": "lc",
+            "title": "LC: Climbing Stairs",
+            "id": "https://leetcode.com/problems/climbing-stairs/"
+          },
+          {
+            "url": "https://leetcode.com/problems/coin-change/",
+            "platform": "lc",
+            "title": "LC: Coin Change",
+            "id": "https://leetcode.com/problems/coin-change/"
+          },
+          {
+            "url": "https://leetcode.com/problems/longest-common-subsequence/",
+            "platform": "lc",
+            "title": "LC: LCS",
+            "id": "https://leetcode.com/problems/longest-common-subsequence/"
+          },
+          {
+            "url": "https://leetcode.com/problems/house-robber/",
+            "platform": "lc",
+            "title": "LC: House Robber",
+            "id": "https://leetcode.com/problems/house-robber/"
+          },
+          {
+            "url": "https://leetcode.com/problems/unique-paths/",
+            "platform": "lc",
+            "title": "LC: Unique Paths",
+            "id": "https://leetcode.com/problems/unique-paths/"
+          },
+          {
+            "url": "https://leetcode.com/problems/longest-increasing-subsequence/",
+            "platform": "lc",
+            "title": "LC: LIS",
+            "id": "https://leetcode.com/problems/longest-increasing-subsequence/"
+          },
+          {
+            "url": "https://leetcode.com/problems/edit-distance/",
+            "platform": "lc",
+            "title": "LC: Edit Distance",
+            "id": "https://leetcode.com/problems/edit-distance/"
+          },
+          {
+            "url": "https://leetcode.com/problems/partition-equal-subset-sum/",
+            "platform": "lc",
+            "title": "LC: Partition Equal Subset",
+            "id": "https://leetcode.com/problems/partition-equal-subset-sum/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/fibonacci-modified/problem",
+            "platform": "hr",
+            "title": "HR: Modified Fibonacci",
+            "id": "https://www.hackerrank.com/challenges/fibonacci-modified/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1",
+            "platform": "gfg",
+            "title": "GFG: 0-1 Knapsack",
+            "id": "https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/KNAPSACK",
+            "platform": "cc",
+            "title": "CC: Knapsack",
+            "id": "https://www.codechef.com/problems/KNAPSACK"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/189/A",
+            "platform": "cf",
+            "title": "CF: Cut Ribbon",
+            "id": "https://codeforces.com/problemset/problem/189/A"
+          }
+        ],
+        "concepts": [
+          "memoization",
+          "tabulation",
+          "LCS",
+          "knapsack",
+          "LIS",
+          "edit distance",
+          "optimal substructure"
+        ]
+      },
+      {
+        "title": "Graph Algorithms — BFS, DFS, Dijkstra",
+        "difficulty": "Hard",
+        "code": "<span class=\"kw\">from</span> <span class=\"cls\">collections</span> <span class=\"kw\">import</span> <span class=\"cls\">deque</span>\n<span class=\"kw\">import</span> <span class=\"cls\">heapq</span>\n\n<span class=\"cm\"># BFS — shortest unweighted path</span>\n<span class=\"kw\">def</span> <span class=\"fn\">bfs</span>(<span class=\"var\">g</span>,<span class=\"var\">s</span>):\n    <span class=\"var\">vis</span>,<span class=\"var\">q</span><span class=\"op\">=</span>{<span class=\"var\">s</span>:<span class=\"num\">0</span>},<span class=\"cls\">deque</span>([<span class=\"var\">s</span>])\n    <span class=\"kw\">while</span> <span class=\"var\">q</span>:\n        <span class=\"var\">u</span><span class=\"op\">=</span><span class=\"var\">q</span><span class=\"op\">.</span><span class=\"fn\">popleft</span>()\n        <span class=\"kw\">for</span> <span class=\"var\">v</span> <span class=\"kw\">in</span> <span class=\"var\">g</span>[<span class=\"var\">u</span>]:\n            <span class=\"kw\">if</span> <span class=\"var\">v</span> <span class=\"kw\">not in</span> <span class=\"var\">vis</span>:\n                <span class=\"var\">vis</span>[<span class=\"var\">v</span>]<span class=\"op\">=</span><span class=\"var\">vis</span>[<span class=\"var\">u</span>]<span class=\"op\">+</span><span class=\"num\">1</span>; <span class=\"var\">q</span><span class=\"op\">.</span><span class=\"fn\">append</span>(<span class=\"var\">v</span>)\n\n<span class=\"cm\"># Dijkstra — weighted shortest path</span>\n<span class=\"kw\">def</span> <span class=\"fn\">dijkstra</span>(<span class=\"var\">g</span>,<span class=\"var\">s</span>):\n    <span class=\"var\">dist</span><span class=\"op\">=</span>{<span class=\"var\">s</span>:<span class=\"num\">0</span>}; <span class=\"var\">pq</span><span class=\"op\">=</span>[(<span class=\"num\">0</span>,<span class=\"var\">s</span>)]\n    <span class=\"kw\">while</span> <span class=\"var\">pq</span>:\n        <span class=\"var\">d</span>,<span class=\"var\">u</span><span class=\"op\">=</span><span class=\"cls\">heapq</span><span class=\"op\">.</span><span class=\"fn\">heappop</span>(<span class=\"var\">pq</span>)\n        <span class=\"kw\">if</span> <span class=\"var\">d</span><span class=\"op\">&gt;</span><span class=\"var\">dist</span><span class=\"op\">.</span><span class=\"fn\">get</span>(<span class=\"var\">u</span>,<span class=\"fn\">float</span>(<span class=\"str\">\"inf\"</span>)): <span class=\"kw\">continue</span>\n        <span class=\"kw\">for</span> <span class=\"var\">v</span>,<span class=\"var\">w</span> <span class=\"kw\">in</span> <span class=\"var\">g</span>[<span class=\"var\">u</span>]:\n            <span class=\"kw\">if</span> <span class=\"var\">d</span><span class=\"op\">+</span><span class=\"var\">w</span><span class=\"op\">&lt;</span><span class=\"var\">dist</span><span class=\"op\">.</span><span class=\"fn\">get</span>(<span class=\"var\">v</span>,<span class=\"fn\">float</span>(<span class=\"str\">\"inf\"</span>)):\n                <span class=\"var\">dist</span>[<span class=\"var\">v</span>]<span class=\"op\">=</span><span class=\"var\">d</span><span class=\"op\">+</span><span class=\"var\">w</span>; <span class=\"cls\">heapq</span><span class=\"op\">.</span><span class=\"fn\">heappush</span>(<span class=\"var\">pq</span>,(<span class=\"var\">dist</span>[<span class=\"var\">v</span>],<span class=\"var\">v</span>))\n    <span class=\"kw\">return</span> <span class=\"var\">dist</span>",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/number-of-islands/",
+            "platform": "lc",
+            "title": "LC: Number of Islands",
+            "id": "https://leetcode.com/problems/number-of-islands/"
+          },
+          {
+            "url": "https://leetcode.com/problems/course-schedule/",
+            "platform": "lc",
+            "title": "LC: Course Schedule (Topo)",
+            "id": "https://leetcode.com/problems/course-schedule/"
+          },
+          {
+            "url": "https://leetcode.com/problems/network-delay-time/",
+            "platform": "lc",
+            "title": "LC: Network Delay (Dijkstra)",
+            "id": "https://leetcode.com/problems/network-delay-time/"
+          },
+          {
+            "url": "https://leetcode.com/problems/rotting-oranges/",
+            "platform": "lc",
+            "title": "LC: Rotting Oranges (BFS)",
+            "id": "https://leetcode.com/problems/rotting-oranges/"
+          },
+          {
+            "url": "https://leetcode.com/problems/word-ladder/",
+            "platform": "lc",
+            "title": "LC: Word Ladder",
+            "id": "https://leetcode.com/problems/word-ladder/"
+          },
+          {
+            "url": "https://leetcode.com/problems/pacific-atlantic-water-flow/",
+            "platform": "lc",
+            "title": "LC: Pacific Atlantic",
+            "id": "https://leetcode.com/problems/pacific-atlantic-water-flow/"
+          },
+          {
+            "url": "https://leetcode.com/problems/clone-graph/",
+            "platform": "lc",
+            "title": "LC: Clone Graph",
+            "id": "https://leetcode.com/problems/clone-graph/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/bfsshortreach/problem",
+            "platform": "hr",
+            "title": "HR: BFS Shortest Reach",
+            "id": "https://www.hackerrank.com/challenges/bfsshortreach/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/ctci-connected-cells-in-a-grid/problem",
+            "platform": "hr",
+            "title": "HR: Connected Cells",
+            "id": "https://www.hackerrank.com/challenges/ctci-connected-cells-in-a-grid/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1",
+            "platform": "gfg",
+            "title": "GFG: BFS Traversal",
+            "id": "https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/DIGJUMP",
+            "platform": "cc",
+            "title": "CC: Digit Jump BFS",
+            "id": "https://www.codechef.com/problems/DIGJUMP"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/20/C",
+            "platform": "cf",
+            "title": "CF: Dijkstra? (Classic)",
+            "id": "https://codeforces.com/problemset/problem/20/C"
+          }
+        ],
+        "concepts": [
+          "BFS",
+          "DFS",
+          "Dijkstra",
+          "topological sort",
+          "V+E",
+          "adjacency list"
+        ]
+      },
+      {
+        "title": "Two Pointers & Sliding Window",
+        "difficulty": "Medium",
+        "code": "<span class=\"cm\"># Two pointers — pair sum</span>\n<span class=\"kw\">def</span> <span class=\"fn\">two_sum_sorted</span>(<span class=\"var\">a</span>,<span class=\"var\">t</span>):\n    <span class=\"var\">l</span>,<span class=\"var\">r</span><span class=\"op\">=</span><span class=\"num\">0</span>,<span class=\"fn\">len</span>(<span class=\"var\">a</span>)<span class=\"op\">-</span><span class=\"num\">1</span>\n    <span class=\"kw\">while</span> <span class=\"var\">l</span><span class=\"op\">&lt;</span><span class=\"var\">r</span>:\n        <span class=\"var\">s</span><span class=\"op\">=</span><span class=\"var\">a</span>[<span class=\"var\">l</span>]<span class=\"op\">+</span><span class=\"var\">a</span>[<span class=\"var\">r</span>]\n        <span class=\"kw\">if</span>   <span class=\"var\">s</span><span class=\"op\">==</span><span class=\"var\">t</span>: <span class=\"kw\">return</span> [<span class=\"var\">l</span>,<span class=\"var\">r</span>]\n        <span class=\"kw\">elif</span> <span class=\"var\">s</span><span class=\"op\">&lt;</span><span class=\"var\">t</span>:  <span class=\"var\">l</span><span class=\"op\">+=</span><span class=\"num\">1</span>\n        <span class=\"kw\">else</span>: <span class=\"var\">r</span><span class=\"op\">-=</span><span class=\"num\">1</span>\n\n<span class=\"cm\"># Variable sliding window</span>\n<span class=\"kw\">def</span> <span class=\"fn\">min_window_sum</span>(<span class=\"var\">a</span>,<span class=\"var\">t</span>):\n    <span class=\"var\">l</span><span class=\"op\">=</span><span class=\"var\">tot</span><span class=\"op\">=</span><span class=\"num\">0</span>; <span class=\"var\">best</span><span class=\"op\">=</span><span class=\"fn\">float</span>(<span class=\"str\">\"inf\"</span>)\n    <span class=\"kw\">for</span> <span class=\"var\">r</span>,<span class=\"var\">v</span> <span class=\"kw\">in</span> <span class=\"fn\">enumerate</span>(<span class=\"var\">a</span>):\n        <span class=\"var\">tot</span><span class=\"op\">+=</span><span class=\"var\">v</span>\n        <span class=\"kw\">while</span> <span class=\"var\">tot</span><span class=\"op\">&gt;=</span><span class=\"var\">t</span>:\n            <span class=\"var\">best</span><span class=\"op\">=</span><span class=\"fn\">min</span>(<span class=\"var\">best</span>,<span class=\"var\">r</span><span class=\"op\">-</span><span class=\"var\">l</span><span class=\"op\">+</span><span class=\"num\">1</span>)\n            <span class=\"var\">tot</span><span class=\"op\">-=</span><span class=\"var\">a</span>[<span class=\"var\">l</span>]; <span class=\"var\">l</span><span class=\"op\">+=</span><span class=\"num\">1</span>\n    <span class=\"kw\">return</span> <span class=\"var\">best</span>",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/container-with-most-water/",
+            "platform": "lc",
+            "title": "LC: Container Water",
+            "id": "https://leetcode.com/problems/container-with-most-water/"
+          },
+          {
+            "url": "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
+            "platform": "lc",
+            "title": "LC: Longest Substring",
+            "id": "https://leetcode.com/problems/longest-substring-without-repeating-characters/"
+          },
+          {
+            "url": "https://leetcode.com/problems/minimum-size-subarray-sum/",
+            "platform": "lc",
+            "title": "LC: Min Subarray Sum",
+            "id": "https://leetcode.com/problems/minimum-size-subarray-sum/"
+          },
+          {
+            "url": "https://leetcode.com/problems/sliding-window-maximum/",
+            "platform": "lc",
+            "title": "LC: Sliding Window Max",
+            "id": "https://leetcode.com/problems/sliding-window-maximum/"
+          },
+          {
+            "url": "https://leetcode.com/problems/3sum/",
+            "platform": "lc",
+            "title": "LC: 3Sum",
+            "id": "https://leetcode.com/problems/3sum/"
+          },
+          {
+            "url": "https://leetcode.com/problems/minimum-window-substring/",
+            "platform": "lc",
+            "title": "LC: Min Window Substring",
+            "id": "https://leetcode.com/problems/minimum-window-substring/"
+          },
+          {
+            "url": "https://leetcode.com/problems/longest-repeating-character-replacement/",
+            "platform": "lc",
+            "title": "LC: Longest Repeating Char",
+            "id": "https://leetcode.com/problems/longest-repeating-character-replacement/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/pairs/problem",
+            "platform": "hr",
+            "title": "HR: Pairs",
+            "id": "https://www.hackerrank.com/challenges/pairs/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/two-sum-nearest-to-target/1",
+            "platform": "gfg",
+            "title": "GFG: Two Sum Nearest",
+            "id": "https://www.geeksforgeeks.org/problems/two-sum-nearest-to-target/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/subarray-with-given-sum-1587115621/1",
+            "platform": "gfg",
+            "title": "GFG: Subarray Given Sum",
+            "id": "https://www.geeksforgeeks.org/problems/subarray-with-given-sum-1587115621/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/SLIDE",
+            "platform": "cc",
+            "title": "CC: Slide Window",
+            "id": "https://www.codechef.com/problems/SLIDE"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1354/B",
+            "platform": "cf",
+            "title": "CF: Ternary String",
+            "id": "https://codeforces.com/problemset/problem/1354/B"
+          }
+        ],
+        "concepts": [
+          "two pointers",
+          "variable window",
+          "fixed window",
+          "monotonic deque",
+          "O(n)"
+        ]
+      },
+      {
+        "title": "Recursion & Backtracking",
+        "difficulty": "Hard",
+        "code": "<span class=\"cm\"># Backtracking template</span>\n<span class=\"kw\">def</span> <span class=\"fn\">backtrack</span>(<span class=\"var\">state</span>,<span class=\"var\">choices</span>):\n    <span class=\"kw\">if</span> <span class=\"fn\">is_solution</span>(<span class=\"var\">state</span>):\n        <span class=\"var\">res</span><span class=\"op\">.</span><span class=\"fn\">append</span>(<span class=\"var\">state</span>[:]); <span class=\"kw\">return</span>\n    <span class=\"kw\">for</span> <span class=\"var\">c</span> <span class=\"kw\">in</span> <span class=\"var\">choices</span>:\n        <span class=\"kw\">if</span> <span class=\"fn\">is_valid</span>(<span class=\"var\">state</span>,<span class=\"var\">c</span>):\n            <span class=\"var\">state</span><span class=\"op\">.</span><span class=\"fn\">append</span>(<span class=\"var\">c</span>)     <span class=\"cm\"># choose</span>\n            <span class=\"fn\">backtrack</span>(<span class=\"var\">state</span>,<span class=\"var\">choices</span>)\n            <span class=\"var\">state</span><span class=\"op\">.</span><span class=\"fn\">pop</span>()         <span class=\"cm\"># unchoose</span>\n\n<span class=\"cm\"># Subsets</span>\n<span class=\"kw\">def</span> <span class=\"fn\">subsets</span>(<span class=\"var\">nums</span>):\n    <span class=\"var\">res</span><span class=\"op\">=</span>[[]]\n    <span class=\"kw\">for</span> <span class=\"var\">n</span> <span class=\"kw\">in</span> <span class=\"var\">nums</span>:\n        <span class=\"var\">res</span><span class=\"op\">+=</span>[<span class=\"var\">s</span><span class=\"op\">+</span>[<span class=\"var\">n</span>] <span class=\"kw\">for</span> <span class=\"var\">s</span> <span class=\"kw\">in</span> <span class=\"var\">res</span>]\n    <span class=\"kw\">return</span> <span class=\"var\">res</span>",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/permutations/",
+            "platform": "lc",
+            "title": "LC: Permutations",
+            "id": "https://leetcode.com/problems/permutations/"
+          },
+          {
+            "url": "https://leetcode.com/problems/subsets/",
+            "platform": "lc",
+            "title": "LC: Subsets",
+            "id": "https://leetcode.com/problems/subsets/"
+          },
+          {
+            "url": "https://leetcode.com/problems/combination-sum/",
+            "platform": "lc",
+            "title": "LC: Combination Sum",
+            "id": "https://leetcode.com/problems/combination-sum/"
+          },
+          {
+            "url": "https://leetcode.com/problems/n-queens/",
+            "platform": "lc",
+            "title": "LC: N-Queens",
+            "id": "https://leetcode.com/problems/n-queens/"
+          },
+          {
+            "url": "https://leetcode.com/problems/sudoku-solver/",
+            "platform": "lc",
+            "title": "LC: Sudoku Solver",
+            "id": "https://leetcode.com/problems/sudoku-solver/"
+          },
+          {
+            "url": "https://leetcode.com/problems/word-search/",
+            "platform": "lc",
+            "title": "LC: Word Search",
+            "id": "https://leetcode.com/problems/word-search/"
+          },
+          {
+            "url": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/",
+            "platform": "lc",
+            "title": "LC: Phone Combinations",
+            "id": "https://leetcode.com/problems/letter-combinations-of-a-phone-number/"
+          },
+          {
+            "url": "https://leetcode.com/problems/generate-parentheses/",
+            "platform": "lc",
+            "title": "LC: Generate Parentheses",
+            "id": "https://leetcode.com/problems/generate-parentheses/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/recursive-digit-sum/problem",
+            "platform": "hr",
+            "title": "HR: Recursive Digit Sum",
+            "id": "https://www.hackerrank.com/challenges/recursive-digit-sum/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1",
+            "platform": "gfg",
+            "title": "GFG: String Perms",
+            "id": "https://www.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1",
+            "platform": "gfg",
+            "title": "GFG: Rat in a Maze",
+            "id": "https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1097/B",
+            "platform": "cf",
+            "title": "CF: Petr and a Tree",
+            "id": "https://codeforces.com/problemset/problem/1097/B"
+          }
+        ],
+        "concepts": [
+          "backtracking",
+          "pruning",
+          "state space",
+          "N-Queens",
+          "subsets",
+          "power set"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Python stdlib Essentials",
+    "icon": "⚙️",
+    "topics": [
+      {
+        "title": "itertools — Combinatorics & Iteration",
+        "difficulty": "Medium",
+        "code": "<span class=\"kw\">import</span> <span class=\"cls\">itertools</span> <span class=\"kw\">as</span> <span class=\"cls\">it</span>\n\n<span class=\"fn\">list</span>(<span class=\"cls\">it</span><span class=\"op\">.</span><span class=\"fn\">permutations</span>([<span class=\"num\">1</span>,<span class=\"num\">2</span>,<span class=\"num\">3</span>]))\n<span class=\"fn\">list</span>(<span class=\"cls\">it</span><span class=\"op\">.</span><span class=\"fn\">combinations</span>([<span class=\"num\">1</span>,<span class=\"num\">2</span>,<span class=\"num\">3</span>],<span class=\"num\">2</span>))\n<span class=\"fn\">list</span>(<span class=\"cls\">it</span><span class=\"op\">.</span><span class=\"fn\">combinations_with_replacement</span>([<span class=\"num\">1</span>,<span class=\"num\">2</span>],<span class=\"num\">2</span>))\n<span class=\"fn\">list</span>(<span class=\"cls\">it</span><span class=\"op\">.</span><span class=\"fn\">product</span>(<span class=\"str\">\"AB\"</span>,<span class=\"var\">repeat</span><span class=\"op\">=</span><span class=\"num\">2</span>))\n<span class=\"fn\">list</span>(<span class=\"cls\">it</span><span class=\"op\">.</span><span class=\"fn\">chain</span>([<span class=\"num\">1</span>,<span class=\"num\">2</span>],[<span class=\"num\">3</span>,<span class=\"num\">4</span>]))\n<span class=\"fn\">list</span>(<span class=\"cls\">it</span><span class=\"op\">.</span><span class=\"fn\">accumulate</span>([<span class=\"num\">1</span>,<span class=\"num\">2</span>,<span class=\"num\">3</span>,<span class=\"num\">4</span>])) <span class=\"cm\"># prefix sums</span>\n<span class=\"fn\">list</span>(<span class=\"cls\">it</span><span class=\"op\">.</span><span class=\"fn\">groupby</span>(<span class=\"str\">\"aabbc\"</span>))           <span class=\"cm\"># runs</span>\n<span class=\"fn\">list</span>(<span class=\"cls\">it</span><span class=\"op\">.</span><span class=\"fn\">islice</span>(<span class=\"fn\">range</span>(<span class=\"num\">100</span>),<span class=\"num\">5</span>))       <span class=\"cm\"># take 5</span>\n<span class=\"cls\">it</span><span class=\"op\">.</span><span class=\"fn\">starmap</span>(<span class=\"fn\">pow</span>,[(<span class=\"num\">2</span>,<span class=\"num\">3</span>),(<span class=\"num\">3</span>,<span class=\"num\">2</span>)])      <span class=\"cm\"># [8,9]</span>",
+        "problems": [
+          {
+            "url": "https://www.hackerrank.com/challenges/itertools-product/problem",
+            "platform": "hr",
+            "title": "HR: itertools.product",
+            "id": "https://www.hackerrank.com/challenges/itertools-product/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/itertools-permutations/problem",
+            "platform": "hr",
+            "title": "HR: Permutations",
+            "id": "https://www.hackerrank.com/challenges/itertools-permutations/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/itertools-combinations/problem",
+            "platform": "hr",
+            "title": "HR: Combinations",
+            "id": "https://www.hackerrank.com/challenges/itertools-combinations/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/itertools-combinations-with-replacement/problem",
+            "platform": "hr",
+            "title": "HR: Combinations+Replace",
+            "id": "https://www.hackerrank.com/challenges/itertools-combinations-with-replacement/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/compress-the-string/problem",
+            "platform": "hr",
+            "title": "HR: groupby Compress",
+            "id": "https://www.hackerrank.com/challenges/compress-the-string/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/maximize-it/problem",
+            "platform": "hr",
+            "title": "HR: Maximize It",
+            "id": "https://www.hackerrank.com/challenges/maximize-it/problem"
+          },
+          {
+            "url": "https://leetcode.com/problems/permutations/",
+            "platform": "lc",
+            "title": "LC: Permutations",
+            "id": "https://leetcode.com/problems/permutations/"
+          },
+          {
+            "url": "https://leetcode.com/problems/combinations/",
+            "platform": "lc",
+            "title": "LC: Combinations",
+            "id": "https://leetcode.com/problems/combinations/"
+          },
+          {
+            "url": "https://leetcode.com/problems/running-sum-of-1d-array/",
+            "platform": "lc",
+            "title": "LC: Running Sum (accumulate)",
+            "id": "https://leetcode.com/problems/running-sum-of-1d-array/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/combinations/1",
+            "platform": "gfg",
+            "title": "GFG: Combinations",
+            "id": "https://www.geeksforgeeks.org/problems/combinations/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/PERM",
+            "platform": "cc",
+            "title": "CC: Permutations",
+            "id": "https://www.codechef.com/problems/PERM"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/196/E",
+            "platform": "cf",
+            "title": "CF: Expecting Rain",
+            "id": "https://codeforces.com/problemset/problem/196/E"
+          }
+        ],
+        "concepts": [
+          "permutations",
+          "combinations",
+          "product",
+          "chain",
+          "accumulate",
+          "groupby",
+          "islice"
+        ]
+      },
+      {
+        "title": "Regex (re module)",
+        "difficulty": "Medium",
+        "code": "<span class=\"kw\">import</span> <span class=\"cls\">re</span>\n\n<span class=\"cm\"># Common patterns</span>\n<span class=\"var\">EMAIL</span> <span class=\"op\">=</span> <span class=\"str\">r\"[\\w.+-]+@[\\w-]+\\.[a-z]{2,}\"</span>\n<span class=\"var\">PHONE</span> <span class=\"op\">=</span> <span class=\"str\">r\"\\+?\\d[\\d\\s.-]{7,}\\d\"</span>\n<span class=\"var\">URL</span>   <span class=\"op\">=</span> <span class=\"str\">r\"https?://[\\w./%-]+\"</span>\n\n<span class=\"cls\">re</span><span class=\"op\">.</span><span class=\"fn\">match</span>(<span class=\"var\">pat</span>,<span class=\"var\">s</span>)        <span class=\"cm\"># from start</span>\n<span class=\"cls\">re</span><span class=\"op\">.</span><span class=\"fn\">search</span>(<span class=\"var\">pat</span>,<span class=\"var\">s</span>)       <span class=\"cm\"># anywhere</span>\n<span class=\"cls\">re</span><span class=\"op\">.</span><span class=\"fn\">findall</span>(<span class=\"var\">pat</span>,<span class=\"var\">s</span>)      <span class=\"cm\"># all matches</span>\n<span class=\"cls\">re</span><span class=\"op\">.</span><span class=\"fn\">sub</span>(<span class=\"var\">pat</span>,<span class=\"str\">\"r\"</span>,<span class=\"var\">s</span>)      <span class=\"cm\"># replace</span>\n<span class=\"cls\">re</span><span class=\"op\">.</span><span class=\"fn\">split</span>(<span class=\"str\">r\"\\W+\"</span>,<span class=\"var\">s</span>)    <span class=\"cm\"># split</span>\n<span class=\"var\">m</span><span class=\"op\">=</span><span class=\"cls\">re</span><span class=\"op\">.</span><span class=\"fn\">search</span>(<span class=\"str\">r\"(\\d+)\"</span>,<span class=\"var\">s</span>)\n<span class=\"var\">m</span><span class=\"op\">.</span><span class=\"fn\">group</span>(<span class=\"num\">1</span>)             <span class=\"cm\"># capture group</span>",
+        "problems": [
+          {
+            "url": "https://www.hackerrank.com/challenges/re-findall-re-finditer/problem",
+            "platform": "hr",
+            "title": "HR: findall & finditer",
+            "id": "https://www.hackerrank.com/challenges/re-findall-re-finditer/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/re-start-end/problem",
+            "platform": "hr",
+            "title": "HR: start() & end()",
+            "id": "https://www.hackerrank.com/challenges/re-start-end/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/validate-list-of-email-address-with-filter/problem",
+            "platform": "hr",
+            "title": "HR: Validate Emails",
+            "id": "https://www.hackerrank.com/challenges/validate-list-of-email-address-with-filter/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/detecting-valid-latitude-and-longitude-pairs/problem",
+            "platform": "hr",
+            "title": "HR: Lat/Long Validation",
+            "id": "https://www.hackerrank.com/challenges/detecting-valid-latitude-and-longitude-pairs/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/validating-credit-card-numbers/problem",
+            "platform": "hr",
+            "title": "HR: Credit Card Regex",
+            "id": "https://www.hackerrank.com/challenges/validating-credit-card-numbers/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/validating-uid/problem",
+            "platform": "hr",
+            "title": "HR: Validate UID",
+            "id": "https://www.hackerrank.com/challenges/validating-uid/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/validating-postalcode/problem",
+            "platform": "hr",
+            "title": "HR: Postal Code",
+            "id": "https://www.hackerrank.com/challenges/validating-postalcode/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/html-parser-part-1/problem",
+            "platform": "hr",
+            "title": "HR: HTML Parser",
+            "id": "https://www.hackerrank.com/challenges/html-parser-part-1/problem"
+          },
+          {
+            "url": "https://leetcode.com/problems/valid-ip-address/",
+            "platform": "lc",
+            "title": "LC: Valid IP Address",
+            "id": "https://leetcode.com/problems/valid-ip-address/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/check-if-string-is-valid-ip-address-or-not/1",
+            "platform": "gfg",
+            "title": "GFG: Valid IP",
+            "id": "https://www.geeksforgeeks.org/problems/check-if-string-is-valid-ip-address-or-not/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/python-regex-word-boundary/1",
+            "platform": "gfg",
+            "title": "GFG: Word Boundary",
+            "id": "https://www.geeksforgeeks.org/problems/python-regex-word-boundary/1"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/86/C",
+            "platform": "cf",
+            "title": "CF: Genetic Engineering",
+            "id": "https://codeforces.com/problemset/problem/86/C"
+          }
+        ],
+        "concepts": [
+          "match",
+          "search",
+          "findall",
+          "groups",
+          "sub",
+          "compile",
+          "IGNORECASE"
+        ]
+      },
+      {
+        "title": "Exception Handling & Custom Exceptions",
+        "difficulty": "Medium",
+        "code": "<span class=\"cm\"># Custom exception hierarchy</span>\n<span class=\"kw\">class</span> <span class=\"cls\">AppError</span>(<span class=\"cls\">Exception</span>): <span class=\"kw\">pass</span>\n<span class=\"kw\">class</span> <span class=\"cls\">ValidationError</span>(<span class=\"cls\">AppError</span>):\n    <span class=\"kw\">def</span> <span class=\"fn\">__init__</span>(<span class=\"var\">self</span>,<span class=\"var\">f</span>,<span class=\"var\">m</span>):\n        <span class=\"kw\">super</span>()<span class=\"op\">.</span><span class=\"fn\">__init__</span>(<span class=\"fn\">f</span><span class=\"str\">\"{f}: {m}\"</span>)\n        <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">field</span><span class=\"op\">=</span><span class=\"var\">f</span>\n\n<span class=\"kw\">try</span>:\n    <span class=\"var\">x</span><span class=\"op\">=</span><span class=\"fn\">int</span>(<span class=\"fn\">input</span>())\n    <span class=\"kw\">if</span> <span class=\"var\">x</span><span class=\"op\">&lt;</span><span class=\"num\">0</span>:\n        <span class=\"kw\">raise</span> <span class=\"cls\">ValidationError</span>(<span class=\"str\">\"x\"</span>,<span class=\"str\">\"must be +ve\"</span>)\n<span class=\"kw\">except</span> <span class=\"cls\">ValidationError</span> <span class=\"kw\">as</span> <span class=\"var\">e</span>:\n    <span class=\"fn\">print</span>(<span class=\"var\">e</span><span class=\"op\">.</span><span class=\"var\">field</span>)\n<span class=\"kw\">except</span> (<span class=\"cls\">ValueError</span>,<span class=\"cls\">TypeError</span>):\n    <span class=\"fn\">print</span>(<span class=\"str\">\"type error\"</span>)\n<span class=\"kw\">else</span>: <span class=\"fn\">print</span>(<span class=\"str\">\"OK\"</span>)\n<span class=\"kw\">finally</span>: <span class=\"fn\">print</span>(<span class=\"str\">\"always\"</span>)",
+        "problems": [
+          {
+            "url": "https://www.hackerrank.com/challenges/exceptions/problem",
+            "platform": "hr",
+            "title": "HR: Exceptions",
+            "id": "https://www.hackerrank.com/challenges/exceptions/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/incorrect-regex/problem",
+            "platform": "hr",
+            "title": "HR: Incorrect Regex",
+            "id": "https://www.hackerrank.com/challenges/incorrect-regex/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/no-idea/problem",
+            "platform": "hr",
+            "title": "HR: No Idea",
+            "id": "https://www.hackerrank.com/challenges/no-idea/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-division/problem",
+            "platform": "hr",
+            "title": "HR: Division Errors",
+            "id": "https://www.hackerrank.com/challenges/python-division/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/2d-array/problem",
+            "platform": "hr",
+            "title": "HR: 2D Array",
+            "id": "https://www.hackerrank.com/challenges/2d-array/problem"
+          },
+          {
+            "url": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/",
+            "platform": "lc",
+            "title": "LC: Safe String Search",
+            "id": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-parking-system/",
+            "platform": "lc",
+            "title": "LC: Parking (raise on full)",
+            "id": "https://leetcode.com/problems/design-parking-system/"
+          },
+          {
+            "url": "https://leetcode.com/problems/lru-cache/",
+            "platform": "lc",
+            "title": "LC: LRU (KeyError safe)",
+            "id": "https://leetcode.com/problems/lru-cache/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/exception-handling/1",
+            "platform": "gfg",
+            "title": "GFG: Exception Handling",
+            "id": "https://www.geeksforgeeks.org/problems/exception-handling/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/python-try-except/1",
+            "platform": "gfg",
+            "title": "GFG: try/except",
+            "id": "https://www.geeksforgeeks.org/problems/python-try-except/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/ERRORH",
+            "platform": "cc",
+            "title": "CC: Error Handling",
+            "id": "https://www.codechef.com/problems/ERRORH"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/918/B",
+            "platform": "cf",
+            "title": "CF: Prime Swaps",
+            "id": "https://codeforces.com/problemset/problem/918/B"
+          }
+        ],
+        "concepts": [
+          "try/except/else/finally",
+          "raise",
+          "custom exception",
+          "hierarchy",
+          "context"
+        ]
+      },
+      {
+        "title": "Math, Number Theory & Bit Manipulation",
+        "difficulty": "Medium",
+        "code": "<span class=\"kw\">import</span> <span class=\"cls\">math</span>\n<span class=\"kw\">from</span> <span class=\"cls\">math</span> <span class=\"kw\">import</span> <span class=\"fn\">gcd</span>,<span class=\"fn\">lcm</span>,<span class=\"fn\">isqrt</span>,<span class=\"fn\">comb</span>,<span class=\"fn\">perm</span>\n\n<span class=\"fn\">gcd</span>(<span class=\"num\">12</span>,<span class=\"num\">18</span>)     <span class=\"cm\"># 6</span>\n<span class=\"fn\">lcm</span>(<span class=\"num\">4</span>,<span class=\"num\">6</span>)       <span class=\"cm\"># 12</span>\n<span class=\"fn\">isqrt</span>(<span class=\"num\">17</span>)      <span class=\"cm\"># 4</span>\n<span class=\"fn\">comb</span>(<span class=\"num\">10</span>,<span class=\"num\">3</span>)     <span class=\"cm\"># 120</span>\n<span class=\"cls\">math</span><span class=\"op\">.</span><span class=\"fn\">ceil</span>(<span class=\"num\">7</span><span class=\"op\">/</span><span class=\"num\">2</span>)  <span class=\"cm\"># 4</span>\n\n<span class=\"cm\"># Bit manipulation</span>\n<span class=\"var\">n</span> <span class=\"op\">&amp;</span> (<span class=\"var\">n</span><span class=\"op\">-</span><span class=\"num\">1</span>)      <span class=\"cm\"># clear lowest set bit</span>\n<span class=\"var\">n</span> <span class=\"op\">&amp;</span> <span class=\"op\">-</span><span class=\"var\">n</span>        <span class=\"cm\"># isolate lowest set bit</span>\n<span class=\"fn\">bin</span>(<span class=\"var\">n</span>)<span class=\"op\">.</span><span class=\"fn\">count</span>(<span class=\"str\">\"1\"</span>) <span class=\"cm\"># popcount</span>\n<span class=\"num\">1</span> <span class=\"op\">&lt;&lt;</span> <span class=\"var\">k</span>         <span class=\"cm\"># 2^k</span>\n(<span class=\"var\">n</span><span class=\"op\">&gt;&gt;</span><span class=\"var\">k</span>)<span class=\"op\">&amp;</span><span class=\"num\">1</span>       <span class=\"cm\"># kth bit</span>",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/number-of-1-bits/",
+            "platform": "lc",
+            "title": "LC: Count 1 Bits",
+            "id": "https://leetcode.com/problems/number-of-1-bits/"
+          },
+          {
+            "url": "https://leetcode.com/problems/single-number/",
+            "platform": "lc",
+            "title": "LC: Single Number (XOR)",
+            "id": "https://leetcode.com/problems/single-number/"
+          },
+          {
+            "url": "https://leetcode.com/problems/power-of-two/",
+            "platform": "lc",
+            "title": "LC: Power of Two",
+            "id": "https://leetcode.com/problems/power-of-two/"
+          },
+          {
+            "url": "https://leetcode.com/problems/counting-bits/",
+            "platform": "lc",
+            "title": "LC: Counting Bits",
+            "id": "https://leetcode.com/problems/counting-bits/"
+          },
+          {
+            "url": "https://leetcode.com/problems/reverse-bits/",
+            "platform": "lc",
+            "title": "LC: Reverse Bits",
+            "id": "https://leetcode.com/problems/reverse-bits/"
+          },
+          {
+            "url": "https://leetcode.com/problems/gcd-of-strings/",
+            "platform": "lc",
+            "title": "LC: GCD of Strings",
+            "id": "https://leetcode.com/problems/gcd-of-strings/"
+          },
+          {
+            "url": "https://leetcode.com/problems/sum-of-two-integers/",
+            "platform": "lc",
+            "title": "LC: Sum Without Operator",
+            "id": "https://leetcode.com/problems/sum-of-two-integers/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/find-angle/problem",
+            "platform": "hr",
+            "title": "HR: Find the Angle",
+            "id": "https://www.hackerrank.com/challenges/find-angle/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-eval/problem",
+            "platform": "hr",
+            "title": "HR: Eval (math)",
+            "id": "https://www.hackerrank.com/challenges/python-eval/problem"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/lcm-and-gcd4516/1",
+            "platform": "gfg",
+            "title": "GFG: LCM and GCD",
+            "id": "https://www.geeksforgeeks.org/problems/lcm-and-gcd4516/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/BITWISE",
+            "platform": "cc",
+            "title": "CC: Bitwise Ops",
+            "id": "https://www.codechef.com/problems/BITWISE"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/768/B",
+            "platform": "cf",
+            "title": "CF: Code For 1",
+            "id": "https://codeforces.com/problemset/problem/768/B"
+          }
+        ],
+        "concepts": [
+          "gcd/lcm",
+          "isqrt",
+          "comb",
+          "XOR",
+          "bit masking",
+          "popcount",
+          "power of 2"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Advanced Python Topics",
+    "icon": "🧩",
+    "topics": [
+      {
+        "title": "Generators, Iterators & Context Managers",
+        "difficulty": "Hard",
+        "code": "<span class=\"cm\"># Custom iterator</span>\n<span class=\"kw\">class</span> <span class=\"cls\">Counter</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">__init__</span>(<span class=\"var\">self</span>,<span class=\"var\">n</span>): <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">n</span><span class=\"op\">=</span><span class=\"var\">n</span>; <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">i</span><span class=\"op\">=</span><span class=\"num\">0</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">__iter__</span>(<span class=\"var\">self</span>): <span class=\"kw\">return</span> <span class=\"var\">self</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">__next__</span>(<span class=\"var\">self</span>):\n        <span class=\"kw\">if</span> <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">i</span><span class=\"op\">&gt;=</span><span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">n</span>: <span class=\"kw\">raise</span> <span class=\"cls\">StopIteration</span>\n        <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">i</span><span class=\"op\">+=</span><span class=\"num\">1</span>; <span class=\"kw\">return</span> <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">i</span><span class=\"op\">-</span><span class=\"num\">1</span>\n\n<span class=\"cm\"># Infinite generator</span>\n<span class=\"kw\">def</span> <span class=\"fn\">fib</span>():\n    <span class=\"var\">a</span>,<span class=\"var\">b</span><span class=\"op\">=</span><span class=\"num\">0</span>,<span class=\"num\">1</span>\n    <span class=\"kw\">while</span> <span class=\"kw\">True</span>: <span class=\"kw\">yield</span> <span class=\"var\">a</span>; <span class=\"var\">a</span>,<span class=\"var\">b</span><span class=\"op\">=</span><span class=\"var\">b</span>,<span class=\"var\">a</span><span class=\"op\">+</span><span class=\"var\">b</span>\n\n<span class=\"cm\"># Context manager (class)</span>\n<span class=\"kw\">class</span> <span class=\"cls\">Timer</span>:\n    <span class=\"kw\">def</span> <span class=\"fn\">__enter__</span>(<span class=\"var\">self</span>):\n        <span class=\"kw\">import</span> <span class=\"cls\">time</span>; <span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">t</span><span class=\"op\">=</span><span class=\"cls\">time</span><span class=\"op\">.</span><span class=\"fn\">time</span>(); <span class=\"kw\">return</span> <span class=\"var\">self</span>\n    <span class=\"kw\">def</span> <span class=\"fn\">__exit__</span>(<span class=\"var\">self</span>,<span class=\"op\">*</span><span class=\"var\">a</span>):\n        <span class=\"fn\">print</span>(<span class=\"cls\">time</span><span class=\"op\">.</span><span class=\"fn\">time</span>()<span class=\"op\">-</span><span class=\"var\">self</span><span class=\"op\">.</span><span class=\"var\">t</span>)",
+        "problems": [
+          {
+            "url": "https://www.hackerrank.com/challenges/iterables-and-iterators/problem",
+            "platform": "hr",
+            "title": "HR: Iterables & Iterators",
+            "id": "https://www.hackerrank.com/challenges/iterables-and-iterators/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/maximize-it/problem",
+            "platform": "hr",
+            "title": "HR: Maximize It",
+            "id": "https://www.hackerrank.com/challenges/maximize-it/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/generator-expressions/problem",
+            "platform": "hr",
+            "title": "HR: Generator Expressions",
+            "id": "https://www.hackerrank.com/challenges/generator-expressions/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/no-idea/problem",
+            "platform": "hr",
+            "title": "HR: No Idea (generator)",
+            "id": "https://www.hackerrank.com/challenges/no-idea/problem"
+          },
+          {
+            "url": "https://leetcode.com/problems/flatten-nested-list-iterator/",
+            "platform": "lc",
+            "title": "LC: Flatten Nested Iterator",
+            "id": "https://leetcode.com/problems/flatten-nested-list-iterator/"
+          },
+          {
+            "url": "https://leetcode.com/problems/peeking-iterator/",
+            "platform": "lc",
+            "title": "LC: Peeking Iterator",
+            "id": "https://leetcode.com/problems/peeking-iterator/"
+          },
+          {
+            "url": "https://leetcode.com/problems/zigzag-iterator/",
+            "platform": "lc",
+            "title": "LC: ZigZag Iterator",
+            "id": "https://leetcode.com/problems/zigzag-iterator/"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-bounded-blocking-queue/",
+            "platform": "lc",
+            "title": "LC: Bounded Queue",
+            "id": "https://leetcode.com/problems/design-bounded-blocking-queue/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/generators-in-python/1",
+            "platform": "gfg",
+            "title": "GFG: Generators",
+            "id": "https://www.geeksforgeeks.org/problems/generators-in-python/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/python-iterator/1",
+            "platform": "gfg",
+            "title": "GFG: Custom Iterator",
+            "id": "https://www.geeksforgeeks.org/problems/python-iterator/1"
+          },
+          {
+            "url": "https://www.codechef.com/problems/ITER",
+            "platform": "cc",
+            "title": "CC: Iterator Problem",
+            "id": "https://www.codechef.com/problems/ITER"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1213/C",
+            "platform": "cf",
+            "title": "CF: Book Reading",
+            "id": "https://codeforces.com/problemset/problem/1213/C"
+          }
+        ],
+        "concepts": [
+          "__iter__",
+          "__next__",
+          "yield",
+          "StopIteration",
+          "__enter__",
+          "__exit__",
+          "lazy eval"
+        ]
+      },
+      {
+        "title": "async / await & Concurrency",
+        "difficulty": "Hard",
+        "code": "<span class=\"kw\">import</span> <span class=\"cls\">asyncio</span>\n\n<span class=\"kw\">async def</span> <span class=\"fn\">fetch</span>(<span class=\"var\">url</span>:<span class=\"fn\">str</span>)<span class=\"op\">-&gt;</span><span class=\"fn\">str</span>:\n    <span class=\"kw\">await</span> <span class=\"cls\">asyncio</span><span class=\"op\">.</span><span class=\"fn\">sleep</span>(<span class=\"num\">1</span>)\n    <span class=\"kw\">return</span> <span class=\"fn\">f</span><span class=\"str\">\"data:{url}\"</span>\n\n<span class=\"kw\">async def</span> <span class=\"fn\">main</span>():\n    <span class=\"cm\"># Concurrent execution</span>\n    <span class=\"var\">res</span><span class=\"op\">=</span><span class=\"kw\">await</span> <span class=\"cls\">asyncio</span><span class=\"op\">.</span><span class=\"fn\">gather</span>(\n        <span class=\"fn\">fetch</span>(<span class=\"str\">\"u1\"</span>),<span class=\"fn\">fetch</span>(<span class=\"str\">\"u2\"</span>))\n    <span class=\"cm\"># Task</span>\n    <span class=\"var\">t</span><span class=\"op\">=</span><span class=\"cls\">asyncio</span><span class=\"op\">.</span><span class=\"fn\">create_task</span>(<span class=\"fn\">fetch</span>(<span class=\"str\">\"bg\"</span>))\n    <span class=\"kw\">await</span> <span class=\"var\">t</span>\n    <span class=\"cm\"># Timeout</span>\n    <span class=\"kw\">async with</span> <span class=\"cls\">asyncio</span><span class=\"op\">.</span><span class=\"fn\">timeout</span>(<span class=\"num\">5.0</span>):\n        <span class=\"kw\">await</span> <span class=\"fn\">fetch</span>(<span class=\"str\">\"slow\"</span>)\n\n<span class=\"cls\">asyncio</span><span class=\"op\">.</span><span class=\"fn\">run</span>(<span class=\"fn\">main</span>())",
+        "problems": [
+          {
+            "url": "https://leetcode.com/problems/promise-pool/",
+            "platform": "lc",
+            "title": "LC: Promise Pool (async)",
+            "id": "https://leetcode.com/problems/promise-pool/"
+          },
+          {
+            "url": "https://leetcode.com/problems/execute-asynchronous-functions-in-parallel/",
+            "platform": "lc",
+            "title": "LC: Execute in Parallel",
+            "id": "https://leetcode.com/problems/execute-asynchronous-functions-in-parallel/"
+          },
+          {
+            "url": "https://leetcode.com/problems/sleep/",
+            "platform": "lc",
+            "title": "LC: Sleep (async)",
+            "id": "https://leetcode.com/problems/sleep/"
+          },
+          {
+            "url": "https://leetcode.com/problems/cache-with-time-limit/",
+            "platform": "lc",
+            "title": "LC: Cache With Time Limit",
+            "id": "https://leetcode.com/problems/cache-with-time-limit/"
+          },
+          {
+            "url": "https://leetcode.com/problems/memoize/",
+            "platform": "lc",
+            "title": "LC: Memoize",
+            "id": "https://leetcode.com/problems/memoize/"
+          },
+          {
+            "url": "https://leetcode.com/problems/add-two-promises/",
+            "platform": "lc",
+            "title": "LC: Add Two Promises",
+            "id": "https://leetcode.com/problems/add-two-promises/"
+          },
+          {
+            "url": "https://leetcode.com/problems/timeout-cancellation/",
+            "platform": "lc",
+            "title": "LC: Timeout Cancellation",
+            "id": "https://leetcode.com/problems/timeout-cancellation/"
+          },
+          {
+            "url": "https://leetcode.com/problems/throttle/",
+            "platform": "lc",
+            "title": "LC: Throttle",
+            "id": "https://leetcode.com/problems/throttle/"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/asyncio-in-python/1",
+            "platform": "gfg",
+            "title": "GFG: asyncio Basics",
+            "id": "https://www.geeksforgeeks.org/problems/asyncio-in-python/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/coroutines/1",
+            "platform": "gfg",
+            "title": "GFG: Coroutines",
+            "id": "https://www.geeksforgeeks.org/problems/coroutines/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/producer-consumer/1",
+            "platform": "gfg",
+            "title": "GFG: Producer Consumer",
+            "id": "https://www.geeksforgeeks.org/problems/producer-consumer/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/threading-in-python/1",
+            "platform": "gfg",
+            "title": "GFG: Threading",
+            "id": "https://www.geeksforgeeks.org/problems/threading-in-python/1"
+          }
+        ],
+        "concepts": [
+          "async/await",
+          "gather",
+          "create_task",
+          "event loop",
+          "coroutine",
+          "timeout",
+          "ThreadPool"
+        ]
+      },
+      {
+        "title": "Type Hints & Pattern Matching (3.10+)",
+        "difficulty": "Medium",
+        "code": "<span class=\"kw\">from</span> <span class=\"cls\">typing</span> <span class=\"kw\">import</span> <span class=\"cls\">List</span>,<span class=\"cls\">Dict</span>,<span class=\"cls\">Optional</span>,<span class=\"cls\">Union</span>,<span class=\"cls\">TypeVar</span>,<span class=\"cls\">Callable</span>\n\n<span class=\"var\">T</span><span class=\"op\">=</span><span class=\"fn\">TypeVar</span>(<span class=\"str\">\"T\"</span>)\n<span class=\"kw\">def</span> <span class=\"fn\">first</span>(<span class=\"var\">lst</span>:<span class=\"cls\">List</span>[<span class=\"var\">T</span>])<span class=\"op\">-&gt;</span><span class=\"cls\">Optional</span>[<span class=\"var\">T</span>]:\n    <span class=\"kw\">return</span> <span class=\"var\">lst</span>[<span class=\"num\">0</span>] <span class=\"kw\">if</span> <span class=\"var\">lst</span> <span class=\"kw\">else</span> <span class=\"kw\">None</span>\n\n<span class=\"kw\">def</span> <span class=\"fn\">f</span>(<span class=\"var\">x</span>:<span class=\"cls\">Union</span>[<span class=\"fn\">int</span>,<span class=\"fn\">str</span>])<span class=\"op\">-&gt;</span><span class=\"fn\">str</span>:\n    <span class=\"kw\">return</span> <span class=\"fn\">str</span>(<span class=\"var\">x</span>)\n\n<span class=\"cm\"># Pattern matching Python 3.10+</span>\n<span class=\"kw\">match</span> <span class=\"var\">point</span>:\n    <span class=\"kw\">case</span> (<span class=\"num\">0</span>,<span class=\"num\">0</span>): <span class=\"fn\">print</span>(<span class=\"str\">\"Origin\"</span>)\n    <span class=\"kw\">case</span> (<span class=\"var\">x</span>,<span class=\"num\">0</span>): <span class=\"fn\">print</span>(<span class=\"fn\">f</span><span class=\"str\">\"x={x}\"</span>)\n    <span class=\"kw\">case</span> (<span class=\"var\">x</span>,<span class=\"var\">y</span>): <span class=\"fn\">print</span>(<span class=\"fn\">f</span><span class=\"str\">\"({x},{y})\"</span>)\n    <span class=\"kw\">case</span> <span class=\"var\">_</span>: <span class=\"fn\">print</span>(<span class=\"str\">\"?\"</span>)",
+        "problems": [
+          {
+            "url": "https://www.geeksforgeeks.org/problems/python-type-hints/1",
+            "platform": "gfg",
+            "title": "GFG: Type Hints",
+            "id": "https://www.geeksforgeeks.org/problems/python-type-hints/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/python-match-case/1",
+            "platform": "gfg",
+            "title": "GFG: Match Case",
+            "id": "https://www.geeksforgeeks.org/problems/python-match-case/1"
+          },
+          {
+            "url": "https://www.geeksforgeeks.org/problems/callable-types/1",
+            "platform": "gfg",
+            "title": "GFG: Callable Types",
+            "id": "https://www.geeksforgeeks.org/problems/callable-types/1"
+          },
+          {
+            "url": "https://leetcode.com/problems/count-good-triplets/",
+            "platform": "lc",
+            "title": "LC: Count Good Triplets",
+            "id": "https://leetcode.com/problems/count-good-triplets/"
+          },
+          {
+            "url": "https://leetcode.com/problems/split-the-array/",
+            "platform": "lc",
+            "title": "LC: Split the Array",
+            "id": "https://leetcode.com/problems/split-the-array/"
+          },
+          {
+            "url": "https://leetcode.com/problems/apply-operations-to-an-array/",
+            "platform": "lc",
+            "title": "LC: Apply Operations",
+            "id": "https://leetcode.com/problems/apply-operations-to-an-array/"
+          },
+          {
+            "url": "https://leetcode.com/problems/design-parking-system/",
+            "platform": "lc",
+            "title": "LC: Typed Parking System",
+            "id": "https://leetcode.com/problems/design-parking-system/"
+          },
+          {
+            "url": "https://leetcode.com/problems/robot-bounded-in-circle/",
+            "platform": "lc",
+            "title": "LC: Robot in Circle",
+            "id": "https://leetcode.com/problems/robot-bounded-in-circle/"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-string-formatting/problem",
+            "platform": "hr",
+            "title": "HR: String Formatting",
+            "id": "https://www.hackerrank.com/challenges/python-string-formatting/problem"
+          },
+          {
+            "url": "https://www.hackerrank.com/challenges/python-mutations/problem",
+            "platform": "hr",
+            "title": "HR: Mutations",
+            "id": "https://www.hackerrank.com/challenges/python-mutations/problem"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1702/D",
+            "platform": "cf",
+            "title": "CF: Not a Substring",
+            "id": "https://codeforces.com/problemset/problem/1702/D"
+          },
+          {
+            "url": "https://codeforces.com/problemset/problem/1512/A",
+            "platform": "cf",
+            "title": "CF: Spy Detected!",
+            "id": "https://codeforces.com/problemset/problem/1512/A"
+          }
+        ],
+        "concepts": [
+          "Optional",
+          "Union",
+          "TypeVar",
+          "Callable",
+          "match/case",
+          "3.10+",
+          "structural pattern"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "Quick Reference Tables",
+    "icon": "📋",
+    "topics": []
+  }
+]

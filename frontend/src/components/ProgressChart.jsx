@@ -61,6 +61,7 @@ export default function ProgressChart({ data = mockData, title }) {
                         <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#cbd5e1', strokeWidth: 1, strokeDasharray: '5 5' }} />
                         <Line type="monotone" dataKey="coding" name="Coding" stroke="var(--color-primary-500)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
                         <Line type="monotone" dataKey="aptitude" name="Aptitude" stroke="#3b82f6" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                        <Line type="monotone" dataKey="core" name="Core Concepts" stroke="#f59e0b" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
                         <Line type="monotone" dataKey="softskills" name="Soft Skills" stroke="var(--color-success)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
                     </LineChart>
                 </ResponsiveContainer>

@@ -7,10 +7,12 @@ import ProgrammingSection from "@/components/landing/ProgrammingSection";
 import { AnimatedFeatureSpotlight } from "@/components/ui/feature-spotlight";
 import { Eye } from "lucide-react";
 import Footer from "@/components/landing/Footer";
+import { useNavigate } from "react-router-dom";
 
 import { ShootingStars } from "@/components/ui/shooting-stars";
 
 const Index = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen relative bg-background overflow-hidden text-foreground">
       {/* Background with stars that stays fixed while scrolling */}
@@ -87,6 +89,9 @@ const Index = () => {
             }
             description="Practice topic-wise coding problems from top platforms to strengthen your core concepts. Improve your problem-solving skills and boost your placement readiness."
             buttonText="Start Practicing →"
+            buttonProps={{
+              onClick: () => navigate('/login', { state: { from: '/student/practice' } })
+            }}
             imageUrl="https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=1031&auto=format&fit=crop"
             imageAlt="Coding editor with algorithms"
           />

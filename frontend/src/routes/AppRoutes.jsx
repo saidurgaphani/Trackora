@@ -19,6 +19,7 @@ const ManageGoals = lazy(() => import('../pages/admin/ManageGoals'));
 const StudentsList = lazy(() => import('../pages/admin/StudentsList'));
 const StudentDetails = lazy(() => import('../pages/admin/StudentDetails'));
 const Profile = lazy(() => import('../pages/student/Profile'));
+const Practice = lazy(() => import('../pages/student/Practice'));
 
 const AppRoutes = () => {
     return (
@@ -41,6 +42,7 @@ const AppRoutes = () => {
                         <Route path="/student/learning/:courseId" element={<Learning />} />
                         <Route path="/student/activity-log" element={<ActivityLog />} />
                         <Route path="/student/progress" element={<Progress />} />
+                        <Route path="/student/practice" element={<Practice />} />
                         <Route path="/student/mock-interview" element={<MockInterview />} />
                     </Route>
                 </Route>

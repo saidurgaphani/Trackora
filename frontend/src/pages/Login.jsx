@@ -12,6 +12,7 @@ import NeuralBackground from '../components/ui/flow-field-background';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import app from '../firebaseSetup';
+import api from '../api';
 
 const loginSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }),
@@ -72,6 +73,17 @@ export default function Login() {
             // Sign in
             const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
             const user = userCredential.user;
+
+            // Generate/Retrieve Node JS Backend JWT 
+            const backendRes = await api.post('/auth/login', {
+                email: data.email,
+                firebaseUid: user.uid,
+                name: user.displayName || data.email.split('@')[0],
+                role: loginType
+            });
+            if (backendRes.data.token) {
+                localStorage.setItem('token', backendRes.data.token);
+            }
 
             // Optional: Verify role against what they selected
             const userDoc = await getDoc(doc(db, "users", user.uid));

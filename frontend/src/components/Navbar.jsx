@@ -14,6 +14,7 @@ const Navbar = () => {
     const studentLinks = [
         { name: 'Dashboard', path: '/student/dashboard' },
         { name: 'My Courses', path: '/student/courses' },
+        { name: 'Practice', path: '/student/practice' },
         { name: 'Resources', path: '/student/resources' },
         { name: 'Activity Log', path: '/student/activity-log' },
         { name: 'Progress', path: '/student/progress' },

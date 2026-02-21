@@ -28,7 +28,9 @@ const adminOrTrainer = (req, res, next) => {
     if (req.user && (req.user.role === 'admin' || req.user.role === 'trainer')) {
         next();
     } else {
-        res.status(403).json({ message: 'Not authorized, role requires admin or trainer' });
+        res.status(403).json({
+            message: `Not authorized, role requires admin or trainer. Your current role is: ${req.user?.role || 'none'}`
+        });
     }
 };
 

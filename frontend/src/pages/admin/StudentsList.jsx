@@ -1,32 +1,47 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Table from '../../components/Table';
 import Badge from '../../components/Badge';
-import { Search, SlidersHorizontal, Download } from 'lucide-react';
+import { Search, SlidersHorizontal, Download, Loader2 } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useNavigate } from 'react-router-dom';
-
-const mockStudents = [
-    { id: '1', name: 'Alice Smith', email: 'alice@snist.edu', branch: 'CSE', score: 94, status: 'active', lastActive: '2 hours ago' },
-    { id: '2', name: 'Bob Johnson', email: 'bob@snist.edu', branch: 'IT', score: 91, status: 'active', lastActive: '1 day ago' },
-    { id: '3', name: 'Charlie Davis', email: 'charlie@snist.edu', branch: 'ECE', score: 88, status: 'inactive', lastActive: '2 weeks ago' },
-    { id: '4', name: 'Diana King', email: 'diana@snist.edu', branch: 'CSE', score: 85, status: 'active', lastActive: 'Just now' },
-    { id: '5', name: 'Ethan Hunt', email: 'ethan@snist.edu', branch: 'EEE', score: 45, status: 'warning', lastActive: '4 days ago' },
-];
+import api from '../../api';
 
 export default function StudentsList() {
     const containerRef = useRef();
     const navigate = useNavigate();
+    const [students, setStudents] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        fetchStudents();
+    }, []);
+
+    const fetchStudents = async () => {
+        setIsLoading(true);
+        try {
+            const res = await api.get('/admin/students');
+            setStudents(res.data);
+        } catch (error) {
+            console.error("Failed to fetch students:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
     useGSAP(() => {
-        gsap.from('.std-anim', { y: -20, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' });
-    }, { scope: containerRef });
+        if (!isLoading) {
+            gsap.from('.std-anim', { y: -20, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' });
+        }
+    }, [isLoading]);
 
     const columns = [
         {
             header: 'Student', render: (row) => (
                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-[var(--color-primary-500)] text-white flex items-center justify-center font-bold text-sm shadow-sm">{row.name.charAt(0)}</div>
+                    <div className="w-10 h-10 rounded-full bg-[var(--color-primary-500)] text-white flex items-center justify-center font-bold text-sm shadow-sm">
+                        {row.name?.charAt(0) || '?'}
+                    </div>
                     <div className="min-w-0">
                         <p className="font-bold text-slate-800 dark:text-slate-100 truncate">{row.name}</p>
                         <p className="text-xs text-slate-500 dark:text-slate-500 truncate font-mono">{row.email}</p>
@@ -34,25 +49,37 @@ export default function StudentsList() {
                 </div>
             )
         },
-        { header: 'Branch', accessor: 'branch', cellClassName: 'font-medium text-slate-700 dark:text-slate-200' },
+        {
+            header: 'Branch',
+            render: (row) => <span>{row.profile?.branch || 'N/A'}</span>,
+            cellClassName: 'font-medium text-slate-700 dark:text-slate-200'
+        },
         {
             header: 'Score', render: (row) => (
-                <div className={`font-mono font-bold ${row.score > 75 ? 'text-emerald-600' : 'text-amber-600'}`}>{row.score}%</div>
+                <div className={`font-mono font-bold ${row.score > 75 ? 'text-emerald-600' : 'text-amber-600'}`}>
+                    {row.score || 0}%
+                </div>
             )
         },
         {
-            header: 'Status', render: (row) => (
-                <Badge variant={row.status === 'active' ? 'success' : (row.status === 'warning' ? 'warning' : 'default')} className="capitalize">
-                    {row.status}
-                </Badge>
-            )
+            header: 'Status', render: (row) => {
+                const status = row.isActive ? 'active' : 'inactive';
+                return (
+                    <Badge variant={status === 'active' ? 'success' : 'default'} className="capitalize">
+                        {status}
+                    </Badge>
+                );
+            }
         },
-        { header: 'Last Active', accessor: 'lastActive', cellClassName: 'text-slate-500 dark:text-slate-500 text-sm' },
+        {
+            header: 'Joined',
+            render: (row) => <span className="text-slate-500 dark:text-slate-500 text-sm">{new Date(row.createdAt).toLocaleDateString()}</span>
+        },
         {
             header: 'Actions', render: (row) => (
                 <button
-                    onClick={() => navigate(`/admin/students/${row.id}`)}
-                    className="px-3 py-1.5 text-sm font-semibold text-[var(--color-primary-500)] bg-primary-50 border border-primary-100 rounded-lg hover:bg-primary-100 transition-colors"
+                    onClick={() => navigate(`/admin/students/${row._id}`)}
+                    className="px-3 py-1.5 text-sm font-semibold text-[var(--color-primary-500)] bg-primary-50 border border-primary-100 rounded-lg hover:bg-primary-100 transition-colors cursor-pointer"
                 >
                     View Profile
                 </button>
@@ -74,21 +101,27 @@ export default function StudentsList() {
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center">
                             <Search size={16} className="text-slate-400 dark:text-slate-500" />
                         </div>
-                        <input type="text" placeholder="Search students..." className="w-full md:w-64 pl-9 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] text-sm shadow-sm" />
+                        <input type="text" placeholder="Search students..." className="w-full md:w-64 pl-9 pr-4 py-2 bg-transparent border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] text-sm shadow-sm" />
                     </div>
 
-                    <button className="p-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm">
+                    <button className="p-2 border border-slate-200 dark:border-slate-700 bg-transparent rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm cursor-pointer">
                         <SlidersHorizontal size={20} />
                     </button>
-                    <button className="p-2 border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm">
+                    <button className="p-2 border border-slate-200 dark:border-slate-700 bg-transparent text-slate-600 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm cursor-pointer">
                         <Download size={20} />
                     </button>
                 </div>
             </div>
 
-            <div className="std-anim">
-                <Table columns={columns} data={mockStudents} />
-            </div>
+            {isLoading ? (
+                <div className="flex justify-center items-center h-64">
+                    <Loader2 className="w-10 h-10 animate-spin text-primary-500" />
+                </div>
+            ) : (
+                <div className="std-anim">
+                    <Table columns={columns} data={students} />
+                </div>
+            )}
 
         </div>
     );

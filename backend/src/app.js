@@ -7,6 +7,7 @@ const activityRoutes = require('./routes/activityRoutes');
 const progressRoutes = require('./routes/progressRoutes');
 const mockRoutes = require('./routes/mockRoutes');
 const adminRoutes = require('./routes/adminRoutes');
+const studentRoutes = require('./routes/studentRoutes');
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/api/activities', activityRoutes);
 app.use('/api/progress', progressRoutes);
 app.use('/api/mock', mockRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/students', studentRoutes);
 
 // Error Handling Middleware
 app.use((err, req, res, next) => {

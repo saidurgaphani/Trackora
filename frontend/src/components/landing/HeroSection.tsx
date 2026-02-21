@@ -25,7 +25,7 @@ const HeroSection = () => {
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <Button
-              onClick={() => navigate('/register')}
+              onClick={() => navigate('/register', { state: { from: '/student/courses' } })}
               size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
               Sign Up for Free
             </Button>

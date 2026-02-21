@@ -11,6 +11,15 @@ const userSchema = new mongoose.Schema({
         year: { type: Number },
         rollNo: { type: String }
     },
+    completedProblems: {
+        type: Map,
+        of: [String],
+        default: {
+            coding: [],
+            aptitude: [],
+            softskills: []
+        }
+    },
     isActive: { type: Boolean, default: true }
 }, { timestamps: true });
 

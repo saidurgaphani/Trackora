@@ -1,14 +1,9 @@
 import { Building2, BrainCircuit, Monitor, Code2, Users, Megaphone } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const paths = [
-  // {
-  //   icon: Building2,
-  //   title: "Companies",
-  //   description: "Prepare for companies like Cisco, Amazon, TCS, Google and more",
-  //   cta: "View All Companies",
-  //   color: "bg-primary/10 text-primary",
-  // },
+  // ... (keeping existing paths)
   {
     icon: BrainCircuit,
     title: "Aptitude",
@@ -47,6 +42,13 @@ const paths = [
 ];
 
 const LearningPaths = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (title: string) => {
+    const target = (title === "Aptitude" || title === "CS Subjects") ? "/student/practice" : "/student/courses";
+    navigate("/login", { state: { from: target } });
+  };
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-20 lg:px-8">
       <div className="mb-12 text-center">
@@ -61,6 +63,7 @@ const LearningPaths = () => {
         {paths.map((path, i) => (
           <motion.div
             key={path.title}
+            onClick={() => handleNavigation(path.title)}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}

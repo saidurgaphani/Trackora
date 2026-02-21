@@ -12,6 +12,7 @@ import NeuralBackground from '../components/ui/flow-field-background';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { getFirestore, doc, setDoc } from "firebase/firestore";
 import app from '../firebaseSetup';
+import api from '../api';
 
 const registerSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters" }),
@@ -75,6 +76,23 @@ export default function Register() {
             // Create auth entry
             const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
             const user = userCredential.user;
+
+            // Generate/Retrieve Node JS Backend JWT & create MongoDB entry
+            try {
+                const backendRes = await api.post('/auth/register', {
+                    name: data.name,
+                    email: data.email,
+                    firebaseUid: user.uid,
+                    collegeId: null, // Let backend assign the default for now
+                    role: 'student'
+                });
+                if (backendRes.data.token) {
+                    localStorage.setItem('token', backendRes.data.token);
+                }
+            } catch (backendError) {
+                console.warn("Node Backend Sync Error:", backendError);
+                // Even if backend fails, Firebase auth succeeded. They can login later.
+            }
 
             // Optional: update the auth profile with the display name
             await updateProfile(user, { displayName: data.name });

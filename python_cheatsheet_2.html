@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Python Master Cheatsheet</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0d0d14;--card:#1a1a2e;--border:#2a2a45;--accent:#f7c948;--accent2:#4ecdc4;--accent3:#ff6b6b;--accent4:#a855f7;--text:#e8e8f0;--muted:#8888aa;--code-bg:#0a0a14;--lc:#f89f1b;--hr:#2ec866;--gfg:#308d46;--cc:#4285f4;--cf:#e44b23}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Syne',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 10% 20%,rgba(247,201,72,.06) 0%,transparent 50%),radial-gradient(ellipse at 90% 80%,rgba(78,205,196,.06) 0%,transparent 50%);pointer-events:none;z-index:0}
+.container{max-width:1440px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+header{padding:60px 0 36px;text-align:center}
+.badge{display:inline-block;background:rgba(247,201,72,.12);border:1px solid rgba(247,201,72,.3);color:var(--accent);font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 14px;border-radius:100px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px}
+header h1{font-size:clamp(40px,7vw,78px);font-weight:800;line-height:1.05;letter-spacing:-2px}
+header h1 span{color:var(--accent)}
+header p{color:var(--muted);margin:16px auto 0;max-width:580px;font-size:16px;line-height:1.7}
+.legend{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin:28px 0 40px}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:.5px}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot-lc{background:var(--lc)}.dot-hr{background:var(--hr)}.dot-gfg{background:var(--gfg)}.dot-cc{background:var(--cc)}.dot-cf{background:var(--cf)}
+.section{margin-bottom:60px}
+.section-header{display:flex;align-items:center;gap:16px;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.section-num{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);background:rgba(247,201,72,.1);padding:4px 10px;border-radius:4px;font-weight:700;letter-spacing:1px}
+.section-title{font-size:22px;font-weight:700;letter-spacing:-.5px}
+.section-icon{font-size:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s,transform .2s}
+.card:hover{border-color:rgba(247,201,72,.3);transform:translateY(-2px)}
+.card-header{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);background:rgba(255,255,255,.02)}
+.card-title{font-size:14px;font-weight:700;letter-spacing:.2px}
+.diff{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 10px;border-radius:100px;font-weight:600;letter-spacing:.5px;white-space:nowrap}
+.easy{background:rgba(78,205,196,.15);color:var(--accent2)}
+.medium{background:rgba(247,201,72,.15);color:var(--accent)}
+.hard{background:rgba(255,107,107,.15);color:var(--accent3)}
+.code-block{background:var(--code-bg);padding:14px 18px;font-family:'JetBrains Mono',monospace;font-size:11.5px;line-height:1.75;overflow-x:auto;border-bottom:1px solid var(--border)}
+.kw{color:#c792ea}.fn{color:#82aaff}.str{color:#c3e88d}.cm{color:#546e7a;font-style:italic}.num{color:#f78c6c}.cls{color:#ffcb6b}.op{color:#89ddff}.var{color:#eeffff}
+.problems{padding:12px 18px 14px}
+.problem-label{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;font-weight:600}
+.prob-links{display:flex;flex-wrap:wrap;gap:6px}
+.prob-link{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:6px;font-size:11px;font-family:'JetBrains Mono',monospace;text-decoration:none;font-weight:600;transition:opacity .2s,transform .15s;letter-spacing:.2px}
+.prob-link:hover{opacity:.75;transform:translateY(-1px)}
+.prob-link.lc{background:rgba(248,159,27,.14);color:var(--lc);border:1px solid rgba(248,159,27,.25)}
+.prob-link.hr{background:rgba(46,200,102,.14);color:var(--hr);border:1px solid rgba(46,200,102,.25)}
+.prob-link.gfg{background:rgba(48,141,70,.14);color:#5cb85c;border:1px solid rgba(48,141,70,.25)}
+.prob-link.cc{background:rgba(66,133,244,.14);color:var(--cc);border:1px solid rgba(66,133,244,.25)}
+.prob-link.cf{background:rgba(228,75,35,.14);color:#ff7043;border:1px solid rgba(228,75,35,.25)}
+.concepts{padding:10px 18px 14px;display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid var(--border)}
+.chip{font-size:10px;font-family:'JetBrains Mono',monospace;background:rgba(168,85,247,.1);color:var(--accent4);border:1px solid rgba(168,85,247,.2);padding:3px 10px;border-radius:100px;font-weight:600}
+.table-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.table-card-header{padding:13px 18px;border-bottom:1px solid var(--border);font-weight:700;font-size:14px;display:flex;align-items:center;gap:10px}
+.qt{width:100%;border-collapse:collapse;font-size:12.5px;font-family:'JetBrains Mono',monospace}
+.qt th{text-align:left;padding:10px 16px;background:rgba(247,201,72,.07);color:var(--accent);font-size:10px;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.qt td{padding:9px 16px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text);vertical-align:top}
+.qt td:first-child{color:var(--accent2)}
+.qt tr:last-child td{border-bottom:none}
+.qt tr:hover td{background:rgba(255,255,255,.02)}
+footer{text-align:center;padding:48px 0;color:var(--muted);font-size:13px;border-top:1px solid var(--border);margin-top:40px}
+footer strong{color:var(--accent)}
+@media(max-width:620px){.grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="badge">🐍 Ultimate Reference 2024</div>
+  <h1>Python <span>Master</span><br>Cheatsheet</h1>
+  <p>Every core concept with syntax, code patterns, and <strong>10+ curated practice problems per topic</strong> from the best competitive programming platforms worldwide.</p>
+</header>
+
+<div class="legend">
+  <div class="legend-item"><div class="dot dot-lc"></div>LeetCode</div>
+  <div class="legend-item"><div class="dot dot-hr"></div>HackerRank</div>
+  <div class="legend-item"><div class="dot dot-gfg"></div>GeeksforGeeks</div>
+  <div class="legend-item"><div class="dot dot-cc"></div>CodeChef</div>
+  <div class="legend-item"><div class="dot dot-cf"></div>Codeforces</div>
+</div>
+
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">01</span>
+    <span class="section-icon">🔤</span>
+    <h2 class="section-title">Data Types &amp; Variables</h2>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Basic Types &amp; Type Casting</span><span class="diff easy">Easy</span></div>
+      <div class="code-block"><span class="cm"># Primitive types</span>
+<span class="var">x</span><span class="op">=</span><span class="num">42</span>       <span class="cm"># int</span>
+<span class="var">y</span><span class="op">=</span><span class="num">3.14</span>     <span class="cm"># float</span>
+<span class="var">s</span><span class="op">=</span><span class="str">"hello"</span>   <span class="cm"># str</span>
+<span class="var">b</span><span class="op">=</span><span class="kw">True</span>      <span class="cm"># bool</span>
+<span class="var">c</span><span class="op">=</span><span class="num">2</span><span class="op">+</span><span class="num">3j</span>      <span class="cm"># complex</span>
+<span class="cm"># Casting</span>
+<span class="fn">int</span>(<span class="str">"42"</span>)    <span class="cm"># 42</span>
+<span class="fn">float</span>(<span class="num">7</span>)    <span class="cm"># 7.0</span>
+<span class="fn">str</span>(<span class="num">3.14</span>)   <span class="cm"># "3.14"</span>
+<span class="fn">bool</span>(<span class="num">0</span>)     <span class="cm"># False</span>
+<span class="fn">bin</span>(<span class="num">10</span>)     <span class="cm"># "0b1010"</span>
+<span class="fn">hex</span>(<span class="num">255</span>)    <span class="cm"># "0xff"</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://www.hackerrank.com/challenges/python-arithmetic-operators/problem" target="_blank" class="prob-link hr">HR: Arithmetic Ops</a><a href="https://www.hackerrank.com/challenges/python-print/problem" target="_blank" class="prob-link hr">HR: Python Print</a><a href="https://www.hackerrank.com/challenges/python-integers-come-in-all-sizes/problem" target="_blank" class="prob-link hr">HR: Integer Sizes</a><a href="https://www.hackerrank.com/challenges/python-float/problem" target="_blank" class="prob-link hr">HR: Float</a><a href="https://www.hackerrank.com/challenges/python-division/problem" target="_blank" class="prob-link hr">HR: Division</a><a href="https://leetcode.com/problems/number-of-1-bits/" target="_blank" class="prob-link lc">LC: Count 1 Bits</a><a href="https://leetcode.com/problems/reverse-bits/" target="_blank" class="prob-link lc">LC: Reverse Bits</a><a href="https://leetcode.com/problems/convert-binary-number-in-a-linked-list-to-integer/" target="_blank" class="prob-link lc">LC: Binary to Int</a><a href="https://www.geeksforgeeks.org/problems/sum-of-digits1742/1" target="_blank" class="prob-link gfg">GFG: Sum of Digits</a><a href="https://www.geeksforgeeks.org/problems/convert-to-binary-string/1" target="_blank" class="prob-link gfg">GFG: To Binary String</a><a href="https://www.codechef.com/problems/START01" target="_blank" class="prob-link cc">CC: Getting Started</a><a href="https://codeforces.com/problemset/problem/1/A" target="_blank" class="prob-link cf">CF: Theatre Square</a></div>
+      </div>
+      <div class="concepts"><span class="chip">int</span><span class="chip">float</span><span class="chip">str</span><span class="chip">bool</span><span class="chip">complex</span><span class="chip">type()</span><span class="chip">bin/hex/oct</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">String Operations &amp; Methods</span><span class="diff easy">Easy</span></div>
+      <div class="code-block"><span class="var">s</span> <span class="op">=</span> <span class="str">"Python Rocks"</span>
+<span class="var">s</span><span class="op">.</span><span class="fn">upper</span>()         <span class="cm"># "PYTHON ROCKS"</span>
+<span class="var">s</span><span class="op">.</span><span class="fn">lower</span>()         <span class="cm"># "python rocks"</span>
+<span class="var">s</span><span class="op">.</span><span class="fn">split</span>()         <span class="cm"># ["Python","Rocks"]</span>
+<span class="var">s</span><span class="op">.</span><span class="fn">replace</span>(<span class="str">"Rocks"</span>,<span class="str">"Rules"</span>)
+<span class="var">s</span>[<span class="num">0</span><span class="op">:</span><span class="num">6</span>]            <span class="cm"># "Python" (slice)</span>
+<span class="var">s</span>[<span class="op">::</span><span class="op">-</span><span class="num">1</span>]           <span class="cm"># reverse</span>
+<span class="fn">f</span><span class="str">"Name:{s}"</span>       <span class="cm"># f-string</span>
+<span class="str">" hi "</span><span class="op">.</span><span class="fn">strip</span>()   <span class="cm"># "hi"</span>
+<span class="str">","</span><span class="op">.</span><span class="fn">join</span>([<span class="str">"a"</span>,<span class="str">"b"</span>])<span class="cm"># "a,b"</span>
+<span class="var">s</span><span class="op">.</span><span class="fn">count</span>(<span class="str">"o"</span>)      <span class="cm"># 2</span>
+<span class="var">s</span><span class="op">.</span><span class="fn">startswith</span>(<span class="str">"Py"</span>)<span class="cm"># True</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/reverse-string/" target="_blank" class="prob-link lc">LC: Reverse String</a><a href="https://leetcode.com/problems/valid-anagram/" target="_blank" class="prob-link lc">LC: Valid Anagram</a><a href="https://leetcode.com/problems/first-unique-character-in-a-string/" target="_blank" class="prob-link lc">LC: First Unique Char</a><a href="https://leetcode.com/problems/palindrome-number/" target="_blank" class="prob-link lc">LC: Palindrome</a><a href="https://leetcode.com/problems/longest-common-prefix/" target="_blank" class="prob-link lc">LC: Longest Common Prefix</a><a href="https://leetcode.com/problems/reverse-words-in-a-string/" target="_blank" class="prob-link lc">LC: Reverse Words</a><a href="https://www.hackerrank.com/challenges/mutations/problem" target="_blank" class="prob-link hr">HR: Mutations</a><a href="https://www.hackerrank.com/challenges/python-string-split-and-join/problem" target="_blank" class="prob-link hr">HR: Split & Join</a><a href="https://www.hackerrank.com/challenges/whats-your-name/problem" target="_blank" class="prob-link hr">HR: What's Your Name</a><a href="https://www.hackerrank.com/challenges/string-formatting/problem" target="_blank" class="prob-link hr">HR: String Formatting</a><a href="https://www.geeksforgeeks.org/problems/reverse-words-in-a-given-string5459/1" target="_blank" class="prob-link gfg">GFG: Reverse Words</a><a href="https://codeforces.com/problemset/problem/96/A" target="_blank" class="prob-link cf">CF: Football Kit</a></div>
+      </div>
+      <div class="concepts"><span class="chip">slice</span><span class="chip">f-string</span><span class="chip">strip</span><span class="chip">split/join</span><span class="chip">count</span><span class="chip">startswith</span><span class="chip">zfill</span></div>
+    </div></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">02</span>
+    <span class="section-icon">📦</span>
+    <h2 class="section-title">Data Structures</h2>
+  </div>
+  <div class="table-card"><div class="table-card-header">⚡ Big-O Quick Reference</div><table class="qt"><tr><th>Structure</th><th>Access</th><th>Insert</th><th>Delete</th><th>Search</th></tr><tr><td>List</td><td>O(1)</td><td>O(1) amort.</td><td>O(n)</td><td>O(n)</td></tr><tr><td>Dict (hash)</td><td>O(1)</td><td>O(1)</td><td>O(1)</td><td>O(1)</td></tr><tr><td>Set</td><td>—</td><td>O(1)</td><td>O(1)</td><td>O(1)</td></tr><tr><td>Tuple</td><td>O(1)</td><td>—</td><td>—</td><td>O(n)</td></tr><tr><td>deque</td><td>O(n)</td><td>O(1)</td><td>O(1)</td><td>O(n)</td></tr><tr><td>heapq (min)</td><td>O(1) top</td><td>O(log n)</td><td>O(log n)</td><td>O(n)</td></tr></table></div><div class="grid">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Lists &amp; Comprehensions</span><span class="diff easy">Easy</span></div>
+      <div class="code-block"><span class="var">lst</span><span class="op">=</span>[<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>]
+<span class="var">lst</span><span class="op">.</span><span class="fn">append</span>(<span class="num">6</span>)    <span class="cm"># O(1)</span>
+<span class="var">lst</span><span class="op">.</span><span class="fn">insert</span>(<span class="num">0</span>,<span class="num">0</span>)  <span class="cm"># O(n)</span>
+<span class="var">lst</span><span class="op">.</span><span class="fn">pop</span>()        <span class="cm"># O(1)</span>
+<span class="var">lst</span><span class="op">.</span><span class="fn">sort</span>()       <span class="cm"># Timsort O(n log n)</span>
+<span class="fn">sorted</span>(<span class="var">lst</span>,<span class="var">key</span><span class="op">=</span><span class="kw">lambda</span> <span class="var">x</span>:<span class="op">-</span><span class="var">x</span>)
+<span class="cm"># Comprehensions</span>
+<span class="var">evens</span>  <span class="op">=</span>[<span class="var">x</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="var">lst</span> <span class="kw">if</span> <span class="var">x</span><span class="op">%</span><span class="num">2</span><span class="op">==</span><span class="num">0</span>]
+<span class="var">squares</span><span class="op">=</span>[<span class="var">x</span><span class="op">**</span><span class="num">2</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">10</span>)]
+<span class="var">flat</span>   <span class="op">=</span>[<span class="var">n</span> <span class="kw">for</span> <span class="var">r</span> <span class="kw">in</span> <span class="var">mat</span> <span class="kw">for</span> <span class="var">n</span> <span class="kw">in</span> <span class="var">r</span>]</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/two-sum/" target="_blank" class="prob-link lc">LC: Two Sum</a><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/" target="_blank" class="prob-link lc">LC: Stock Profit</a><a href="https://leetcode.com/problems/contains-duplicate/" target="_blank" class="prob-link lc">LC: Contains Duplicate</a><a href="https://leetcode.com/problems/product-of-array-except-self/" target="_blank" class="prob-link lc">LC: Product Except Self</a><a href="https://leetcode.com/problems/maximum-subarray/" target="_blank" class="prob-link lc">LC: Max Subarray (Kadane)</a><a href="https://leetcode.com/problems/move-zeroes/" target="_blank" class="prob-link lc">LC: Move Zeroes</a><a href="https://www.hackerrank.com/challenges/list-comprehensions/problem" target="_blank" class="prob-link hr">HR: List Comprehensions</a><a href="https://www.hackerrank.com/challenges/nested-list/problem" target="_blank" class="prob-link hr">HR: Nested List</a><a href="https://www.hackerrank.com/challenges/find-second-maximum-number-in-a-list/problem" target="_blank" class="prob-link hr">HR: 2nd Maximum</a><a href="https://www.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1" target="_blank" class="prob-link gfg">GFG: Sort 0s 1s 2s</a><a href="https://www.geeksforgeeks.org/problems/rotate-array-by-n-elements-1587115621/1" target="_blank" class="prob-link gfg">GFG: Rotate Array</a><a href="https://codeforces.com/problemset/problem/1760/B" target="_blank" class="prob-link cf">CF: Array Decrements</a></div>
+      </div>
+      <div class="concepts"><span class="chip">append</span><span class="chip">pop</span><span class="chip">insert</span><span class="chip">sort</span><span class="chip">comprehension</span><span class="chip">slice</span><span class="chip">flatten</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Dictionaries, Counter &amp; defaultdict</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="kw">from</span> <span class="cls">collections</span> <span class="kw">import</span> <span class="cls">Counter</span>, <span class="cls">defaultdict</span>
+<span class="var">d</span><span class="op">=</span>{<span class="str">"a"</span>:<span class="num">1</span>}
+<span class="var">d</span><span class="op">.</span><span class="fn">get</span>(<span class="str">"c"</span>,<span class="num">0</span>)      <span class="cm"># safe access</span>
+<span class="var">d</span><span class="op">.</span><span class="fn">setdefault</span>(<span class="str">"d"</span>,[])
+{<span class="op">**</span><span class="var">d1</span>,<span class="op">**</span><span class="var">d2</span>}        <span class="cm"># merge dicts</span>
+<span class="cm"># Counter</span>
+<span class="var">cnt</span><span class="op">=</span><span class="cls">Counter</span>(<span class="str">"abracadabra"</span>)
+<span class="var">cnt</span><span class="op">.</span><span class="fn">most_common</span>(<span class="num">3</span>) <span class="cm"># top 3</span>
+<span class="cm"># defaultdict</span>
+<span class="var">g</span><span class="op">=</span><span class="cls">defaultdict</span>(<span class="fn">list</span>)
+<span class="var">g</span>[<span class="str">"a"</span>]<span class="op">.</span><span class="fn">append</span>(<span class="str">"b"</span>)
+<span class="cm"># Dict comprehension</span>
+<span class="var">sq</span><span class="op">=</span>{<span class="var">x</span>:<span class="var">x</span><span class="op">**</span><span class="num">2</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">6</span>)}</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/group-anagrams/" target="_blank" class="prob-link lc">LC: Group Anagrams</a><a href="https://leetcode.com/problems/top-k-frequent-elements/" target="_blank" class="prob-link lc">LC: Top K Frequent</a><a href="https://leetcode.com/problems/ransom-note/" target="_blank" class="prob-link lc">LC: Ransom Note</a><a href="https://leetcode.com/problems/find-all-anagrams-in-a-string/" target="_blank" class="prob-link lc">LC: Find All Anagrams</a><a href="https://leetcode.com/problems/word-pattern/" target="_blank" class="prob-link lc">LC: Word Pattern</a><a href="https://www.hackerrank.com/challenges/collections-counter/problem" target="_blank" class="prob-link hr">HR: Counter</a><a href="https://www.hackerrank.com/challenges/defaultdict-tutorial/problem" target="_blank" class="prob-link hr">HR: defaultdict</a><a href="https://www.hackerrank.com/challenges/collections-ordereddict/problem" target="_blank" class="prob-link hr">HR: OrderedDict</a><a href="https://www.hackerrank.com/challenges/word-order/problem" target="_blank" class="prob-link hr">HR: Word Order</a><a href="https://www.geeksforgeeks.org/problems/frequency-of-array-elements-1587115620/1" target="_blank" class="prob-link gfg">GFG: Frequency of Elements</a><a href="https://www.codechef.com/problems/LAPIN" target="_blank" class="prob-link cc">CC: LAPIN</a><a href="https://codeforces.com/problemset/problem/4/C" target="_blank" class="prob-link cf">CF: Registration System</a></div>
+      </div>
+      <div class="concepts"><span class="chip">Counter</span><span class="chip">defaultdict</span><span class="chip">setdefault</span><span class="chip">merge</span><span class="chip">dict comp</span><span class="chip">most_common</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Sets &amp; Frozensets</span><span class="diff easy">Easy</span></div>
+      <div class="code-block"><span class="var">s1</span><span class="op">=</span>{<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>}; <span class="var">s2</span><span class="op">=</span>{<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>}
+<span class="var">s1</span><span class="op">.</span><span class="fn">add</span>(<span class="num">7</span>)          <span class="cm"># O(1)</span>
+<span class="var">s1</span><span class="op">.</span><span class="fn">discard</span>(<span class="num">99</span>)     <span class="cm"># no error if absent</span>
+<span class="var">s1</span> <span class="op">&amp;</span> <span class="var">s2</span>            <span class="cm"># intersection</span>
+<span class="var">s1</span> <span class="op">|</span> <span class="var">s2</span>            <span class="cm"># union</span>
+<span class="var">s1</span> <span class="op">-</span> <span class="var">s2</span>            <span class="cm"># difference</span>
+<span class="var">s1</span> <span class="op">^</span> <span class="var">s2</span>            <span class="cm"># symmetric diff</span>
+<span class="var">s1</span><span class="op">.</span><span class="fn">issubset</span>(<span class="var">s2</span>)
+<span class="cm"># Frozenset (hashable)</span>
+<span class="var">fs</span><span class="op">=</span><span class="fn">frozenset</span>([<span class="num">1</span>,<span class="num">2</span>])
+<span class="cm"># Dedup preserving order</span>
+<span class="fn">list</span>(<span class="fn">dict</span><span class="op">.</span><span class="fn">fromkeys</span>(<span class="var">lst</span>))</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/intersection-of-two-arrays/" target="_blank" class="prob-link lc">LC: Intersection of Arrays</a><a href="https://leetcode.com/problems/single-number/" target="_blank" class="prob-link lc">LC: Single Number</a><a href="https://leetcode.com/problems/missing-number/" target="_blank" class="prob-link lc">LC: Missing Number</a><a href="https://leetcode.com/problems/happy-number/" target="_blank" class="prob-link lc">LC: Happy Number (cycle)</a><a href="https://www.hackerrank.com/challenges/py-set-add/problem" target="_blank" class="prob-link hr">HR: Set .add()</a><a href="https://www.hackerrank.com/challenges/py-set-discard-remove-pop/problem" target="_blank" class="prob-link hr">HR: discard/remove/pop</a><a href="https://www.hackerrank.com/challenges/py-set-union/problem" target="_blank" class="prob-link hr">HR: Set Union</a><a href="https://www.hackerrank.com/challenges/py-set-intersection-operation/problem" target="_blank" class="prob-link hr">HR: Set Intersection</a><a href="https://www.hackerrank.com/challenges/py-set-difference-operation/problem" target="_blank" class="prob-link hr">HR: Set Difference</a><a href="https://www.hackerrank.com/challenges/py-set-symmetric-difference-operation/problem" target="_blank" class="prob-link hr">HR: Symmetric Diff</a><a href="https://www.geeksforgeeks.org/problems/count-distinct-elements0152/1" target="_blank" class="prob-link gfg">GFG: Count Distinct</a><a href="https://codeforces.com/problemset/problem/1367/B" target="_blank" class="prob-link cf">CF: Even Array</a></div>
+      </div>
+      <div class="concepts"><span class="chip">set ops</span><span class="chip">frozenset</span><span class="chip">discard</span><span class="chip">union/intersection</span><span class="chip">dedup</span><span class="chip">O(1) lookup</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Stack, Queue, Deque &amp; Heap</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="kw">from</span> <span class="cls">collections</span> <span class="kw">import</span> <span class="cls">deque</span>
+<span class="kw">import</span> <span class="cls">heapq</span>
+<span class="cm"># Stack (LIFO)</span>
+<span class="var">stk</span><span class="op">=</span>[]; <span class="var">stk</span><span class="op">.</span><span class="fn">append</span>(<span class="num">1</span>); <span class="var">stk</span><span class="op">.</span><span class="fn">pop</span>()
+<span class="cm"># Queue (FIFO)</span>
+<span class="var">q</span><span class="op">=</span><span class="cls">deque</span>()
+<span class="var">q</span><span class="op">.</span><span class="fn">append</span>(<span class="num">1</span>)    <span class="cm"># enqueue</span>
+<span class="var">q</span><span class="op">.</span><span class="fn">popleft</span>()    <span class="cm"># dequeue</span>
+<span class="var">q</span><span class="op">.</span><span class="fn">appendleft</span>(<span class="num">0</span>)<span class="cm"># prepend</span>
+<span class="cm"># Min-Heap</span>
+<span class="var">h</span><span class="op">=</span>[<span class="num">3</span>,<span class="num">1</span>,<span class="num">4</span>]; <span class="cls">heapq</span><span class="op">.</span><span class="fn">heapify</span>(<span class="var">h</span>)
+<span class="cls">heapq</span><span class="op">.</span><span class="fn">heappush</span>(<span class="var">h</span>,<span class="num">2</span>)
+<span class="cls">heapq</span><span class="op">.</span><span class="fn">heappop</span>(<span class="var">h</span>)  <span class="cm"># → 1</span>
+<span class="cm"># Max-heap: negate</span>
+<span class="cls">heapq</span><span class="op">.</span><span class="fn">heappush</span>(<span class="var">h</span>,<span class="op">-</span><span class="num">5</span>)</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/valid-parentheses/" target="_blank" class="prob-link lc">LC: Valid Parentheses</a><a href="https://leetcode.com/problems/min-stack/" target="_blank" class="prob-link lc">LC: Min Stack</a><a href="https://leetcode.com/problems/implement-queue-using-stacks/" target="_blank" class="prob-link lc">LC: Queue via Stacks</a><a href="https://leetcode.com/problems/kth-largest-element-in-a-stream/" target="_blank" class="prob-link lc">LC: Kth Largest (Heap)</a><a href="https://leetcode.com/problems/find-median-from-data-stream/" target="_blank" class="prob-link lc">LC: Median from Stream</a><a href="https://leetcode.com/problems/daily-temperatures/" target="_blank" class="prob-link lc">LC: Daily Temperatures</a><a href="https://www.hackerrank.com/challenges/equal-stacks/problem" target="_blank" class="prob-link hr">HR: Equal Stacks</a><a href="https://www.hackerrank.com/challenges/ctci-queue-using-two-stacks/problem" target="_blank" class="prob-link hr">HR: Queue via 2 Stacks</a><a href="https://www.hackerrank.com/challenges/collections-deque/problem" target="_blank" class="prob-link hr">HR: deque</a><a href="https://www.geeksforgeeks.org/problems/implement-stack-using-array/1" target="_blank" class="prob-link gfg">GFG: Stack Array</a><a href="https://www.codechef.com/problems/COMPILER" target="_blank" class="prob-link cc">CC: Compiler Brackets</a><a href="https://codeforces.com/problemset/problem/797/C" target="_blank" class="prob-link cf">CF: Minimal String</a></div>
+      </div>
+      <div class="concepts"><span class="chip">LIFO</span><span class="chip">FIFO</span><span class="chip">deque</span><span class="chip">heapq</span><span class="chip">max-heap trick</span><span class="chip">monotonic stack</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Linked List</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="kw">class</span> <span class="cls">Node</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>,<span class="var">v</span>):
+        <span class="var">self</span><span class="op">.</span><span class="var">val</span><span class="op">=</span><span class="var">v</span>; <span class="var">self</span><span class="op">.</span><span class="var">next</span><span class="op">=</span><span class="kw">None</span>
+
+<span class="cm"># Reverse</span>
+<span class="kw">def</span> <span class="fn">reverse</span>(<span class="var">head</span>):
+    <span class="var">prev</span>,<span class="var">cur</span><span class="op">=</span><span class="kw">None</span>,<span class="var">head</span>
+    <span class="kw">while</span> <span class="var">cur</span>:
+        <span class="var">nxt</span><span class="op">=</span><span class="var">cur</span><span class="op">.</span><span class="var">next</span>
+        <span class="var">cur</span><span class="op">.</span><span class="var">next</span><span class="op">=</span><span class="var">prev</span>
+        <span class="var">prev</span>,<span class="var">cur</span><span class="op">=</span><span class="var">cur</span>,<span class="var">nxt</span>
+    <span class="kw">return</span> <span class="var">prev</span>
+
+<span class="cm"># Fast/slow pointer (cycle)</span>
+<span class="kw">def</span> <span class="fn">has_cycle</span>(<span class="var">h</span>):
+    <span class="var">s</span><span class="op">=</span><span class="var">f</span><span class="op">=</span><span class="var">h</span>
+    <span class="kw">while</span> <span class="var">f</span> <span class="kw">and</span> <span class="var">f</span><span class="op">.</span><span class="var">next</span>:
+        <span class="var">s</span><span class="op">=</span><span class="var">s</span><span class="op">.</span><span class="var">next</span>; <span class="var">f</span><span class="op">=</span><span class="var">f</span><span class="op">.</span><span class="var">next</span><span class="op">.</span><span class="var">next</span>
+        <span class="kw">if</span> <span class="var">s</span><span class="op">==</span><span class="var">f</span>: <span class="kw">return</span> <span class="kw">True</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/reverse-linked-list/" target="_blank" class="prob-link lc">LC: Reverse Linked List</a><a href="https://leetcode.com/problems/merge-two-sorted-lists/" target="_blank" class="prob-link lc">LC: Merge Two Lists</a><a href="https://leetcode.com/problems/linked-list-cycle/" target="_blank" class="prob-link lc">LC: Detect Cycle</a><a href="https://leetcode.com/problems/remove-nth-node-from-end-of-list/" target="_blank" class="prob-link lc">LC: Remove Nth from End</a><a href="https://leetcode.com/problems/palindrome-linked-list/" target="_blank" class="prob-link lc">LC: Palindrome LL</a><a href="https://leetcode.com/problems/intersection-of-two-linked-lists/" target="_blank" class="prob-link lc">LC: Intersection of Lists</a><a href="https://leetcode.com/problems/odd-even-linked-list/" target="_blank" class="prob-link lc">LC: Odd Even LL</a><a href="https://www.hackerrank.com/challenges/insert-a-node-at-the-tail-of-a-linked-list/problem" target="_blank" class="prob-link hr">HR: Insert at Tail</a><a href="https://www.hackerrank.com/challenges/reverse-a-doubly-linked-list/problem" target="_blank" class="prob-link hr">HR: Reverse Doubly LL</a><a href="https://www.geeksforgeeks.org/problems/reverse-a-linked-list/1" target="_blank" class="prob-link gfg">GFG: Reverse LL</a><a href="https://www.geeksforgeeks.org/problems/detect-loop-in-linked-list/1" target="_blank" class="prob-link gfg">GFG: Detect Loop</a><a href="https://codeforces.com/problemset/problem/25/E" target="_blank" class="prob-link cf">CF: Test for Plagiarism</a></div>
+      </div>
+      <div class="concepts"><span class="chip">Node</span><span class="chip">head/tail</span><span class="chip">fast-slow pointer</span><span class="chip">reverse</span><span class="chip">cycle detection</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Trees &amp; Binary Search Tree</span><span class="diff hard">Hard</span></div>
+      <div class="code-block"><span class="kw">class</span> <span class="cls">TreeNode</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>,<span class="var">v</span><span class="op">=</span><span class="num">0</span>):
+        <span class="var">self</span><span class="op">.</span><span class="var">val</span><span class="op">=</span><span class="var">v</span>; <span class="var">self</span><span class="op">.</span><span class="var">left</span><span class="op">=</span><span class="var">self</span><span class="op">.</span><span class="var">right</span><span class="op">=</span><span class="kw">None</span>
+
+<span class="cm"># Inorder (sorted for BST)</span>
+<span class="kw">def</span> <span class="fn">inorder</span>(<span class="var">r</span>):
+    <span class="kw">if</span> <span class="kw">not</span> <span class="var">r</span>: <span class="kw">return</span> []
+    <span class="kw">return</span> <span class="fn">inorder</span>(<span class="var">r</span><span class="op">.</span><span class="var">left</span>)<span class="op">+</span>[<span class="var">r</span><span class="op">.</span><span class="var">val</span>]<span class="op">+</span><span class="fn">inorder</span>(<span class="var">r</span><span class="op">.</span><span class="var">right</span>)
+
+<span class="cm"># Level-order BFS</span>
+<span class="kw">from</span> <span class="cls">collections</span> <span class="kw">import</span> <span class="cls">deque</span>
+<span class="kw">def</span> <span class="fn">bfs</span>(<span class="var">root</span>):
+    <span class="var">q</span><span class="op">=</span><span class="cls">deque</span>([<span class="var">root</span>])
+    <span class="kw">while</span> <span class="var">q</span>:
+        <span class="var">n</span><span class="op">=</span><span class="var">q</span><span class="op">.</span><span class="fn">popleft</span>()
+        <span class="kw">if</span> <span class="var">n</span><span class="op">.</span><span class="var">left</span>:  <span class="var">q</span><span class="op">.</span><span class="fn">append</span>(<span class="var">n</span><span class="op">.</span><span class="var">left</span>)
+        <span class="kw">if</span> <span class="var">n</span><span class="op">.</span><span class="var">right</span>: <span class="var">q</span><span class="op">.</span><span class="fn">append</span>(<span class="var">n</span><span class="op">.</span><span class="var">right</span>)</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank" class="prob-link lc">LC: Max Depth</a><a href="https://leetcode.com/problems/invert-binary-tree/" target="_blank" class="prob-link lc">LC: Invert Tree</a><a href="https://leetcode.com/problems/symmetric-tree/" target="_blank" class="prob-link lc">LC: Symmetric Tree</a><a href="https://leetcode.com/problems/binary-tree-level-order-traversal/" target="_blank" class="prob-link lc">LC: Level Order</a><a href="https://leetcode.com/problems/validate-binary-search-tree/" target="_blank" class="prob-link lc">LC: Validate BST</a><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/" target="_blank" class="prob-link lc">LC: LCA</a><a href="https://leetcode.com/problems/path-sum/" target="_blank" class="prob-link lc">LC: Path Sum</a><a href="https://www.hackerrank.com/challenges/tree-height-of-a-binary-tree/problem" target="_blank" class="prob-link hr">HR: Tree Height</a><a href="https://www.hackerrank.com/challenges/binary-search-tree-lowest-common-ancestor/problem" target="_blank" class="prob-link hr">HR: BST LCA</a><a href="https://www.geeksforgeeks.org/problems/height-of-binary-tree/1" target="_blank" class="prob-link gfg">GFG: Height of Tree</a><a href="https://www.codechef.com/problems/ISBST" target="_blank" class="prob-link cc">CC: Is BST</a><a href="https://codeforces.com/problemset/problem/1017/C" target="_blank" class="prob-link cf">CF: Recursive Queries</a></div>
+      </div>
+      <div class="concepts"><span class="chip">inorder</span><span class="chip">preorder</span><span class="chip">postorder</span><span class="chip">BFS</span><span class="chip">height</span><span class="chip">BST</span><span class="chip">LCA</span></div>
+    </div></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">03</span>
+    <span class="section-icon">🔀</span>
+    <h2 class="section-title">Control Flow &amp; Functions</h2>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Loops, Enumerate, zip &amp; Comprehensions</span><span class="diff easy">Easy</span></div>
+      <div class="code-block"><span class="kw">for</span> <span class="var">i</span>,<span class="var">v</span> <span class="kw">in</span> <span class="fn">enumerate</span>([<span class="str">"a"</span>,<span class="str">"b"</span>]):
+    <span class="fn">print</span>(<span class="var">i</span>,<span class="var">v</span>)
+<span class="kw">for</span> <span class="var">a</span>,<span class="var">b</span> <span class="kw">in</span> <span class="fn">zip</span>([<span class="num">1</span>,<span class="num">2</span>],[<span class="num">3</span>,<span class="num">4</span>]):
+    <span class="fn">print</span>(<span class="var">a</span>,<span class="var">b</span>)
+<span class="cm"># while + else</span>
+<span class="kw">while</span> <span class="var">n</span><span class="op">&gt;</span><span class="num">0</span>: <span class="var">n</span><span class="op">//=</span><span class="num">2</span>
+<span class="kw">else</span>: <span class="fn">print</span>(<span class="str">"done"</span>)
+<span class="cm"># Walrus operator :=</span>
+<span class="kw">while</span> (<span class="var">n</span><span class="op">:=</span><span class="fn">int</span>(<span class="fn">input</span>()))<span class="op">!=</span><span class="num">0</span>:
+    <span class="fn">print</span>(<span class="var">n</span>)
+<span class="cm"># Dict / set comprehension</span>
+<span class="var">sq</span><span class="op">=</span>{<span class="var">x</span>:<span class="var">x</span><span class="op">**</span><span class="num">2</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">5</span>)}
+<span class="cm"># Generator (lazy)</span>
+<span class="var">g</span><span class="op">=</span>(<span class="var">x</span><span class="op">**</span><span class="num">2</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1000</span>))</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/fizz-buzz/" target="_blank" class="prob-link lc">LC: FizzBuzz</a><a href="https://leetcode.com/problems/count-odd-numbers-in-an-interval-range/" target="_blank" class="prob-link lc">LC: Count Odd Numbers</a><a href="https://leetcode.com/problems/running-sum-of-1d-array/" target="_blank" class="prob-link lc">LC: Running Sum</a><a href="https://www.hackerrank.com/challenges/list-comprehensions/problem" target="_blank" class="prob-link hr">HR: List Comprehensions</a><a href="https://www.hackerrank.com/challenges/python-loops/problem" target="_blank" class="prob-link hr">HR: Loops</a><a href="https://www.hackerrank.com/challenges/for-loop-in-python/problem" target="_blank" class="prob-link hr">HR: For Loop</a><a href="https://www.hackerrank.com/challenges/itertools-product/problem" target="_blank" class="prob-link hr">HR: itertools.product</a><a href="https://www.geeksforgeeks.org/problems/sum-of-numbers-in-string-1587115621/1" target="_blank" class="prob-link gfg">GFG: Sum in String</a><a href="https://www.geeksforgeeks.org/problems/print-pattern3227/1" target="_blank" class="prob-link gfg">GFG: Print Pattern</a><a href="https://www.codechef.com/problems/FLOW001" target="_blank" class="prob-link cc">CC: Add Two Numbers</a><a href="https://www.codechef.com/problems/INTEST" target="_blank" class="prob-link cc">CC: I/O Speed Test</a><a href="https://codeforces.com/problemset/problem/282/A" target="_blank" class="prob-link cf">CF: Bit++</a></div>
+      </div>
+      <div class="concepts"><span class="chip">enumerate</span><span class="chip">zip</span><span class="chip">walrus :=</span><span class="chip">generator</span><span class="chip">dict comp</span><span class="chip">while/else</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Functions, Lambda &amp; Higher-Order</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="kw">def</span> <span class="fn">greet</span>(<span class="var">name</span>,<span class="var">msg</span><span class="op">=</span><span class="str">"Hi"</span>):
+    <span class="kw">return</span> <span class="fn">f</span><span class="str">"{msg},{name}"</span>
+
+<span class="kw">def</span> <span class="fn">total</span>(<span class="op">*</span><span class="var">args</span>,<span class="op">**</span><span class="var">kw</span>):
+    <span class="kw">return</span> <span class="fn">sum</span>(<span class="var">args</span>),<span class="var">kw</span>
+
+<span class="cm"># Lambda + HOF</span>
+<span class="var">sq</span><span class="op">=</span><span class="kw">lambda</span> <span class="var">x</span>:<span class="var">x</span><span class="op">**</span><span class="num">2</span>
+<span class="fn">list</span>(<span class="fn">map</span>(<span class="var">sq</span>,[<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>]))  <span class="cm"># [1,4,9]</span>
+<span class="fn">list</span>(<span class="fn">filter</span>(<span class="kw">lambda</span> <span class="var">x</span>:<span class="var">x</span><span class="op">&gt;</span><span class="num">2</span>,[<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>]))
+
+<span class="cm"># Sort with multi-key</span>
+<span class="fn">sorted</span>(<span class="var">words</span>,<span class="var">key</span><span class="op">=</span><span class="kw">lambda</span> <span class="var">w</span>:(<span class="fn">len</span>(<span class="var">w</span>),<span class="var">w</span>))
+
+<span class="cm"># Unpack</span>
+<span class="var">a</span>,<span class="op">*</span><span class="var">b</span>,<span class="var">c</span><span class="op">=</span>[<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>]</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://www.hackerrank.com/challenges/python-sort-sort/problem" target="_blank" class="prob-link hr">HR: Sort with Lambda</a><a href="https://www.hackerrank.com/challenges/map-and-lambda-expression/problem" target="_blank" class="prob-link hr">HR: Map & Lambda</a><a href="https://www.hackerrank.com/challenges/python-functionals/problem" target="_blank" class="prob-link hr">HR: Functionals</a><a href="https://www.hackerrank.com/challenges/validate-list-of-email-address-with-filter/problem" target="_blank" class="prob-link hr">HR: Filter Emails</a><a href="https://leetcode.com/problems/sort-the-people/" target="_blank" class="prob-link lc">LC: Sort the People</a><a href="https://leetcode.com/problems/sort-array-by-parity/" target="_blank" class="prob-link lc">LC: Sort by Parity</a><a href="https://leetcode.com/problems/custom-sort-string/" target="_blank" class="prob-link lc">LC: Custom Sort</a><a href="https://leetcode.com/problems/apply-operations-to-an-array/" target="_blank" class="prob-link lc">LC: Apply Operations</a><a href="https://www.geeksforgeeks.org/problems/sort-by-set-bit-count1153/1" target="_blank" class="prob-link gfg">GFG: Sort by Set Bits</a><a href="https://www.geeksforgeeks.org/problems/lambda-recursion/1" target="_blank" class="prob-link gfg">GFG: Lambda Recursion</a><a href="https://www.codechef.com/problems/FCTRL" target="_blank" class="prob-link cc">CC: Factorial</a><a href="https://codeforces.com/problemset/problem/670/A" target="_blank" class="prob-link cf">CF: Holidays</a></div>
+      </div>
+      <div class="concepts"><span class="chip">*args</span><span class="chip">**kwargs</span><span class="chip">lambda</span><span class="chip">map/filter</span><span class="chip">key sort</span><span class="chip">unpacking</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Decorators, Closures &amp; functools</span><span class="diff hard">Hard</span></div>
+      <div class="code-block"><span class="kw">from</span> <span class="cls">functools</span> <span class="kw">import</span> <span class="fn">wraps</span>,<span class="fn">lru_cache</span>,<span class="fn">partial</span>,<span class="fn">reduce</span>
+
+<span class="cm"># Closure</span>
+<span class="kw">def</span> <span class="fn">counter</span>():
+    <span class="var">n</span><span class="op">=</span><span class="num">0</span>
+    <span class="kw">def</span> <span class="fn">inc</span>(): <span class="kw">nonlocal</span> <span class="var">n</span>; <span class="var">n</span><span class="op">+=</span><span class="num">1</span>; <span class="kw">return</span> <span class="var">n</span>
+    <span class="kw">return</span> <span class="fn">inc</span>
+
+<span class="cm"># Decorator with @wraps</span>
+<span class="kw">def</span> <span class="fn">log</span>(<span class="var">f</span>):
+    <span class="op">@</span><span class="fn">wraps</span>(<span class="var">f</span>)
+    <span class="kw">def</span> <span class="fn">wrapper</span>(<span class="op">*</span><span class="var">a</span>,<span class="op">**</span><span class="var">kw</span>):
+        <span class="fn">print</span>(<span class="var">f</span><span class="op">.</span><span class="var">__name__</span>)
+        <span class="kw">return</span> <span class="fn">f</span>(<span class="op">*</span><span class="var">a</span>,<span class="op">**</span><span class="var">kw</span>)
+    <span class="kw">return</span> <span class="fn">wrapper</span>
+
+<span class="op">@</span><span class="fn">lru_cache</span>(<span class="var">maxsize</span><span class="op">=</span><span class="num">128</span>)
+<span class="kw">def</span> <span class="fn">fib</span>(<span class="var">n</span>): <span class="kw">return</span> <span class="var">n</span> <span class="kw">if</span> <span class="var">n</span><span class="op">&lt;=</span><span class="num">1</span> <span class="kw">else</span> <span class="fn">fib</span>(<span class="var">n</span><span class="op">-</span><span class="num">1</span>)<span class="op">+</span><span class="fn">fib</span>(<span class="var">n</span><span class="op">-</span><span class="num">2</span>)
+<span class="var">double</span><span class="op">=</span><span class="fn">partial</span>(<span class="fn">pow</span>,<span class="var">exp</span><span class="op">=</span><span class="num">2</span>)</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://www.hackerrank.com/challenges/decorators-2-name-directory/problem" target="_blank" class="prob-link hr">HR: Decorators</a><a href="https://www.hackerrank.com/challenges/reduce-function/problem" target="_blank" class="prob-link hr">HR: reduce()</a><a href="https://www.hackerrank.com/challenges/closures-and-decorators/problem" target="_blank" class="prob-link hr">HR: Closures</a><a href="https://leetcode.com/problems/memoize/" target="_blank" class="prob-link lc">LC: Memoize</a><a href="https://leetcode.com/problems/curry/" target="_blank" class="prob-link lc">LC: Curry Function</a><a href="https://leetcode.com/problems/function-composition/" target="_blank" class="prob-link lc">LC: Function Composition</a><a href="https://leetcode.com/problems/memoize-ii/" target="_blank" class="prob-link lc">LC: Memoize II</a><a href="https://leetcode.com/problems/cache-with-time-limit/" target="_blank" class="prob-link lc">LC: Cache w/ Time Limit</a><a href="https://www.geeksforgeeks.org/decorators-in-python/" target="_blank" class="prob-link gfg">GFG: Decorator Practice</a><a href="https://www.geeksforgeeks.org/problems/count-number-of-substrings4528/1" target="_blank" class="prob-link gfg">GFG: Substrings Count</a><a href="https://www.codechef.com/problems/FCTRL2" target="_blank" class="prob-link cc">CC: Large Factorial</a><a href="https://codeforces.com/problemset/problem/1064/A" target="_blank" class="prob-link cf">CF: Make a Triangle</a></div>
+      </div>
+      <div class="concepts"><span class="chip">closure</span><span class="chip">nonlocal</span><span class="chip">@wraps</span><span class="chip">lru_cache</span><span class="chip">partial</span><span class="chip">reduce</span></div>
+    </div></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">04</span>
+    <span class="section-icon">🏗️</span>
+    <h2 class="section-title">OOP — Object-Oriented Programming</h2>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Classes, Inheritance &amp; Dunder Methods</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="kw">class</span> <span class="cls">Animal</span>:
+    <span class="var">count</span><span class="op">=</span><span class="num">0</span>
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>,<span class="var">n</span>):
+        <span class="var">self</span><span class="op">.</span><span class="var">name</span><span class="op">=</span><span class="var">n</span>; <span class="cls">Animal</span><span class="op">.</span><span class="var">count</span><span class="op">+=</span><span class="num">1</span>
+    <span class="kw">def</span> <span class="fn">__repr__</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="fn">f</span><span class="str">"Animal({self.name})"</span>
+    <span class="kw">def</span> <span class="fn">__eq__</span>(<span class="var">self</span>,<span class="var">o</span>):
+        <span class="kw">return</span> <span class="var">self</span><span class="op">.</span><span class="var">name</span><span class="op">==</span><span class="var">o</span><span class="op">.</span><span class="var">name</span>
+    <span class="kw">def</span> <span class="fn">__len__</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="fn">len</span>(<span class="var">self</span><span class="op">.</span><span class="var">name</span>)
+    <span class="kw">def</span> <span class="fn">speak</span>(<span class="var">self</span>): <span class="kw">raise</span> <span class="cls">NotImplementedError</span>
+
+<span class="kw">class</span> <span class="cls">Dog</span>(<span class="cls">Animal</span>):
+    <span class="kw">def</span> <span class="fn">speak</span>(<span class="var">self</span>): <span class="kw">return</span> <span class="str">"Woof!"</span>
+    <span class="kw">def</span> <span class="fn">__add__</span>(<span class="var">self</span>,<span class="var">o</span>):
+        <span class="kw">return</span> <span class="cls">Dog</span>(<span class="var">self</span><span class="op">.</span><span class="var">name</span><span class="op">+</span><span class="var">o</span><span class="op">.</span><span class="var">name</span>)</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://www.hackerrank.com/challenges/class-1-dealing-with-complex-numbers/problem" target="_blank" class="prob-link hr">HR: Complex Numbers</a><a href="https://www.hackerrank.com/challenges/class-2-find-the-torsional-angle/problem" target="_blank" class="prob-link hr">HR: Torsional Angle</a><a href="https://www.hackerrank.com/challenges/abstract-classes-polymorphism/problem" target="_blank" class="prob-link hr">HR: Polymorphism</a><a href="https://www.hackerrank.com/challenges/magic-class/problem" target="_blank" class="prob-link hr">HR: Magic Class</a><a href="https://leetcode.com/problems/design-hashmap/" target="_blank" class="prob-link lc">LC: Design HashMap</a><a href="https://leetcode.com/problems/design-linked-list/" target="_blank" class="prob-link lc">LC: Design Linked List</a><a href="https://leetcode.com/problems/design-stack-with-increment-operation/" target="_blank" class="prob-link lc">LC: Design Stack</a><a href="https://leetcode.com/problems/lru-cache/" target="_blank" class="prob-link lc">LC: LRU Cache</a><a href="https://leetcode.com/problems/design-parking-system/" target="_blank" class="prob-link lc">LC: Parking System</a><a href="https://www.geeksforgeeks.org/problems/implementing-a-stack-using-linked-list/1" target="_blank" class="prob-link gfg">GFG: Stack via LL</a><a href="https://www.codechef.com/problems/BANK2" target="_blank" class="prob-link cc">CC: Bank Problem</a><a href="https://codeforces.com/problemset/problem/1148/A" target="_blank" class="prob-link cf">CF: Palindrome Game</a></div>
+      </div>
+      <div class="concepts"><span class="chip">__init__</span><span class="chip">__repr__</span><span class="chip">__str__</span><span class="chip">__eq__</span><span class="chip">__add__</span><span class="chip">inheritance</span><span class="chip">class var</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Dataclasses, ABC &amp; Properties</span><span class="diff hard">Hard</span></div>
+      <div class="code-block"><span class="kw">from</span> <span class="cls">dataclasses</span> <span class="kw">import</span> <span class="fn">dataclass</span>,<span class="fn">field</span>
+<span class="kw">from</span> <span class="cls">abc</span> <span class="kw">import</span> <span class="cls">ABC</span>,<span class="fn">abstractmethod</span>
+
+<span class="op">@</span><span class="fn">dataclass</span>(<span class="var">order</span><span class="op">=</span><span class="kw">True</span>,<span class="var">frozen</span><span class="op">=</span><span class="kw">True</span>)
+<span class="kw">class</span> <span class="cls">Point</span>:
+    <span class="var">x</span>: <span class="fn">float</span>
+    <span class="var">y</span>: <span class="fn">float</span>
+    <span class="var">tags</span>: <span class="fn">list</span> <span class="op">=</span> <span class="fn">field</span>(<span class="var">default_factory</span><span class="op">=</span><span class="fn">list</span>)
+
+<span class="cm"># Abstract Base Class</span>
+<span class="kw">class</span> <span class="cls">Shape</span>(<span class="cls">ABC</span>):
+    <span class="op">@</span><span class="fn">abstractmethod</span>
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="var">self</span>)<span class="op">-&gt;</span><span class="fn">float</span>: ...
+
+<span class="kw">class</span> <span class="cls">Circle</span>(<span class="cls">Shape</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>,<span class="var">r</span>): <span class="var">self</span><span class="op">.</span><span class="var">_r</span><span class="op">=</span><span class="var">r</span>
+    <span class="op">@</span><span class="fn">property</span>
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="num">3.14159</span><span class="op">*</span><span class="var">self</span><span class="op">.</span><span class="var">_r</span><span class="op">**</span><span class="num">2</span>
+    <span class="op">@</span><span class="var">area</span><span class="op">.</span><span class="fn">setter</span>
+    <span class="kw">def</span> <span class="fn">area</span>(<span class="var">self</span>,<span class="var">v</span>):
+        <span class="var">self</span><span class="op">.</span><span class="var">_r</span><span class="op">=</span>(<span class="var">v</span><span class="op">/</span><span class="num">3.14159</span>)<span class="op">**</span><span class="num">.5</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://www.hackerrank.com/challenges/abstract-classes-polymorphism/problem" target="_blank" class="prob-link hr">HR: Abstract Classes</a><a href="https://www.hackerrank.com/challenges/hotel-prices/problem" target="_blank" class="prob-link hr">HR: Hotel Prices</a><a href="https://leetcode.com/problems/design-an-atm-machine/" target="_blank" class="prob-link lc">LC: ATM Machine</a><a href="https://leetcode.com/problems/design-browser-history/" target="_blank" class="prob-link lc">LC: Browser History</a><a href="https://leetcode.com/problems/design-underground-system/" target="_blank" class="prob-link lc">LC: Underground System</a><a href="https://leetcode.com/problems/design-twitter/" target="_blank" class="prob-link lc">LC: Design Twitter</a><a href="https://leetcode.com/problems/design-hit-counter/" target="_blank" class="prob-link lc">LC: Design Hit Counter</a><a href="https://www.geeksforgeeks.org/problems/python-dataclasses/1" target="_blank" class="prob-link gfg">GFG: Dataclasses</a><a href="https://www.geeksforgeeks.org/problems/abstract-base-class/1" target="_blank" class="prob-link gfg">GFG: ABC</a><a href="https://www.geeksforgeeks.org/problems/python-property-function/1" target="_blank" class="prob-link gfg">GFG: @property</a><a href="https://www.codechef.com/problems/OOP1" target="_blank" class="prob-link cc">CC: OOP Practice</a><a href="https://codeforces.com/problemset/problem/1829/D" target="_blank" class="prob-link cf">CF: Gold & Silver</a></div>
+      </div>
+      <div class="concepts"><span class="chip">@dataclass</span><span class="chip">frozen</span><span class="chip">ABC</span><span class="chip">@abstractmethod</span><span class="chip">@property</span><span class="chip">setter</span></div>
+    </div></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">05</span>
+    <span class="section-icon">🌲</span>
+    <h2 class="section-title">Algorithms &amp; Problem Solving</h2>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Sorting Algorithms</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="cm"># Merge Sort O(n log n)</span>
+<span class="kw">def</span> <span class="fn">merge_sort</span>(<span class="var">a</span>):
+    <span class="kw">if</span> <span class="fn">len</span>(<span class="var">a</span>)<span class="op">&lt;=</span><span class="num">1</span>: <span class="kw">return</span> <span class="var">a</span>
+    <span class="var">m</span><span class="op">=</span><span class="fn">len</span>(<span class="var">a</span>)<span class="op">//</span><span class="num">2</span>
+    <span class="var">L</span>,<span class="var">R</span><span class="op">=</span><span class="fn">merge_sort</span>(<span class="var">a</span>[:<span class="var">m</span>]),<span class="fn">merge_sort</span>(<span class="var">a</span>[<span class="var">m</span>:])
+    <span class="kw">return</span> <span class="fn">merge</span>(<span class="var">L</span>,<span class="var">R</span>)
+
+<span class="cm"># Quick Sort O(n log n) avg</span>
+<span class="kw">def</span> <span class="fn">qsort</span>(<span class="var">a</span>):
+    <span class="kw">if</span> <span class="fn">len</span>(<span class="var">a</span>)<span class="op">&lt;=</span><span class="num">1</span>: <span class="kw">return</span> <span class="var">a</span>
+    <span class="var">p</span><span class="op">=</span><span class="var">a</span>[<span class="fn">len</span>(<span class="var">a</span>)<span class="op">//</span><span class="num">2</span>]
+    <span class="kw">return</span>(<span class="fn">qsort</span>([<span class="var">x</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="var">a</span> <span class="kw">if</span> <span class="var">x</span><span class="op">&lt;</span><span class="var">p</span>])<span class="op">+</span>
+          [<span class="var">x</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="var">a</span> <span class="kw">if</span> <span class="var">x</span><span class="op">==</span><span class="var">p</span>]<span class="op">+</span>
+          <span class="fn">qsort</span>([<span class="var">x</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="var">a</span> <span class="kw">if</span> <span class="var">x</span><span class="op">&gt;</span><span class="var">p</span>]))</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/sort-an-array/" target="_blank" class="prob-link lc">LC: Sort an Array</a><a href="https://leetcode.com/problems/merge-sorted-array/" target="_blank" class="prob-link lc">LC: Merge Sorted Array</a><a href="https://leetcode.com/problems/sort-colors/" target="_blank" class="prob-link lc">LC: Sort Colors (Dutch Flag)</a><a href="https://leetcode.com/problems/kth-largest-element-in-an-array/" target="_blank" class="prob-link lc">LC: Kth Largest</a><a href="https://leetcode.com/problems/largest-number/" target="_blank" class="prob-link lc">LC: Largest Number</a><a href="https://leetcode.com/problems/sort-list/" target="_blank" class="prob-link lc">LC: Sort List (Merge Sort)</a><a href="https://www.hackerrank.com/challenges/ctci-merge-sort/problem" target="_blank" class="prob-link hr">HR: Merge Sort</a><a href="https://www.hackerrank.com/challenges/ctci-bubble-sort/problem" target="_blank" class="prob-link hr">HR: Bubble Sort</a><a href="https://www.hackerrank.com/challenges/countingsort1/problem" target="_blank" class="prob-link hr">HR: Counting Sort</a><a href="https://www.geeksforgeeks.org/problems/merge-sort/1" target="_blank" class="prob-link gfg">GFG: Merge Sort</a><a href="https://www.codechef.com/problems/TSORT" target="_blank" class="prob-link cc">CC: Turbo Sort</a><a href="https://codeforces.com/problemset/problem/1374/C" target="_blank" class="prob-link cf">CF: Move Brackets</a></div>
+      </div>
+      <div class="concepts"><span class="chip">merge sort</span><span class="chip">quick sort</span><span class="chip">counting sort</span><span class="chip">Timsort</span><span class="chip">O(n log n)</span><span class="chip">in-place</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Binary Search &amp; bisect</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="kw">import</span> <span class="cls">bisect</span>
+
+<span class="cm"># Classic binary search O(log n)</span>
+<span class="kw">def</span> <span class="fn">bsearch</span>(<span class="var">a</span>,<span class="var">t</span>):
+    <span class="var">lo</span>,<span class="var">hi</span><span class="op">=</span><span class="num">0</span>,<span class="fn">len</span>(<span class="var">a</span>)<span class="op">-</span><span class="num">1</span>
+    <span class="kw">while</span> <span class="var">lo</span><span class="op">&lt;=</span><span class="var">hi</span>:
+        <span class="var">m</span><span class="op">=</span><span class="var">lo</span><span class="op">+</span>(<span class="var">hi</span><span class="op">-</span><span class="var">lo</span>)<span class="op">//</span><span class="num">2</span>
+        <span class="kw">if</span>   <span class="var">a</span>[<span class="var">m</span>]<span class="op">==</span><span class="var">t</span>: <span class="kw">return</span> <span class="var">m</span>
+        <span class="kw">elif</span> <span class="var">a</span>[<span class="var">m</span>]<span class="op">&lt;</span><span class="var">t</span>:  <span class="var">lo</span><span class="op">=</span><span class="var">m</span><span class="op">+</span><span class="num">1</span>
+        <span class="kw">else</span>: <span class="var">hi</span><span class="op">=</span><span class="var">m</span><span class="op">-</span><span class="num">1</span>
+    <span class="kw">return</span> <span class="op">-</span><span class="num">1</span>
+
+<span class="cm"># Python stdlib bisect</span>
+<span class="cls">bisect</span><span class="op">.</span><span class="fn">bisect_left</span>(<span class="var">a</span>,<span class="var">t</span>)  <span class="cm"># left insertion pt</span>
+<span class="cls">bisect</span><span class="op">.</span><span class="fn">bisect_right</span>(<span class="var">a</span>,<span class="var">t</span>) <span class="cm"># right insertion pt</span>
+<span class="cls">bisect</span><span class="op">.</span><span class="fn">insort</span>(<span class="var">a</span>,<span class="var">v</span>)       <span class="cm"># sorted insert</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/binary-search/" target="_blank" class="prob-link lc">LC: Binary Search</a><a href="https://leetcode.com/problems/search-in-rotated-sorted-array/" target="_blank" class="prob-link lc">LC: Rotated Array Search</a><a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" target="_blank" class="prob-link lc">LC: Min in Rotated</a><a href="https://leetcode.com/problems/search-a-2d-matrix/" target="_blank" class="prob-link lc">LC: Search 2D Matrix</a><a href="https://leetcode.com/problems/koko-eating-bananas/" target="_blank" class="prob-link lc">LC: Koko Bananas</a><a href="https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/" target="_blank" class="prob-link lc">LC: Ship Packages</a><a href="https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/" target="_blank" class="prob-link lc">LC: First & Last Position</a><a href="https://www.hackerrank.com/challenges/binary-search-ice-cream-parlor/problem" target="_blank" class="prob-link hr">HR: Ice Cream Parlor</a><a href="https://www.hackerrank.com/challenges/sherlock-and-array/problem" target="_blank" class="prob-link hr">HR: Sherlock Array</a><a href="https://www.geeksforgeeks.org/problems/binary-search-1587115620/1" target="_blank" class="prob-link gfg">GFG: Binary Search</a><a href="https://www.codechef.com/problems/BSEARCH" target="_blank" class="prob-link cc">CC: Binary Search</a><a href="https://codeforces.com/problemset/problem/1201/C" target="_blank" class="prob-link cf">CF: Maximum Median</a></div>
+      </div>
+      <div class="concepts"><span class="chip">binary search</span><span class="chip">bisect</span><span class="chip">O(log n)</span><span class="chip">search on answer</span><span class="chip">rotated array</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Dynamic Programming</span><span class="diff hard">Hard</span></div>
+      <div class="code-block"><span class="kw">from</span> <span class="cls">functools</span> <span class="kw">import</span> <span class="fn">lru_cache</span>
+
+<span class="cm"># Top-down (memoization)</span>
+<span class="op">@</span><span class="fn">lru_cache</span>(<span class="var">maxsize</span><span class="op">=</span><span class="kw">None</span>)
+<span class="kw">def</span> <span class="fn">fib</span>(<span class="var">n</span>):
+    <span class="kw">if</span> <span class="var">n</span><span class="op">&lt;=</span><span class="num">1</span>: <span class="kw">return</span> <span class="var">n</span>
+    <span class="kw">return</span> <span class="fn">fib</span>(<span class="var">n</span><span class="op">-</span><span class="num">1</span>)<span class="op">+</span><span class="fn">fib</span>(<span class="var">n</span><span class="op">-</span><span class="num">2</span>)
+
+<span class="cm"># Bottom-up tabulation (LCS)</span>
+<span class="kw">def</span> <span class="fn">lcs</span>(<span class="var">a</span>,<span class="var">b</span>):
+    <span class="var">m</span>,<span class="var">n</span><span class="op">=</span><span class="fn">len</span>(<span class="var">a</span>),<span class="fn">len</span>(<span class="var">b</span>)
+    <span class="var">dp</span><span class="op">=</span>[[<span class="num">0</span>]<span class="op">*</span>(<span class="var">n</span><span class="op">+</span><span class="num">1</span>) <span class="kw">for</span> <span class="var">_</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="var">m</span><span class="op">+</span><span class="num">1</span>)]
+    <span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>,<span class="var">m</span><span class="op">+</span><span class="num">1</span>):
+        <span class="kw">for</span> <span class="var">j</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>,<span class="var">n</span><span class="op">+</span><span class="num">1</span>):
+            <span class="kw">if</span> <span class="var">a</span>[<span class="var">i</span><span class="op">-</span><span class="num">1</span>]<span class="op">==</span><span class="var">b</span>[<span class="var">j</span><span class="op">-</span><span class="num">1</span>]:
+                <span class="var">dp</span>[<span class="var">i</span>][<span class="var">j</span>]<span class="op">=</span><span class="var">dp</span>[<span class="var">i</span><span class="op">-</span><span class="num">1</span>][<span class="var">j</span><span class="op">-</span><span class="num">1</span>]<span class="op">+</span><span class="num">1</span>
+            <span class="kw">else</span>:
+                <span class="var">dp</span>[<span class="var">i</span>][<span class="var">j</span>]<span class="op">=</span><span class="fn">max</span>(<span class="var">dp</span>[<span class="var">i</span><span class="op">-</span><span class="num">1</span>][<span class="var">j</span>],<span class="var">dp</span>[<span class="var">i</span>][<span class="var">j</span><span class="op">-</span><span class="num">1</span>])
+    <span class="kw">return</span> <span class="var">dp</span>[<span class="var">m</span>][<span class="var">n</span>]</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/climbing-stairs/" target="_blank" class="prob-link lc">LC: Climbing Stairs</a><a href="https://leetcode.com/problems/coin-change/" target="_blank" class="prob-link lc">LC: Coin Change</a><a href="https://leetcode.com/problems/longest-common-subsequence/" target="_blank" class="prob-link lc">LC: LCS</a><a href="https://leetcode.com/problems/house-robber/" target="_blank" class="prob-link lc">LC: House Robber</a><a href="https://leetcode.com/problems/unique-paths/" target="_blank" class="prob-link lc">LC: Unique Paths</a><a href="https://leetcode.com/problems/longest-increasing-subsequence/" target="_blank" class="prob-link lc">LC: LIS</a><a href="https://leetcode.com/problems/edit-distance/" target="_blank" class="prob-link lc">LC: Edit Distance</a><a href="https://leetcode.com/problems/partition-equal-subset-sum/" target="_blank" class="prob-link lc">LC: Partition Equal Subset</a><a href="https://www.hackerrank.com/challenges/fibonacci-modified/problem" target="_blank" class="prob-link hr">HR: Modified Fibonacci</a><a href="https://www.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1" target="_blank" class="prob-link gfg">GFG: 0-1 Knapsack</a><a href="https://www.codechef.com/problems/KNAPSACK" target="_blank" class="prob-link cc">CC: Knapsack</a><a href="https://codeforces.com/problemset/problem/189/A" target="_blank" class="prob-link cf">CF: Cut Ribbon</a></div>
+      </div>
+      <div class="concepts"><span class="chip">memoization</span><span class="chip">tabulation</span><span class="chip">LCS</span><span class="chip">knapsack</span><span class="chip">LIS</span><span class="chip">edit distance</span><span class="chip">optimal substructure</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Graph Algorithms — BFS, DFS, Dijkstra</span><span class="diff hard">Hard</span></div>
+      <div class="code-block"><span class="kw">from</span> <span class="cls">collections</span> <span class="kw">import</span> <span class="cls">deque</span>
+<span class="kw">import</span> <span class="cls">heapq</span>
+
+<span class="cm"># BFS — shortest unweighted path</span>
+<span class="kw">def</span> <span class="fn">bfs</span>(<span class="var">g</span>,<span class="var">s</span>):
+    <span class="var">vis</span>,<span class="var">q</span><span class="op">=</span>{<span class="var">s</span>:<span class="num">0</span>},<span class="cls">deque</span>([<span class="var">s</span>])
+    <span class="kw">while</span> <span class="var">q</span>:
+        <span class="var">u</span><span class="op">=</span><span class="var">q</span><span class="op">.</span><span class="fn">popleft</span>()
+        <span class="kw">for</span> <span class="var">v</span> <span class="kw">in</span> <span class="var">g</span>[<span class="var">u</span>]:
+            <span class="kw">if</span> <span class="var">v</span> <span class="kw">not in</span> <span class="var">vis</span>:
+                <span class="var">vis</span>[<span class="var">v</span>]<span class="op">=</span><span class="var">vis</span>[<span class="var">u</span>]<span class="op">+</span><span class="num">1</span>; <span class="var">q</span><span class="op">.</span><span class="fn">append</span>(<span class="var">v</span>)
+
+<span class="cm"># Dijkstra — weighted shortest path</span>
+<span class="kw">def</span> <span class="fn">dijkstra</span>(<span class="var">g</span>,<span class="var">s</span>):
+    <span class="var">dist</span><span class="op">=</span>{<span class="var">s</span>:<span class="num">0</span>}; <span class="var">pq</span><span class="op">=</span>[(<span class="num">0</span>,<span class="var">s</span>)]
+    <span class="kw">while</span> <span class="var">pq</span>:
+        <span class="var">d</span>,<span class="var">u</span><span class="op">=</span><span class="cls">heapq</span><span class="op">.</span><span class="fn">heappop</span>(<span class="var">pq</span>)
+        <span class="kw">if</span> <span class="var">d</span><span class="op">&gt;</span><span class="var">dist</span><span class="op">.</span><span class="fn">get</span>(<span class="var">u</span>,<span class="fn">float</span>(<span class="str">"inf"</span>)): <span class="kw">continue</span>
+        <span class="kw">for</span> <span class="var">v</span>,<span class="var">w</span> <span class="kw">in</span> <span class="var">g</span>[<span class="var">u</span>]:
+            <span class="kw">if</span> <span class="var">d</span><span class="op">+</span><span class="var">w</span><span class="op">&lt;</span><span class="var">dist</span><span class="op">.</span><span class="fn">get</span>(<span class="var">v</span>,<span class="fn">float</span>(<span class="str">"inf"</span>)):
+                <span class="var">dist</span>[<span class="var">v</span>]<span class="op">=</span><span class="var">d</span><span class="op">+</span><span class="var">w</span>; <span class="cls">heapq</span><span class="op">.</span><span class="fn">heappush</span>(<span class="var">pq</span>,(<span class="var">dist</span>[<span class="var">v</span>],<span class="var">v</span>))
+    <span class="kw">return</span> <span class="var">dist</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/number-of-islands/" target="_blank" class="prob-link lc">LC: Number of Islands</a><a href="https://leetcode.com/problems/course-schedule/" target="_blank" class="prob-link lc">LC: Course Schedule (Topo)</a><a href="https://leetcode.com/problems/network-delay-time/" target="_blank" class="prob-link lc">LC: Network Delay (Dijkstra)</a><a href="https://leetcode.com/problems/rotting-oranges/" target="_blank" class="prob-link lc">LC: Rotting Oranges (BFS)</a><a href="https://leetcode.com/problems/word-ladder/" target="_blank" class="prob-link lc">LC: Word Ladder</a><a href="https://leetcode.com/problems/pacific-atlantic-water-flow/" target="_blank" class="prob-link lc">LC: Pacific Atlantic</a><a href="https://leetcode.com/problems/clone-graph/" target="_blank" class="prob-link lc">LC: Clone Graph</a><a href="https://www.hackerrank.com/challenges/bfsshortreach/problem" target="_blank" class="prob-link hr">HR: BFS Shortest Reach</a><a href="https://www.hackerrank.com/challenges/ctci-connected-cells-in-a-grid/problem" target="_blank" class="prob-link hr">HR: Connected Cells</a><a href="https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1" target="_blank" class="prob-link gfg">GFG: BFS Traversal</a><a href="https://www.codechef.com/problems/DIGJUMP" target="_blank" class="prob-link cc">CC: Digit Jump BFS</a><a href="https://codeforces.com/problemset/problem/20/C" target="_blank" class="prob-link cf">CF: Dijkstra? (Classic)</a></div>
+      </div>
+      <div class="concepts"><span class="chip">BFS</span><span class="chip">DFS</span><span class="chip">Dijkstra</span><span class="chip">topological sort</span><span class="chip">V+E</span><span class="chip">adjacency list</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Two Pointers &amp; Sliding Window</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="cm"># Two pointers — pair sum</span>
+<span class="kw">def</span> <span class="fn">two_sum_sorted</span>(<span class="var">a</span>,<span class="var">t</span>):
+    <span class="var">l</span>,<span class="var">r</span><span class="op">=</span><span class="num">0</span>,<span class="fn">len</span>(<span class="var">a</span>)<span class="op">-</span><span class="num">1</span>
+    <span class="kw">while</span> <span class="var">l</span><span class="op">&lt;</span><span class="var">r</span>:
+        <span class="var">s</span><span class="op">=</span><span class="var">a</span>[<span class="var">l</span>]<span class="op">+</span><span class="var">a</span>[<span class="var">r</span>]
+        <span class="kw">if</span>   <span class="var">s</span><span class="op">==</span><span class="var">t</span>: <span class="kw">return</span> [<span class="var">l</span>,<span class="var">r</span>]
+        <span class="kw">elif</span> <span class="var">s</span><span class="op">&lt;</span><span class="var">t</span>:  <span class="var">l</span><span class="op">+=</span><span class="num">1</span>
+        <span class="kw">else</span>: <span class="var">r</span><span class="op">-=</span><span class="num">1</span>
+
+<span class="cm"># Variable sliding window</span>
+<span class="kw">def</span> <span class="fn">min_window_sum</span>(<span class="var">a</span>,<span class="var">t</span>):
+    <span class="var">l</span><span class="op">=</span><span class="var">tot</span><span class="op">=</span><span class="num">0</span>; <span class="var">best</span><span class="op">=</span><span class="fn">float</span>(<span class="str">"inf"</span>)
+    <span class="kw">for</span> <span class="var">r</span>,<span class="var">v</span> <span class="kw">in</span> <span class="fn">enumerate</span>(<span class="var">a</span>):
+        <span class="var">tot</span><span class="op">+=</span><span class="var">v</span>
+        <span class="kw">while</span> <span class="var">tot</span><span class="op">&gt;=</span><span class="var">t</span>:
+            <span class="var">best</span><span class="op">=</span><span class="fn">min</span>(<span class="var">best</span>,<span class="var">r</span><span class="op">-</span><span class="var">l</span><span class="op">+</span><span class="num">1</span>)
+            <span class="var">tot</span><span class="op">-=</span><span class="var">a</span>[<span class="var">l</span>]; <span class="var">l</span><span class="op">+=</span><span class="num">1</span>
+    <span class="kw">return</span> <span class="var">best</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/container-with-most-water/" target="_blank" class="prob-link lc">LC: Container Water</a><a href="https://leetcode.com/problems/longest-substring-without-repeating-characters/" target="_blank" class="prob-link lc">LC: Longest Substring</a><a href="https://leetcode.com/problems/minimum-size-subarray-sum/" target="_blank" class="prob-link lc">LC: Min Subarray Sum</a><a href="https://leetcode.com/problems/sliding-window-maximum/" target="_blank" class="prob-link lc">LC: Sliding Window Max</a><a href="https://leetcode.com/problems/3sum/" target="_blank" class="prob-link lc">LC: 3Sum</a><a href="https://leetcode.com/problems/minimum-window-substring/" target="_blank" class="prob-link lc">LC: Min Window Substring</a><a href="https://leetcode.com/problems/longest-repeating-character-replacement/" target="_blank" class="prob-link lc">LC: Longest Repeating Char</a><a href="https://www.hackerrank.com/challenges/pairs/problem" target="_blank" class="prob-link hr">HR: Pairs</a><a href="https://www.geeksforgeeks.org/problems/two-sum-nearest-to-target/1" target="_blank" class="prob-link gfg">GFG: Two Sum Nearest</a><a href="https://www.geeksforgeeks.org/problems/subarray-with-given-sum-1587115621/1" target="_blank" class="prob-link gfg">GFG: Subarray Given Sum</a><a href="https://www.codechef.com/problems/SLIDE" target="_blank" class="prob-link cc">CC: Slide Window</a><a href="https://codeforces.com/problemset/problem/1354/B" target="_blank" class="prob-link cf">CF: Ternary String</a></div>
+      </div>
+      <div class="concepts"><span class="chip">two pointers</span><span class="chip">variable window</span><span class="chip">fixed window</span><span class="chip">monotonic deque</span><span class="chip">O(n)</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Recursion &amp; Backtracking</span><span class="diff hard">Hard</span></div>
+      <div class="code-block"><span class="cm"># Backtracking template</span>
+<span class="kw">def</span> <span class="fn">backtrack</span>(<span class="var">state</span>,<span class="var">choices</span>):
+    <span class="kw">if</span> <span class="fn">is_solution</span>(<span class="var">state</span>):
+        <span class="var">res</span><span class="op">.</span><span class="fn">append</span>(<span class="var">state</span>[:]); <span class="kw">return</span>
+    <span class="kw">for</span> <span class="var">c</span> <span class="kw">in</span> <span class="var">choices</span>:
+        <span class="kw">if</span> <span class="fn">is_valid</span>(<span class="var">state</span>,<span class="var">c</span>):
+            <span class="var">state</span><span class="op">.</span><span class="fn">append</span>(<span class="var">c</span>)     <span class="cm"># choose</span>
+            <span class="fn">backtrack</span>(<span class="var">state</span>,<span class="var">choices</span>)
+            <span class="var">state</span><span class="op">.</span><span class="fn">pop</span>()         <span class="cm"># unchoose</span>
+
+<span class="cm"># Subsets</span>
+<span class="kw">def</span> <span class="fn">subsets</span>(<span class="var">nums</span>):
+    <span class="var">res</span><span class="op">=</span>[[]]
+    <span class="kw">for</span> <span class="var">n</span> <span class="kw">in</span> <span class="var">nums</span>:
+        <span class="var">res</span><span class="op">+=</span>[<span class="var">s</span><span class="op">+</span>[<span class="var">n</span>] <span class="kw">for</span> <span class="var">s</span> <span class="kw">in</span> <span class="var">res</span>]
+    <span class="kw">return</span> <span class="var">res</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/permutations/" target="_blank" class="prob-link lc">LC: Permutations</a><a href="https://leetcode.com/problems/subsets/" target="_blank" class="prob-link lc">LC: Subsets</a><a href="https://leetcode.com/problems/combination-sum/" target="_blank" class="prob-link lc">LC: Combination Sum</a><a href="https://leetcode.com/problems/n-queens/" target="_blank" class="prob-link lc">LC: N-Queens</a><a href="https://leetcode.com/problems/sudoku-solver/" target="_blank" class="prob-link lc">LC: Sudoku Solver</a><a href="https://leetcode.com/problems/word-search/" target="_blank" class="prob-link lc">LC: Word Search</a><a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/" target="_blank" class="prob-link lc">LC: Phone Combinations</a><a href="https://leetcode.com/problems/generate-parentheses/" target="_blank" class="prob-link lc">LC: Generate Parentheses</a><a href="https://www.hackerrank.com/challenges/recursive-digit-sum/problem" target="_blank" class="prob-link hr">HR: Recursive Digit Sum</a><a href="https://www.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1" target="_blank" class="prob-link gfg">GFG: String Perms</a><a href="https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem/1" target="_blank" class="prob-link gfg">GFG: Rat in a Maze</a><a href="https://codeforces.com/problemset/problem/1097/B" target="_blank" class="prob-link cf">CF: Petr and a Tree</a></div>
+      </div>
+      <div class="concepts"><span class="chip">backtracking</span><span class="chip">pruning</span><span class="chip">state space</span><span class="chip">N-Queens</span><span class="chip">subsets</span><span class="chip">power set</span></div>
+    </div></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">06</span>
+    <span class="section-icon">⚙️</span>
+    <h2 class="section-title">Python stdlib Essentials</h2>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-header"><span class="card-title">itertools — Combinatorics &amp; Iteration</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="kw">import</span> <span class="cls">itertools</span> <span class="kw">as</span> <span class="cls">it</span>
+
+<span class="fn">list</span>(<span class="cls">it</span><span class="op">.</span><span class="fn">permutations</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>]))
+<span class="fn">list</span>(<span class="cls">it</span><span class="op">.</span><span class="fn">combinations</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>],<span class="num">2</span>))
+<span class="fn">list</span>(<span class="cls">it</span><span class="op">.</span><span class="fn">combinations_with_replacement</span>([<span class="num">1</span>,<span class="num">2</span>],<span class="num">2</span>))
+<span class="fn">list</span>(<span class="cls">it</span><span class="op">.</span><span class="fn">product</span>(<span class="str">"AB"</span>,<span class="var">repeat</span><span class="op">=</span><span class="num">2</span>))
+<span class="fn">list</span>(<span class="cls">it</span><span class="op">.</span><span class="fn">chain</span>([<span class="num">1</span>,<span class="num">2</span>],[<span class="num">3</span>,<span class="num">4</span>]))
+<span class="fn">list</span>(<span class="cls">it</span><span class="op">.</span><span class="fn">accumulate</span>([<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>])) <span class="cm"># prefix sums</span>
+<span class="fn">list</span>(<span class="cls">it</span><span class="op">.</span><span class="fn">groupby</span>(<span class="str">"aabbc"</span>))           <span class="cm"># runs</span>
+<span class="fn">list</span>(<span class="cls">it</span><span class="op">.</span><span class="fn">islice</span>(<span class="fn">range</span>(<span class="num">100</span>),<span class="num">5</span>))       <span class="cm"># take 5</span>
+<span class="cls">it</span><span class="op">.</span><span class="fn">starmap</span>(<span class="fn">pow</span>,[(<span class="num">2</span>,<span class="num">3</span>),(<span class="num">3</span>,<span class="num">2</span>)])      <span class="cm"># [8,9]</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://www.hackerrank.com/challenges/itertools-product/problem" target="_blank" class="prob-link hr">HR: itertools.product</a><a href="https://www.hackerrank.com/challenges/itertools-permutations/problem" target="_blank" class="prob-link hr">HR: Permutations</a><a href="https://www.hackerrank.com/challenges/itertools-combinations/problem" target="_blank" class="prob-link hr">HR: Combinations</a><a href="https://www.hackerrank.com/challenges/itertools-combinations-with-replacement/problem" target="_blank" class="prob-link hr">HR: Combinations+Replace</a><a href="https://www.hackerrank.com/challenges/compress-the-string/problem" target="_blank" class="prob-link hr">HR: groupby Compress</a><a href="https://www.hackerrank.com/challenges/maximize-it/problem" target="_blank" class="prob-link hr">HR: Maximize It</a><a href="https://leetcode.com/problems/permutations/" target="_blank" class="prob-link lc">LC: Permutations</a><a href="https://leetcode.com/problems/combinations/" target="_blank" class="prob-link lc">LC: Combinations</a><a href="https://leetcode.com/problems/running-sum-of-1d-array/" target="_blank" class="prob-link lc">LC: Running Sum (accumulate)</a><a href="https://www.geeksforgeeks.org/problems/combinations/1" target="_blank" class="prob-link gfg">GFG: Combinations</a><a href="https://www.codechef.com/problems/PERM" target="_blank" class="prob-link cc">CC: Permutations</a><a href="https://codeforces.com/problemset/problem/196/E" target="_blank" class="prob-link cf">CF: Expecting Rain</a></div>
+      </div>
+      <div class="concepts"><span class="chip">permutations</span><span class="chip">combinations</span><span class="chip">product</span><span class="chip">chain</span><span class="chip">accumulate</span><span class="chip">groupby</span><span class="chip">islice</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Regex (re module)</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="kw">import</span> <span class="cls">re</span>
+
+<span class="cm"># Common patterns</span>
+<span class="var">EMAIL</span> <span class="op">=</span> <span class="str">r"[\w.+-]+@[\w-]+\.[a-z]{2,}"</span>
+<span class="var">PHONE</span> <span class="op">=</span> <span class="str">r"\+?\d[\d\s.-]{7,}\d"</span>
+<span class="var">URL</span>   <span class="op">=</span> <span class="str">r"https?://[\w./%-]+"</span>
+
+<span class="cls">re</span><span class="op">.</span><span class="fn">match</span>(<span class="var">pat</span>,<span class="var">s</span>)        <span class="cm"># from start</span>
+<span class="cls">re</span><span class="op">.</span><span class="fn">search</span>(<span class="var">pat</span>,<span class="var">s</span>)       <span class="cm"># anywhere</span>
+<span class="cls">re</span><span class="op">.</span><span class="fn">findall</span>(<span class="var">pat</span>,<span class="var">s</span>)      <span class="cm"># all matches</span>
+<span class="cls">re</span><span class="op">.</span><span class="fn">sub</span>(<span class="var">pat</span>,<span class="str">"r"</span>,<span class="var">s</span>)      <span class="cm"># replace</span>
+<span class="cls">re</span><span class="op">.</span><span class="fn">split</span>(<span class="str">r"\W+"</span>,<span class="var">s</span>)    <span class="cm"># split</span>
+<span class="var">m</span><span class="op">=</span><span class="cls">re</span><span class="op">.</span><span class="fn">search</span>(<span class="str">r"(\d+)"</span>,<span class="var">s</span>)
+<span class="var">m</span><span class="op">.</span><span class="fn">group</span>(<span class="num">1</span>)             <span class="cm"># capture group</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://www.hackerrank.com/challenges/re-findall-re-finditer/problem" target="_blank" class="prob-link hr">HR: findall & finditer</a><a href="https://www.hackerrank.com/challenges/re-start-end/problem" target="_blank" class="prob-link hr">HR: start() & end()</a><a href="https://www.hackerrank.com/challenges/validate-list-of-email-address-with-filter/problem" target="_blank" class="prob-link hr">HR: Validate Emails</a><a href="https://www.hackerrank.com/challenges/detecting-valid-latitude-and-longitude-pairs/problem" target="_blank" class="prob-link hr">HR: Lat/Long Validation</a><a href="https://www.hackerrank.com/challenges/validating-credit-card-numbers/problem" target="_blank" class="prob-link hr">HR: Credit Card Regex</a><a href="https://www.hackerrank.com/challenges/validating-uid/problem" target="_blank" class="prob-link hr">HR: Validate UID</a><a href="https://www.hackerrank.com/challenges/validating-postalcode/problem" target="_blank" class="prob-link hr">HR: Postal Code</a><a href="https://www.hackerrank.com/challenges/html-parser-part-1/problem" target="_blank" class="prob-link hr">HR: HTML Parser</a><a href="https://leetcode.com/problems/valid-ip-address/" target="_blank" class="prob-link lc">LC: Valid IP Address</a><a href="https://www.geeksforgeeks.org/problems/check-if-string-is-valid-ip-address-or-not/1" target="_blank" class="prob-link gfg">GFG: Valid IP</a><a href="https://www.geeksforgeeks.org/problems/python-regex-word-boundary/1" target="_blank" class="prob-link gfg">GFG: Word Boundary</a><a href="https://codeforces.com/problemset/problem/86/C" target="_blank" class="prob-link cf">CF: Genetic Engineering</a></div>
+      </div>
+      <div class="concepts"><span class="chip">match</span><span class="chip">search</span><span class="chip">findall</span><span class="chip">groups</span><span class="chip">sub</span><span class="chip">compile</span><span class="chip">IGNORECASE</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Exception Handling &amp; Custom Exceptions</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="cm"># Custom exception hierarchy</span>
+<span class="kw">class</span> <span class="cls">AppError</span>(<span class="cls">Exception</span>): <span class="kw">pass</span>
+<span class="kw">class</span> <span class="cls">ValidationError</span>(<span class="cls">AppError</span>):
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>,<span class="var">f</span>,<span class="var">m</span>):
+        <span class="kw">super</span>()<span class="op">.</span><span class="fn">__init__</span>(<span class="fn">f</span><span class="str">"{f}: {m}"</span>)
+        <span class="var">self</span><span class="op">.</span><span class="var">field</span><span class="op">=</span><span class="var">f</span>
+
+<span class="kw">try</span>:
+    <span class="var">x</span><span class="op">=</span><span class="fn">int</span>(<span class="fn">input</span>())
+    <span class="kw">if</span> <span class="var">x</span><span class="op">&lt;</span><span class="num">0</span>:
+        <span class="kw">raise</span> <span class="cls">ValidationError</span>(<span class="str">"x"</span>,<span class="str">"must be +ve"</span>)
+<span class="kw">except</span> <span class="cls">ValidationError</span> <span class="kw">as</span> <span class="var">e</span>:
+    <span class="fn">print</span>(<span class="var">e</span><span class="op">.</span><span class="var">field</span>)
+<span class="kw">except</span> (<span class="cls">ValueError</span>,<span class="cls">TypeError</span>):
+    <span class="fn">print</span>(<span class="str">"type error"</span>)
+<span class="kw">else</span>: <span class="fn">print</span>(<span class="str">"OK"</span>)
+<span class="kw">finally</span>: <span class="fn">print</span>(<span class="str">"always"</span>)</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://www.hackerrank.com/challenges/exceptions/problem" target="_blank" class="prob-link hr">HR: Exceptions</a><a href="https://www.hackerrank.com/challenges/incorrect-regex/problem" target="_blank" class="prob-link hr">HR: Incorrect Regex</a><a href="https://www.hackerrank.com/challenges/no-idea/problem" target="_blank" class="prob-link hr">HR: No Idea</a><a href="https://www.hackerrank.com/challenges/python-division/problem" target="_blank" class="prob-link hr">HR: Division Errors</a><a href="https://www.hackerrank.com/challenges/2d-array/problem" target="_blank" class="prob-link hr">HR: 2D Array</a><a href="https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/" target="_blank" class="prob-link lc">LC: Safe String Search</a><a href="https://leetcode.com/problems/design-parking-system/" target="_blank" class="prob-link lc">LC: Parking (raise on full)</a><a href="https://leetcode.com/problems/lru-cache/" target="_blank" class="prob-link lc">LC: LRU (KeyError safe)</a><a href="https://www.geeksforgeeks.org/problems/exception-handling/1" target="_blank" class="prob-link gfg">GFG: Exception Handling</a><a href="https://www.geeksforgeeks.org/problems/python-try-except/1" target="_blank" class="prob-link gfg">GFG: try/except</a><a href="https://www.codechef.com/problems/ERRORH" target="_blank" class="prob-link cc">CC: Error Handling</a><a href="https://codeforces.com/problemset/problem/918/B" target="_blank" class="prob-link cf">CF: Prime Swaps</a></div>
+      </div>
+      <div class="concepts"><span class="chip">try/except/else/finally</span><span class="chip">raise</span><span class="chip">custom exception</span><span class="chip">hierarchy</span><span class="chip">context</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Math, Number Theory &amp; Bit Manipulation</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="kw">import</span> <span class="cls">math</span>
+<span class="kw">from</span> <span class="cls">math</span> <span class="kw">import</span> <span class="fn">gcd</span>,<span class="fn">lcm</span>,<span class="fn">isqrt</span>,<span class="fn">comb</span>,<span class="fn">perm</span>
+
+<span class="fn">gcd</span>(<span class="num">12</span>,<span class="num">18</span>)     <span class="cm"># 6</span>
+<span class="fn">lcm</span>(<span class="num">4</span>,<span class="num">6</span>)       <span class="cm"># 12</span>
+<span class="fn">isqrt</span>(<span class="num">17</span>)      <span class="cm"># 4</span>
+<span class="fn">comb</span>(<span class="num">10</span>,<span class="num">3</span>)     <span class="cm"># 120</span>
+<span class="cls">math</span><span class="op">.</span><span class="fn">ceil</span>(<span class="num">7</span><span class="op">/</span><span class="num">2</span>)  <span class="cm"># 4</span>
+
+<span class="cm"># Bit manipulation</span>
+<span class="var">n</span> <span class="op">&amp;</span> (<span class="var">n</span><span class="op">-</span><span class="num">1</span>)      <span class="cm"># clear lowest set bit</span>
+<span class="var">n</span> <span class="op">&amp;</span> <span class="op">-</span><span class="var">n</span>        <span class="cm"># isolate lowest set bit</span>
+<span class="fn">bin</span>(<span class="var">n</span>)<span class="op">.</span><span class="fn">count</span>(<span class="str">"1"</span>) <span class="cm"># popcount</span>
+<span class="num">1</span> <span class="op">&lt;&lt;</span> <span class="var">k</span>         <span class="cm"># 2^k</span>
+(<span class="var">n</span><span class="op">&gt;&gt;</span><span class="var">k</span>)<span class="op">&amp;</span><span class="num">1</span>       <span class="cm"># kth bit</span></div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/number-of-1-bits/" target="_blank" class="prob-link lc">LC: Count 1 Bits</a><a href="https://leetcode.com/problems/single-number/" target="_blank" class="prob-link lc">LC: Single Number (XOR)</a><a href="https://leetcode.com/problems/power-of-two/" target="_blank" class="prob-link lc">LC: Power of Two</a><a href="https://leetcode.com/problems/counting-bits/" target="_blank" class="prob-link lc">LC: Counting Bits</a><a href="https://leetcode.com/problems/reverse-bits/" target="_blank" class="prob-link lc">LC: Reverse Bits</a><a href="https://leetcode.com/problems/gcd-of-strings/" target="_blank" class="prob-link lc">LC: GCD of Strings</a><a href="https://leetcode.com/problems/sum-of-two-integers/" target="_blank" class="prob-link lc">LC: Sum Without Operator</a><a href="https://www.hackerrank.com/challenges/find-angle/problem" target="_blank" class="prob-link hr">HR: Find the Angle</a><a href="https://www.hackerrank.com/challenges/python-eval/problem" target="_blank" class="prob-link hr">HR: Eval (math)</a><a href="https://www.geeksforgeeks.org/problems/lcm-and-gcd4516/1" target="_blank" class="prob-link gfg">GFG: LCM and GCD</a><a href="https://www.codechef.com/problems/BITWISE" target="_blank" class="prob-link cc">CC: Bitwise Ops</a><a href="https://codeforces.com/problemset/problem/768/B" target="_blank" class="prob-link cf">CF: Code For 1</a></div>
+      </div>
+      <div class="concepts"><span class="chip">gcd/lcm</span><span class="chip">isqrt</span><span class="chip">comb</span><span class="chip">XOR</span><span class="chip">bit masking</span><span class="chip">popcount</span><span class="chip">power of 2</span></div>
+    </div></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">07</span>
+    <span class="section-icon">🧩</span>
+    <h2 class="section-title">Advanced Python Topics</h2>
+  </div>
+  <div class="grid">
+    <div class="card">
+      <div class="card-header"><span class="card-title">Generators, Iterators &amp; Context Managers</span><span class="diff hard">Hard</span></div>
+      <div class="code-block"><span class="cm"># Custom iterator</span>
+<span class="kw">class</span> <span class="cls">Counter</span>:
+    <span class="kw">def</span> <span class="fn">__init__</span>(<span class="var">self</span>,<span class="var">n</span>): <span class="var">self</span><span class="op">.</span><span class="var">n</span><span class="op">=</span><span class="var">n</span>; <span class="var">self</span><span class="op">.</span><span class="var">i</span><span class="op">=</span><span class="num">0</span>
+    <span class="kw">def</span> <span class="fn">__iter__</span>(<span class="var">self</span>): <span class="kw">return</span> <span class="var">self</span>
+    <span class="kw">def</span> <span class="fn">__next__</span>(<span class="var">self</span>):
+        <span class="kw">if</span> <span class="var">self</span><span class="op">.</span><span class="var">i</span><span class="op">&gt;=</span><span class="var">self</span><span class="op">.</span><span class="var">n</span>: <span class="kw">raise</span> <span class="cls">StopIteration</span>
+        <span class="var">self</span><span class="op">.</span><span class="var">i</span><span class="op">+=</span><span class="num">1</span>; <span class="kw">return</span> <span class="var">self</span><span class="op">.</span><span class="var">i</span><span class="op">-</span><span class="num">1</span>
+
+<span class="cm"># Infinite generator</span>
+<span class="kw">def</span> <span class="fn">fib</span>():
+    <span class="var">a</span>,<span class="var">b</span><span class="op">=</span><span class="num">0</span>,<span class="num">1</span>
+    <span class="kw">while</span> <span class="kw">True</span>: <span class="kw">yield</span> <span class="var">a</span>; <span class="var">a</span>,<span class="var">b</span><span class="op">=</span><span class="var">b</span>,<span class="var">a</span><span class="op">+</span><span class="var">b</span>
+
+<span class="cm"># Context manager (class)</span>
+<span class="kw">class</span> <span class="cls">Timer</span>:
+    <span class="kw">def</span> <span class="fn">__enter__</span>(<span class="var">self</span>):
+        <span class="kw">import</span> <span class="cls">time</span>; <span class="var">self</span><span class="op">.</span><span class="var">t</span><span class="op">=</span><span class="cls">time</span><span class="op">.</span><span class="fn">time</span>(); <span class="kw">return</span> <span class="var">self</span>
+    <span class="kw">def</span> <span class="fn">__exit__</span>(<span class="var">self</span>,<span class="op">*</span><span class="var">a</span>):
+        <span class="fn">print</span>(<span class="cls">time</span><span class="op">.</span><span class="fn">time</span>()<span class="op">-</span><span class="var">self</span><span class="op">.</span><span class="var">t</span>)</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://www.hackerrank.com/challenges/iterables-and-iterators/problem" target="_blank" class="prob-link hr">HR: Iterables & Iterators</a><a href="https://www.hackerrank.com/challenges/maximize-it/problem" target="_blank" class="prob-link hr">HR: Maximize It</a><a href="https://www.hackerrank.com/challenges/generator-expressions/problem" target="_blank" class="prob-link hr">HR: Generator Expressions</a><a href="https://www.hackerrank.com/challenges/no-idea/problem" target="_blank" class="prob-link hr">HR: No Idea (generator)</a><a href="https://leetcode.com/problems/flatten-nested-list-iterator/" target="_blank" class="prob-link lc">LC: Flatten Nested Iterator</a><a href="https://leetcode.com/problems/peeking-iterator/" target="_blank" class="prob-link lc">LC: Peeking Iterator</a><a href="https://leetcode.com/problems/zigzag-iterator/" target="_blank" class="prob-link lc">LC: ZigZag Iterator</a><a href="https://leetcode.com/problems/design-bounded-blocking-queue/" target="_blank" class="prob-link lc">LC: Bounded Queue</a><a href="https://www.geeksforgeeks.org/problems/generators-in-python/1" target="_blank" class="prob-link gfg">GFG: Generators</a><a href="https://www.geeksforgeeks.org/problems/python-iterator/1" target="_blank" class="prob-link gfg">GFG: Custom Iterator</a><a href="https://www.codechef.com/problems/ITER" target="_blank" class="prob-link cc">CC: Iterator Problem</a><a href="https://codeforces.com/problemset/problem/1213/C" target="_blank" class="prob-link cf">CF: Book Reading</a></div>
+      </div>
+      <div class="concepts"><span class="chip">__iter__</span><span class="chip">__next__</span><span class="chip">yield</span><span class="chip">StopIteration</span><span class="chip">__enter__</span><span class="chip">__exit__</span><span class="chip">lazy eval</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">async / await &amp; Concurrency</span><span class="diff hard">Hard</span></div>
+      <div class="code-block"><span class="kw">import</span> <span class="cls">asyncio</span>
+
+<span class="kw">async def</span> <span class="fn">fetch</span>(<span class="var">url</span>:<span class="fn">str</span>)<span class="op">-&gt;</span><span class="fn">str</span>:
+    <span class="kw">await</span> <span class="cls">asyncio</span><span class="op">.</span><span class="fn">sleep</span>(<span class="num">1</span>)
+    <span class="kw">return</span> <span class="fn">f</span><span class="str">"data:{url}"</span>
+
+<span class="kw">async def</span> <span class="fn">main</span>():
+    <span class="cm"># Concurrent execution</span>
+    <span class="var">res</span><span class="op">=</span><span class="kw">await</span> <span class="cls">asyncio</span><span class="op">.</span><span class="fn">gather</span>(
+        <span class="fn">fetch</span>(<span class="str">"u1"</span>),<span class="fn">fetch</span>(<span class="str">"u2"</span>))
+    <span class="cm"># Task</span>
+    <span class="var">t</span><span class="op">=</span><span class="cls">asyncio</span><span class="op">.</span><span class="fn">create_task</span>(<span class="fn">fetch</span>(<span class="str">"bg"</span>))
+    <span class="kw">await</span> <span class="var">t</span>
+    <span class="cm"># Timeout</span>
+    <span class="kw">async with</span> <span class="cls">asyncio</span><span class="op">.</span><span class="fn">timeout</span>(<span class="num">5.0</span>):
+        <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">"slow"</span>)
+
+<span class="cls">asyncio</span><span class="op">.</span><span class="fn">run</span>(<span class="fn">main</span>())</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://leetcode.com/problems/promise-pool/" target="_blank" class="prob-link lc">LC: Promise Pool (async)</a><a href="https://leetcode.com/problems/execute-asynchronous-functions-in-parallel/" target="_blank" class="prob-link lc">LC: Execute in Parallel</a><a href="https://leetcode.com/problems/sleep/" target="_blank" class="prob-link lc">LC: Sleep (async)</a><a href="https://leetcode.com/problems/cache-with-time-limit/" target="_blank" class="prob-link lc">LC: Cache With Time Limit</a><a href="https://leetcode.com/problems/memoize/" target="_blank" class="prob-link lc">LC: Memoize</a><a href="https://leetcode.com/problems/add-two-promises/" target="_blank" class="prob-link lc">LC: Add Two Promises</a><a href="https://leetcode.com/problems/timeout-cancellation/" target="_blank" class="prob-link lc">LC: Timeout Cancellation</a><a href="https://leetcode.com/problems/throttle/" target="_blank" class="prob-link lc">LC: Throttle</a><a href="https://www.geeksforgeeks.org/problems/asyncio-in-python/1" target="_blank" class="prob-link gfg">GFG: asyncio Basics</a><a href="https://www.geeksforgeeks.org/problems/coroutines/1" target="_blank" class="prob-link gfg">GFG: Coroutines</a><a href="https://www.geeksforgeeks.org/problems/producer-consumer/1" target="_blank" class="prob-link gfg">GFG: Producer Consumer</a><a href="https://www.geeksforgeeks.org/problems/threading-in-python/1" target="_blank" class="prob-link gfg">GFG: Threading</a></div>
+      </div>
+      <div class="concepts"><span class="chip">async/await</span><span class="chip">gather</span><span class="chip">create_task</span><span class="chip">event loop</span><span class="chip">coroutine</span><span class="chip">timeout</span><span class="chip">ThreadPool</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span class="card-title">Type Hints &amp; Pattern Matching (3.10+)</span><span class="diff medium">Medium</span></div>
+      <div class="code-block"><span class="kw">from</span> <span class="cls">typing</span> <span class="kw">import</span> <span class="cls">List</span>,<span class="cls">Dict</span>,<span class="cls">Optional</span>,<span class="cls">Union</span>,<span class="cls">TypeVar</span>,<span class="cls">Callable</span>
+
+<span class="var">T</span><span class="op">=</span><span class="fn">TypeVar</span>(<span class="str">"T"</span>)
+<span class="kw">def</span> <span class="fn">first</span>(<span class="var">lst</span>:<span class="cls">List</span>[<span class="var">T</span>])<span class="op">-&gt;</span><span class="cls">Optional</span>[<span class="var">T</span>]:
+    <span class="kw">return</span> <span class="var">lst</span>[<span class="num">0</span>] <span class="kw">if</span> <span class="var">lst</span> <span class="kw">else</span> <span class="kw">None</span>
+
+<span class="kw">def</span> <span class="fn">f</span>(<span class="var">x</span>:<span class="cls">Union</span>[<span class="fn">int</span>,<span class="fn">str</span>])<span class="op">-&gt;</span><span class="fn">str</span>:
+    <span class="kw">return</span> <span class="fn">str</span>(<span class="var">x</span>)
+
+<span class="cm"># Pattern matching Python 3.10+</span>
+<span class="kw">match</span> <span class="var">point</span>:
+    <span class="kw">case</span> (<span class="num">0</span>,<span class="num">0</span>): <span class="fn">print</span>(<span class="str">"Origin"</span>)
+    <span class="kw">case</span> (<span class="var">x</span>,<span class="num">0</span>): <span class="fn">print</span>(<span class="fn">f</span><span class="str">"x={x}"</span>)
+    <span class="kw">case</span> (<span class="var">x</span>,<span class="var">y</span>): <span class="fn">print</span>(<span class="fn">f</span><span class="str">"({x},{y})"</span>)
+    <span class="kw">case</span> <span class="var">_</span>: <span class="fn">print</span>(<span class="str">"?"</span>)</div>
+      <div class="problems">
+        <div class="problem-label">Practice Problems (12)</div>
+        <div class="prob-links"><a href="https://www.geeksforgeeks.org/problems/python-type-hints/1" target="_blank" class="prob-link gfg">GFG: Type Hints</a><a href="https://www.geeksforgeeks.org/problems/python-match-case/1" target="_blank" class="prob-link gfg">GFG: Match Case</a><a href="https://www.geeksforgeeks.org/problems/callable-types/1" target="_blank" class="prob-link gfg">GFG: Callable Types</a><a href="https://leetcode.com/problems/count-good-triplets/" target="_blank" class="prob-link lc">LC: Count Good Triplets</a><a href="https://leetcode.com/problems/split-the-array/" target="_blank" class="prob-link lc">LC: Split the Array</a><a href="https://leetcode.com/problems/apply-operations-to-an-array/" target="_blank" class="prob-link lc">LC: Apply Operations</a><a href="https://leetcode.com/problems/design-parking-system/" target="_blank" class="prob-link lc">LC: Typed Parking System</a><a href="https://leetcode.com/problems/robot-bounded-in-circle/" target="_blank" class="prob-link lc">LC: Robot in Circle</a><a href="https://www.hackerrank.com/challenges/python-string-formatting/problem" target="_blank" class="prob-link hr">HR: String Formatting</a><a href="https://www.hackerrank.com/challenges/python-mutations/problem" target="_blank" class="prob-link hr">HR: Mutations</a><a href="https://codeforces.com/problemset/problem/1702/D" target="_blank" class="prob-link cf">CF: Not a Substring</a><a href="https://codeforces.com/problemset/problem/1512/A" target="_blank" class="prob-link cf">CF: Spy Detected!</a></div>
+      </div>
+      <div class="concepts"><span class="chip">Optional</span><span class="chip">Union</span><span class="chip">TypeVar</span><span class="chip">Callable</span><span class="chip">match/case</span><span class="chip">3.10+</span><span class="chip">structural pattern</span></div>
+    </div></div>
+</div>
+
+<div class="section">
+  <div class="section-header">
+    <span class="section-num">08</span>
+    <span class="section-icon">📋</span>
+    <h2 class="section-title">Quick Reference Tables</h2>
+  </div>
+  <div class="table-card"><div class="table-card-header">🔢 Essential Built-in Functions</div><table class="qt"><tr><th>Function</th><th>Use</th><th>Example</th></tr><tr><td>len()</td><td>Length of sequence</td><td>len([1,2,3]) → 3</td></tr><tr><td>range()</td><td>Integer sequence</td><td>range(0,10,2) → 0,2,4,6,8</td></tr><tr><td>enumerate()</td><td>Index + value pairs</td><td>enumerate(['a','b']) → (0,'a'),(1,'b')</td></tr><tr><td>zip()</td><td>Pair iterables</td><td>zip([1,2],[3,4]) → (1,3),(2,4)</td></tr><tr><td>map()</td><td>Apply fn to each</td><td>map(str,[1,2,3]) → ['1','2','3']</td></tr><tr><td>filter()</td><td>Filter by predicate</td><td>filter(None,[0,1,2]) → [1,2]</td></tr><tr><td>sorted()</td><td>New sorted list</td><td>sorted([3,1,2],key=lambda x:-x)</td></tr><tr><td>any() / all()</td><td>Boolean aggregation</td><td>any([0,1,0]) → True</td></tr><tr><td>max() / min()</td><td>Max/min with key</td><td>max('hello',key=ord)</td></tr><tr><td>sum()</td><td>Sum iterable</td><td>sum([1,2,3],start=10) → 16</td></tr><tr><td>reversed()</td><td>Reverse iterator</td><td>list(reversed([1,2,3]))</td></tr><tr><td>vars() / dir()</td><td>Object attributes</td><td>dir(str) → all string methods</td></tr></table></div><div class="table-card"><div class="table-card-header">⏱️ Algorithm Complexity Cheatsheet</div><table class="qt"><tr><th>Algorithm</th><th>Best</th><th>Average</th><th>Worst</th><th>Space</th></tr><tr><td>Quick Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n²)</td><td>O(log n)</td></tr><tr><td>Merge Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td></tr><tr><td>Heap Sort</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(1)</td></tr><tr><td>Tim Sort</td><td>O(n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)</td></tr><tr><td>Binary Search</td><td>O(1)</td><td>O(log n)</td><td>O(log n)</td><td>O(1)</td></tr><tr><td>BFS / DFS</td><td>O(V+E)</td><td>O(V+E)</td><td>O(V+E)</td><td>O(V)</td></tr><tr><td>Dijkstra</td><td>—</td><td>O((V+E)logV)</td><td>O((V+E)logV)</td><td>O(V)</td></tr><tr><td>Bellman-Ford</td><td>O(VE)</td><td>O(VE)</td><td>O(VE)</td><td>O(V)</td></tr><tr><td>DP 1D</td><td>O(n)</td><td>O(n)</td><td>O(n)</td><td>O(n)</td></tr><tr><td>DP 2D</td><td>O(nm)</td><td>O(nm)</td><td>O(nm)</td><td>O(nm)</td></tr></table></div>
+</div>
+<footer>
+  Built for <strong>Python Mastery</strong> &nbsp;·&nbsp;
+  Problems from LeetCode · HackerRank · GeeksforGeeks · CodeChef · Codeforces
+  &nbsp;·&nbsp; <strong>Python 3.10+</strong>
+</footer>
+</div>
+</body>
+</html>

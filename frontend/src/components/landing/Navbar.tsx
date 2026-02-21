@@ -57,7 +57,7 @@ const Navbar = () => {
             Login
           </Button> */}
           <Button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/login', { state: { from: '/student/courses' } })}
             size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
             Get Started →
           </Button>

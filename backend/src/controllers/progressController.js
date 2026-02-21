@@ -1,5 +1,7 @@
 const Activity = require('../models/Activity');
 const ReadinessSnapshot = require('../models/ReadinessSnapshot');
+const GoalAssignment = require('../models/GoalAssignment');
+const Goal = require('../models/Goal');
 
 // @desc Get category-wise performance
 // @route GET /api/progress/category
@@ -106,4 +108,45 @@ const getReadinessScore = async (req, res) => {
     }
 };
 
-module.exports = { getCategoryProgress, getStreak, getReadinessScore };
+// @desc Get current active goals for the student
+// @route GET /api/progress/goals
+// @access Protected
+const getActiveGoals = async (req, res) => {
+    try {
+        let goals = await GoalAssignment.find({ studentId: req.user._id })
+            .populate('goalId')
+            .sort({ createdAt: -1 });
+
+        // If no goals assigned, check for active goals in their college to proactively assign
+        // This handles students who joined after goals were created or missed auto-assignment
+        const activeGoalsInCollege = await Goal.find({
+            collegeId: req.user.collegeId,
+            isActive: true
+        });
+
+        const assignedGoalIds = goals.map(g => g.goalId?._id?.toString());
+        const missingGoals = activeGoalsInCollege.filter(g => !assignedGoalIds.includes(g._id.toString()));
+
+        if (missingGoals.length > 0) {
+            const newAssignments = missingGoals.map(goal => ({
+                goalId: goal._id,
+                studentId: req.user._id,
+                status: 'pending',
+                progress: 0
+            }));
+            await GoalAssignment.insertMany(newAssignments);
+
+            // Re-fetch to include new assignments
+            goals = await GoalAssignment.find({ studentId: req.user._id })
+                .populate('goalId')
+                .sort({ createdAt: -1 });
+        }
+
+        res.json(goals);
+    } catch (error) {
+        console.error("getActiveGoals Error:", error);
+        res.status(500).json({ message: 'Server Error', error: error.message });
+    }
+};
+
+module.exports = { getCategoryProgress, getStreak, getReadinessScore, getActiveGoals };
