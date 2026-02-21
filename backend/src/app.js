@@ -15,6 +15,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+// Request Logic Logger
+app.use((req, res, next) => {
+    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+    next();
+});
+
 // Default Route
 app.get('/', (req, res) => {
     res.send('API is running...');
