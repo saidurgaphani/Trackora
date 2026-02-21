@@ -18,6 +18,7 @@ const AdminDashboard = lazy(() => import('../pages/admin/AdminDashboard'));
 const ManageGoals = lazy(() => import('../pages/admin/ManageGoals'));
 const StudentsList = lazy(() => import('../pages/admin/StudentsList'));
 const StudentDetails = lazy(() => import('../pages/admin/StudentDetails'));
+const Profile = lazy(() => import('../pages/student/Profile'));
 
 const AppRoutes = () => {
     return (
@@ -34,6 +35,7 @@ const AppRoutes = () => {
                 <Route element={<ProtectedRoute allowedRoles={['student']} />}>
                     <Route element={<Layout />}>
                         <Route path="/student/dashboard" element={<StudentDashboard />} />
+                        <Route path="/student/profile" element={<Profile />} />
                         <Route path="/student/courses" element={<MyCourses />} />
                         <Route path="/student/resources" element={<Resources />} />
                         <Route path="/student/learning/:courseId" element={<Learning />} />
@@ -47,6 +49,7 @@ const AppRoutes = () => {
                 <Route element={<ProtectedRoute allowedRoles={['admin', 'trainer']} />}>
                     <Route element={<Layout />}>
                         <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                        <Route path="/admin/profile" element={<Profile />} />
                         <Route path="/admin/manage-goals" element={<ManageGoals />} />
                         <Route path="/admin/students" element={<StudentsList />} />
                         <Route path="/admin/students/:id" element={<StudentDetails />} />

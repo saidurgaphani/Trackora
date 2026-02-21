@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Search, Bell, Menu, X, ChevronDown } from "lucide-react";
 import Logo from "@/assets/LOGO.png";
 
-const navItems = [
-  { label: "Prepare", hasDropdown: true },
-  { label: "Courses", hasDropdown: true },
-  { label: "Projects", hasDropdown: true },
-  { label: "Skill Courses", hasDropdown: true },
-  { label: "OffCampus", hasDropdown: true },
-];
+// const navItems = [
+//   { label: "Prepare", hasDropdown: true },
+//   { label: "Courses", hasDropdown: true },
+//   { label: "Projects", hasDropdown: true },
+//   { label: "Skill Courses", hasDropdown: true },
+//   { label: "OffCampus", hasDropdown: true },
+// ];
 
 const Navbar = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -29,7 +29,7 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden items-center gap-1 lg:flex">
-          {navItems.map((item) => (
+          {/* {navItems.map((item) => (
             <button
               key={item.label}
               className="flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-muted hover:text-foreground"
@@ -37,19 +37,19 @@ const Navbar = () => {
               {item.label}
               {item.hasDropdown && <ChevronDown className="h-3.5 w-3.5" />}
             </button>
-          ))}
+          ))} */}
         </div>
 
         {/* Search + Actions */}
         <div className="flex items-center gap-3">
-          <div className="hidden items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-2 md:flex">
+          {/* <div className="hidden items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-2 md:flex">
             <Search className="h-4 w-4 text-muted-foreground" />
             <input
               type="text"
               placeholder='Search for "Placements"'
               className="w-48 bg-transparent text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
             />
-          </div>
+          </div> */}
           <button className="hidden rounded-full p-2 text-muted-foreground transition-colors hover:bg-muted lg:block">
             <Bell className="h-5 w-5" />
           </button>
@@ -73,7 +73,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {mobileOpen && (
         <div className="border-t border-border bg-background px-4 py-4 lg:hidden">
-          {navItems.map((item) => (
+          {/* {navItems.map((item) => (
             <button
               key={item.label}
               className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-sm font-medium text-foreground/80 hover:bg-muted"
@@ -81,15 +81,15 @@ const Navbar = () => {
               {item.label}
               <ChevronDown className="h-4 w-4" />
             </button>
-          ))}
-          <div className="mt-3 flex items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-2">
+          ))} */}
+          {/* <div className="mt-3 flex items-center gap-2 rounded-full border border-border bg-muted/50 px-4 py-2">
             <Search className="h-4 w-4 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search..."
               className="w-full bg-transparent text-sm focus:outline-none"
             />
-          </div>
+          </div> */}
         </div>
       )}
     </nav>
