@@ -8,6 +8,11 @@ import { useGSAP } from '@gsap/react';
 import { ArrowRight, Loader2, Sun as Sunburst } from 'lucide-react';
 import NeuralBackground from '../components/ui/flow-field-background';
 
+// Firebase imports
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import app from '../firebaseSetup';
+
 const registerSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters" }),
     email: z.string().email({ message: "Invalid email address" }),
@@ -24,6 +29,7 @@ export default function Register() {
     const navigate = useNavigate();
     const location = useLocation();
     const [isLoading, setIsLoading] = useState(false);
+    const [firebaseError, setFirebaseError] = useState("");
 
     const from = location.state?.from || '/student/dashboard';
 
@@ -61,12 +67,34 @@ export default function Register() {
 
     const onSubmit = async (data) => {
         setIsLoading(true);
+        setFirebaseError("");
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
+            const auth = getAuth(app);
+            const db = getFirestore(app);
+
+            // Create auth entry
+            const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
+            const user = userCredential.user;
+
+            // Optional: update the auth profile with the display name
+            await updateProfile(user, { displayName: data.name });
+
+            // Create user profile in Firestore
+            await setDoc(doc(db, "users", user.uid), {
+                name: data.name,
+                email: data.email,
+                college: data.college,
+                role: 'student', // Default role for registration
+                createdAt: new Date()
+            });
+
             // Automatically pass 'from' logic onto the next step in auth sequence
-            navigate('/login', { state: { from } });
+            // Often after registration they are auto-logged in by firebase and onAuthStateChanged redirects them!
+            // Depending on the flow, we can navigate directly
+            navigate(from);
         } catch (error) {
-            console.error(error);
+            console.error("Firebase Registration Error", error);
+            setFirebaseError(error.message);
         } finally {
             setIsLoading(false);
         }
@@ -129,6 +157,11 @@ export default function Register() {
                         <p className="text-slate-500 dark:text-slate-500">
                             Register your account to continue
                         </p>
+                        {firebaseError && (
+                            <div className="mt-4 p-3 rounded-lg bg-red-50 text-red-600 text-sm font-medium border border-red-200">
+                                {firebaseError}
+                            </div>
+                        )}
                     </div>
 
                     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">

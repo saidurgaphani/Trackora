@@ -3,11 +3,15 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Lock, Mail, ArrowRight, Loader2, Sun as Sunburst } from 'lucide-react';
 import NeuralBackground from '../components/ui/flow-field-background';
+
+// Firebase imports
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import app from '../firebaseSetup';
 
 const loginSchema = z.object({
     email: z.string().email({ message: "Invalid email address" }),
@@ -17,13 +21,14 @@ const loginSchema = z.object({
 export default function Login() {
     const containerRef = useRef();
     const formRef = useRef();
-    const { login } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();
     const [isLoading, setIsLoading] = useState(false);
     const [loginType, setLoginType] = useState('student');
+    const [firebaseError, setFirebaseError] = useState("");
 
-    const from = location.state?.from || '/student/dashboard';
+    // Read the intended destination if it was passed via state
+    const from = location.state?.from || (loginType === 'admin' ? '/admin/dashboard' : '/student/dashboard');
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(loginSchema),
@@ -59,22 +64,40 @@ export default function Login() {
 
     const onSubmit = async (data) => {
         setIsLoading(true);
+        setFirebaseError("");
         try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            const mockUser = {
-                id: '1',
-                name: loginType === 'admin' ? 'Admin User' : 'John Doe',
-                email: data.email,
-                role: loginType
-            };
-            login(mockUser, 'mock-jwt-token-123');
-            if (mockUser.role === 'admin') {
-                navigate('/admin/dashboard');
-            } else {
-                navigate(from);
+            const auth = getAuth(app);
+            const db = getFirestore(app);
+
+            // Sign in
+            const userCredential = await signInWithEmailAndPassword(auth, data.email, data.password);
+            const user = userCredential.user;
+
+            // Optional: Verify role against what they selected
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+                const actualRole = userData.role || 'student';
+
+                if (loginType === 'admin' && actualRole !== 'admin' && actualRole !== 'trainer') {
+                    throw new Error("You are not authorized to login as an Admin/Trainer.");
+                }
+            } else if (loginType === 'admin') {
+                // No profile and tried admin (assuming default user is student)
+                throw new Error("Admin privileges not found.");
             }
+
+            // AuthContext observes the state change and handles updating its local state
+            navigate(loginType === 'admin' ? '/admin/dashboard' : from);
         } catch (error) {
-            console.error(error);
+            console.error("Firebase Login Error", error);
+
+            // Map common errors
+            if (error.code === 'auth/invalid-login-credentials' || error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
+                setFirebaseError("Invalid email or password.");
+            } else {
+                setFirebaseError(error.message);
+            }
         } finally {
             setIsLoading(false);
         }
@@ -137,6 +160,11 @@ export default function Login() {
                         <p className="text-slate-500 dark:text-slate-500">
                             Sign in to your account to continue
                         </p>
+                        {firebaseError && (
+                            <div className="mt-4 p-3 rounded-lg bg-red-50 text-red-600 text-sm font-medium border border-red-200">
+                                {firebaseError}
+                            </div>
+                        )}
                     </div>
 
                     <div className="flex p-1 bg-slate-100 dark:bg-slate-800/50/80 rounded-xl mb-8 animate-item">

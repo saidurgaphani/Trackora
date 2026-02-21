@@ -1,12 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import StatCard from '../../components/StatCard';
 import ProgressChart from '../../components/ProgressChart';
-import { Users, Activity, CheckCircle, Target } from 'lucide-react';
+import { Users, Activity, CheckCircle, Target, Plus } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import AddAdminModal from '../../components/AddAdminModal';
 
 export default function AdminDashboard() {
     const containerRef = useRef();
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
     useGSAP(() => {
         const tl = gsap.timeline();
@@ -18,13 +20,28 @@ export default function AdminDashboard() {
     return (
         <div ref={containerRef} className="space-y-6 max-w-screen-2xl mx-auto">
 
+            {/* Add Admin/Trainer Modal */}
+            <AddAdminModal
+                isOpen={isAddModalOpen}
+                onClose={() => setIsAddModalOpen(false)}
+            />
+
             <div className="admin-hdr flex justify-between items-end pb-4 border-b border-slate-200 dark:border-slate-700">
                 <div>
                     <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100 tracking-tight">College Dashboard</h1>
                     <p className="text-slate-500 dark:text-slate-500 mt-1">SNIST Placement Analytics</p>
                 </div>
-                <div className="text-sm font-semibold text-[var(--color-primary-500)] bg-primary-50 px-3 py-1.5 rounded-lg border border-primary-100">
-                    Last updated: Today
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setIsAddModalOpen(true)}
+                        className="flex items-center gap-2 bg-primary-500 hover:bg-primary-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors shadow-sm"
+                    >
+                        <Plus size={18} />
+                        Add User
+                    </button>
+                    <div className="hidden sm:block text-sm font-semibold text-[var(--color-primary-500)] bg-primary-50 px-3 py-2 rounded-xl border border-primary-100">
+                        Last updated: Today
+                    </div>
                 </div>
             </div>
 
