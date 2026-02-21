@@ -21,6 +21,22 @@ const mockData = [
     { name: 'Sun', coding: 34, aptitude: 43, softskills: 21 },
 ];
 
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+        return (
+            <div className="bg-white dark:bg-slate-800 p-3 lg:p-4 border border-slate-200 dark:border-slate-700 rounded-xl shadow-lg">
+                <p className="font-semibold text-slate-800 dark:text-slate-100 mb-2">{label}</p>
+                {payload.map((entry, index) => (
+                    <p key={`item-${index}`} style={{ color: entry.color }} className="text-sm font-medium capitalize">
+                        {entry.name} : {entry.value}
+                    </p>
+                ))}
+            </div>
+        );
+    }
+    return null;
+};
+
 export default function ProgressChart({ data = mockData, title }) {
     const chartRef = useRef();
 
@@ -41,13 +57,11 @@ export default function ProgressChart({ data = mockData, title }) {
                     <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
                         <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
                         <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                        <CartesianGrid stroke="#e2e8f0" strokeDasharray="5 5" vertical={false} />
-                        <Tooltip
-                            contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)' }}
-                        />
-                        <Line type="monotone" dataKey="coding" stroke="var(--color-primary-500)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
-                        <Line type="monotone" dataKey="aptitude" stroke="var(--color-cta)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
-                        <Line type="monotone" dataKey="softskills" stroke="var(--color-success)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                        <CartesianGrid stroke="#e2e8f0" strokeDasharray="5 5" vertical={false} opacity={0.3} />
+                        <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#cbd5e1', strokeWidth: 1, strokeDasharray: '5 5' }} />
+                        <Line type="monotone" dataKey="coding" name="Coding" stroke="var(--color-primary-500)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                        <Line type="monotone" dataKey="aptitude" name="Aptitude" stroke="#3b82f6" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                        <Line type="monotone" dataKey="softskills" name="Soft Skills" stroke="var(--color-success)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
                     </LineChart>
                 </ResponsiveContainer>
             </div>
