@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { ReactLenis } from 'lenis/react';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Layout from '../components/Layout';
 
@@ -24,43 +25,54 @@ const Practice = lazy(() => import('../pages/student/Practice'));
 const AppRoutes = () => {
     return (
         <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
-            <Routes>
-                {/* Public Routes */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+            <ReactLenis root options={{
+                lerp: 0.1,
+                duration: 1.2,
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: true,
+                wheelMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            }}>
+                <Routes>
+                    {/* Public Routes */}
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
 
-                {/* Default root Landing page */}
-                <Route path="/" element={<Landing />} />
+                    {/* Default root Landing page */}
+                    <Route path="/" element={<Landing />} />
 
-                {/* Student Routes */}
-                <Route element={<ProtectedRoute allowedRoles={['student']} />}>
-                    <Route element={<Layout />}>
-                        <Route path="/student/dashboard" element={<StudentDashboard />} />
-                        <Route path="/student/profile" element={<Profile />} />
-                        <Route path="/student/courses" element={<MyCourses />} />
-                        <Route path="/student/resources" element={<Resources />} />
-                        <Route path="/student/learning/:courseId" element={<Learning />} />
-                        <Route path="/student/activity-log" element={<ActivityLog />} />
-                        <Route path="/student/progress" element={<Progress />} />
-                        <Route path="/student/practice" element={<Practice />} />
-                        <Route path="/student/mock-interview" element={<MockInterview />} />
+                    {/* Student Routes */}
+                    <Route element={<ProtectedRoute allowedRoles={['student']} />}>
+                        <Route element={<Layout />}>
+                            <Route path="/student/dashboard" element={<StudentDashboard />} />
+                            <Route path="/student/profile" element={<Profile />} />
+                            <Route path="/student/courses" element={<MyCourses />} />
+                            <Route path="/student/resources" element={<Resources />} />
+                            <Route path="/student/learning/:courseId" element={<Learning />} />
+                            <Route path="/student/activity-log" element={<ActivityLog />} />
+                            <Route path="/student/progress" element={<Progress />} />
+                            <Route path="/student/practice" element={<Practice />} />
+                            <Route path="/student/mock-interview" element={<MockInterview />} />
+                        </Route>
                     </Route>
-                </Route>
 
-                {/* Admin / Trainer Routes */}
-                <Route element={<ProtectedRoute allowedRoles={['admin', 'trainer']} />}>
-                    <Route element={<Layout />}>
-                        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                        <Route path="/admin/profile" element={<Profile />} />
-                        <Route path="/admin/manage-goals" element={<ManageGoals />} />
-                        <Route path="/admin/students" element={<StudentsList />} />
-                        <Route path="/admin/students/:id" element={<StudentDetails />} />
+                    {/* Admin / Trainer Routes */}
+                    <Route element={<ProtectedRoute allowedRoles={['admin', 'trainer']} />}>
+                        <Route element={<Layout />}>
+                            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                            <Route path="/admin/profile" element={<Profile />} />
+                            <Route path="/admin/manage-goals" element={<ManageGoals />} />
+                            <Route path="/admin/students" element={<StudentsList />} />
+                            <Route path="/admin/students/:id" element={<StudentDetails />} />
+                        </Route>
                     </Route>
-                </Route>
 
-                {/* Catch all */}
-                <Route path="*" element={<Navigate to="/login" replace />} />
-            </Routes>
+                    {/* Catch all */}
+                    <Route path="*" element={<Navigate to="/login" replace />} />
+                </Routes>
+            </ReactLenis>
         </Suspense>
     );
 };
