@@ -21,6 +21,7 @@ const StudentsList = lazy(() => import('../pages/admin/StudentsList'));
 const StudentDetails = lazy(() => import('../pages/admin/StudentDetails'));
 const Profile = lazy(() => import('../pages/student/Profile'));
 const Practice = lazy(() => import('../pages/student/Practice'));
+const AIMentor = lazy(() => import('../pages/student/AIMentor'));
 
 const AppRoutes = () => {
     return (
@@ -55,6 +56,7 @@ const AppRoutes = () => {
                             <Route path="/student/progress" element={<Progress />} />
                             <Route path="/student/practice" element={<Practice />} />
                             <Route path="/student/mock-interview" element={<MockInterview />} />
+                            <Route path="/student/ai-mentor" element={<AIMentor />} />
                         </Route>
                     </Route>
 

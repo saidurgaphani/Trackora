@@ -19,6 +19,7 @@ const Navbar = () => {
         { name: 'Activity Log', path: '/student/activity-log' },
         { name: 'Progress', path: '/student/progress' },
         { name: 'Mock Interviews', path: '/student/mock-interview' },
+        { name: 'AI Mentor', path: '/student/ai-mentor' },
     ];
 
     const adminLinks = [

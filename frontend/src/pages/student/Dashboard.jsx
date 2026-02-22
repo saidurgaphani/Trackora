@@ -90,6 +90,12 @@ export default function Dashboard() {
                 </div>
                 <div className="flex gap-4 items-center">
                     <button
+                        onClick={() => navigate('/student/ai-mentor')}
+                        className="bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 px-4 py-2 rounded-xl font-bold border border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition-all flex gap-2 items-center"
+                    >
+                        ✨ AI Mentor
+                    </button>
+                    <button
                         onClick={() => navigate('/student/practice')}
                         className="bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 px-4 py-2 rounded-xl font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all flex gap-2 items-center"
                     >
