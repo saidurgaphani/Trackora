@@ -75,6 +75,19 @@ const updateGoal = async (req, res) => {
         }
 
         const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, { new: true });
+
+        if (req.body.targetCount) {
+            // Recalculate status based on new target count
+            await GoalAssignment.updateMany(
+                { goalId: goal._id, progress: { $gte: req.body.targetCount } },
+                { $set: { status: 'completed', completedAt: new Date() } }
+            );
+            await GoalAssignment.updateMany(
+                { goalId: goal._id, progress: { $lt: req.body.targetCount } },
+                { $set: { status: 'pending', completedAt: null } }
+            );
+        }
+
         res.json(updatedGoal);
     } catch (error) {
         res.status(500).json({ message: 'Server Error', error: error.message });
@@ -95,7 +108,9 @@ const deleteGoal = async (req, res) => {
             return res.status(403).json({ message: 'Not authorized to delete this goal' });
         }
 
+        await GoalAssignment.deleteMany({ goalId: goal._id });
         await Goal.deleteOne({ _id: req.params.id });
+
         res.json({ message: 'Goal removed' });
     } catch (error) {
         res.status(500).json({ message: 'Server Error', error: error.message });
@@ -120,10 +135,17 @@ const getStudents = async (req, res) => {
 
             // For demo purposes, we treat total count as score (clamped at 100 for percentage feel)
             const count = activities.length > 0 ? activities[0].total : 0;
+
+            let readiness = 'Low';
+            if (count > 50) readiness = 'Moderate';
+            if (count > 100) readiness = 'High';
+            if (count > 200) readiness = 'Placement Ready';
+
             return {
                 ...student,
                 score: Math.min(count, 100),
-                totalActivity: count
+                totalActivity: count,
+                readiness
             };
         }));
 
@@ -189,13 +211,114 @@ const getAnalytics = async (req, res) => {
             };
         }));
 
+        const { timeFrame = 'weekly', startDate, endDate } = req.query;
+
+        let dateFrom = new Date();
+        let dateTo = new Date();
+        dateTo.setHours(23, 59, 59, 999);
+
+        const barChartMap = {};
+        let labelFormat = 'daily';
+
+        if (timeFrame === 'weekly') {
+            dateFrom.setDate(dateFrom.getDate() - 6);
+            dateFrom.setHours(0, 0, 0, 0);
+
+            for (let i = 6; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                const dateStr = d.toISOString().split('T')[0];
+                const dayName = d.toLocaleDateString('en-US', { weekday: 'short' });
+                barChartMap[dateStr] = { name: dayName, coding: 0, aptitude: 0, core: 0, softskills: 0 };
+            }
+        } else if (timeFrame === 'monthly') {
+            dateFrom.setDate(dateFrom.getDate() - 29);
+            dateFrom.setHours(0, 0, 0, 0);
+
+            for (let i = 29; i >= 0; i--) {
+                const d = new Date();
+                d.setDate(d.getDate() - i);
+                const dateStr = d.toISOString().split('T')[0];
+                const dayName = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                barChartMap[dateStr] = { name: dayName, coding: 0, aptitude: 0, core: 0, softskills: 0 };
+            }
+        } else if (timeFrame === 'yearly') {
+            dateFrom.setMonth(dateFrom.getMonth() - 11);
+            dateFrom.setDate(1);
+            dateFrom.setHours(0, 0, 0, 0);
+            labelFormat = 'monthly';
+
+            for (let i = 11; i >= 0; i--) {
+                const d = new Date();
+                d.setMonth(d.getMonth() - i);
+                const valStr = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+                const monthName = d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+                barChartMap[valStr] = { name: monthName, coding: 0, aptitude: 0, core: 0, softskills: 0 };
+            }
+        } else if (timeFrame === 'custom') {
+            if (startDate) {
+                dateFrom = new Date(startDate);
+                dateFrom.setHours(0, 0, 0, 0);
+            }
+            if (endDate) {
+                dateTo = new Date(endDate);
+                dateTo.setHours(23, 59, 59, 999);
+            }
+
+            const diffDays = Math.ceil(Math.abs(dateTo - dateFrom) / (1000 * 60 * 60 * 24));
+            if (diffDays > 90) {
+                labelFormat = 'monthly';
+                let currMonth = new Date(dateFrom.getFullYear(), dateFrom.getMonth(), 1);
+                while (currMonth <= dateTo) {
+                    const valStr = `${currMonth.getFullYear()}-${String(currMonth.getMonth() + 1).padStart(2, '0')}`;
+                    const monthName = currMonth.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+                    barChartMap[valStr] = { name: monthName, coding: 0, aptitude: 0, core: 0, softskills: 0 };
+                    currMonth.setMonth(currMonth.getMonth() + 1);
+                }
+            } else {
+                let currDate = new Date(dateFrom);
+                while (currDate <= dateTo) {
+                    const dateStr = currDate.toISOString().split('T')[0];
+                    const dayName = currDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    barChartMap[dateStr] = { name: dayName, coding: 0, aptitude: 0, core: 0, softskills: 0 };
+                    currDate.setDate(currDate.getDate() + 1);
+                }
+            }
+        }
+
+        const recentActivities = await Activity.find({
+            collegeId: collId,
+            loggedDate: { $gte: dateFrom, $lte: dateTo }
+        });
+
+        for (const act of recentActivities) {
+            if (!act.loggedDate) continue;
+            let keyStr = "";
+            const actDate = new Date(act.loggedDate);
+            if (labelFormat === 'daily') {
+                keyStr = actDate.toISOString().split('T')[0];
+            } else {
+                keyStr = `${actDate.getFullYear()}-${String(actDate.getMonth() + 1).padStart(2, '0')}`;
+            }
+
+            if (barChartMap[keyStr]) {
+                const cat = act.category || 'coding';
+                if (barChartMap[keyStr][cat] !== undefined) {
+                    barChartMap[keyStr][cat] += act.count || 0;
+                }
+            }
+        }
+
+        const barChartData = Object.values(barChartMap);
+
         res.json({
             totalStudents,
             activeStudents,
             inactiveStudents: totalStudents - activeStudents,
             totalActivitiesRecorded: totalActivities,
             averageActivitiesPerStudent: totalStudents > 0 ? (totalActivities / totalStudents).toFixed(2) : 0,
-            topPerformers
+            topPerformers,
+            barChartData
         });
     } catch (error) {
         console.error("Analytics Error:", error);

@@ -142,6 +142,9 @@ const getActiveGoals = async (req, res) => {
                 .sort({ createdAt: -1 });
         }
 
+        // Filter out inactive goals or goals that were deleted
+        goals = goals.filter(g => g.goalId && g.goalId.isActive);
+
         res.json(goals);
     } catch (error) {
         console.error("getActiveGoals Error:", error);

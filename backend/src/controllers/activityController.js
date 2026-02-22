@@ -11,7 +11,6 @@ const logActivity = async (req, res) => {
         // Normalize category
         if (category) category = category.toLowerCase();
 
-        // Validate category
         const validCategories = ['coding', 'aptitude', 'core', 'softskills'];
         if (!validCategories.includes(category)) {
             return res.status(400).json({
@@ -19,15 +18,48 @@ const logActivity = async (req, res) => {
             });
         }
 
-        const activity = await Activity.create({
+        const startOfDay = new Date();
+        startOfDay.setHours(0, 0, 0, 0);
+
+        const endOfDay = new Date();
+        endOfDay.setHours(23, 59, 59, 999);
+
+        let activity = await Activity.findOne({
             userId: req.user._id,
-            collegeId: req.user.collegeId,
-            category,
-            subCategory,
-            count: Number(count) || 1,
-            durationMinutes: Number(durationMinutes) || 0,
-            source
+            category: category,
+            loggedDate: { $gte: startOfDay, $lte: endOfDay }
         });
+
+        const newCount = Number(count) || 1;
+        const newDuration = Number(durationMinutes) || 0;
+
+        if (activity) {
+            // Update existing card for the day
+            activity.count += newCount;
+            activity.durationMinutes += newDuration;
+
+            // Append subcategory if it's new
+            if (subCategory && !activity.subCategory.includes(subCategory)) {
+                // To prevent title from getting excessively long, limit appends
+                if (activity.subCategory.length < 60) {
+                    activity.subCategory += ` | ${subCategory}`;
+                } else if (!activity.subCategory.endsWith('...')) {
+                    activity.subCategory += '...';
+                }
+            }
+            await activity.save();
+        } else {
+            // Create new card
+            activity = await Activity.create({
+                userId: req.user._id,
+                collegeId: req.user.collegeId,
+                category,
+                subCategory: subCategory || category,
+                count: newCount,
+                durationMinutes: newDuration,
+                source: source || 'Manual Log'
+            });
+        }
 
         // Update active Goal Assignments for this user and category
         const updatedAssignments = await GoalAssignment.find({
@@ -171,4 +203,104 @@ const getActivityTrends = async (req, res) => {
     }
 };
 
-module.exports = { logActivity, getMyActivities, getActivitySummary, getActivityTrends };
+// @desc Update activity
+// @route PUT /api/activities/:id
+// @access Protected
+const updateActivity = async (req, res) => {
+    try {
+        console.log(`[Activity] Updating ${req.params.id} for user ${req.user._id}`);
+        const activity = await Activity.findById(req.params.id);
+
+        if (!activity) {
+            return res.status(404).json({ message: 'Activity not found' });
+        }
+
+        if (activity.userId.toString() !== req.user._id.toString()) {
+            return res.status(401).json({ message: 'Not authorized' });
+        }
+
+        const oldCategory = activity.category;
+        const oldCount = activity.count;
+        const { category, subCategory, count, durationMinutes, source } = req.body;
+
+        activity.category = (category || activity.category).toLowerCase();
+        activity.subCategory = subCategory || activity.subCategory;
+        activity.count = count !== undefined ? Number(count) : activity.count;
+        activity.durationMinutes = durationMinutes !== undefined ? Number(durationMinutes) : activity.durationMinutes;
+        activity.source = source || activity.source;
+
+        const updatedActivity = await activity.save();
+
+        if (oldCategory !== activity.category || oldCount !== activity.count) {
+            const assignments = await GoalAssignment.find({ studentId: req.user._id }).populate('goalId');
+            for (const assignment of assignments) {
+                if (assignment.goalId && assignment.goalId.category) {
+                    let changed = false;
+                    if (assignment.goalId.category === oldCategory) {
+                        assignment.progress = Math.max(0, assignment.progress - oldCount);
+                        if (assignment.progress < assignment.goalId.targetCount) {
+                            assignment.status = 'pending';
+                            assignment.completedAt = null;
+                        }
+                        changed = true;
+                    }
+                    if (assignment.goalId.category === activity.category) {
+                        assignment.progress += activity.count;
+                        if (assignment.progress >= assignment.goalId.targetCount) {
+                            assignment.status = 'completed';
+                            assignment.completedAt = new Date();
+                        }
+                        changed = true;
+                    }
+                    if (changed) await assignment.save();
+                }
+            }
+        }
+        res.json(updatedActivity);
+    } catch (error) {
+        console.error("Update activity error:", error);
+        res.status(500).json({ message: 'Server Error', error: error.message });
+    }
+};
+
+// @desc Delete activity
+// @route DELETE /api/activities/:id
+// @access Protected
+const deleteActivity = async (req, res) => {
+    try {
+        console.log(`[Activity] Deleting ${req.params.id} for user ${req.user._id}`);
+        const activity = await Activity.findById(req.params.id);
+
+        if (!activity) {
+            return res.status(404).json({ message: 'Activity not found' });
+        }
+
+        if (activity.userId.toString() !== req.user._id.toString()) {
+            return res.status(401).json({ message: 'Not authorized' });
+        }
+
+        const category = activity.category;
+        const count = activity.count;
+
+        await activity.deleteOne();
+
+        const assignments = await GoalAssignment.find({ studentId: req.user._id }).populate('goalId');
+        for (const assignment of assignments) {
+            if (assignment.goalId && assignment.goalId.category === category) {
+                assignment.progress = Math.max(0, assignment.progress - count);
+                if (assignment.progress < assignment.goalId.targetCount) {
+                    assignment.status = 'pending';
+                    assignment.completedAt = null;
+                }
+                await assignment.save();
+            }
+        }
+
+        res.json({ message: 'Activity removed' });
+    } catch (error) {
+        console.error("Delete activity error:", error);
+        res.status(500).json({ message: 'Server Error', error: error.message });
+    }
+};
+
+module.exports = { logActivity, getMyActivities, getActivitySummary, getActivityTrends, updateActivity, deleteActivity };
