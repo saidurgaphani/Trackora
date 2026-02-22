@@ -118,6 +118,37 @@ export default function StudentDetails() {
                 </div>
             </div>
 
+            {/* Detailed Progress Section */}
+            <div className="sd-card mt-6">
+                <h2 className="text-xl font-bold text-slate-800 dark:text-slate-100 mb-4 px-1">Activity Breakdown</h2>
+                {progress.length > 0 ? (
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {progress.map((item, idx) => (
+                            <div key={idx} className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 p-5 rounded-2xl shadow-sm flex flex-col justify-center transition-all hover:-translate-y-1 hover:shadow-md">
+                                <h3 className="text-sm font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wide mb-3">{item._id}</h3>
+                                <div className="flex items-end gap-2">
+                                    <span className="text-4xl font-black text-slate-800 dark:text-slate-100 leading-none">{item.totalCount}</span>
+                                    <span className="text-sm font-medium text-slate-500 dark:text-slate-500 mb-1">activities</span>
+                                </div>
+                                {item.totalDuration > 0 && (
+                                    <div className="mt-3 inline-block px-2.5 py-1 bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-300 rounded-lg text-xs font-medium">
+                                        {item.totalDuration} mins spent
+                                    </div>
+                                )}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="bg-slate-50 dark:bg-slate-800 border border-dashed border-slate-200 dark:border-slate-700 rounded-2xl p-10 text-center flex flex-col items-center justify-center">
+                        <div className="w-16 h-16 bg-white dark:bg-slate-900 rounded-full flex items-center justify-center shadow-sm mb-4">
+                            <span className="text-2xl">📊</span>
+                        </div>
+                        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">No Activity Logged</h3>
+                        <p className="text-slate-500 dark:text-slate-400 mt-2 max-w-sm">This student hasn't logged any practice activities yet. Check back later.</p>
+                    </div>
+                )}
+            </div>
+
         </div>
     );
 }
