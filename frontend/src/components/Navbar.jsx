@@ -91,17 +91,19 @@ const Navbar = () => {
                             {/* Profile Dropdown */}
                             <div className="absolute right-0 top-full pt-2 w-48 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
                                 <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-100 dark:border-slate-700 overflow-hidden">
-                                    <div className="p-2 space-y-1">
-                                        <NavLink to={`/${user?.role === 'admin' ? 'admin' : 'student'}/profile`} className="flex items-center gap-2 px-3 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg font-medium transition-colors">
-                                            <User size={16} /> My Profile
-                                        </NavLink>
-                                        <NavLink to={`/${user?.role === 'admin' ? 'admin' : 'student'}/courses`} className="flex items-center gap-2 px-3 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg font-medium transition-colors">
-                                            <BookOpen size={16} /> My Courses
-                                        </NavLink>
-                                        <NavLink to={`/${user?.role === 'admin' ? 'admin' : 'student'}/progress`} className="flex items-center gap-2 px-3 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg font-medium transition-colors">
-                                            <LineChart size={16} /> Progress
-                                        </NavLink>
-                                    </div>
+                                    {user?.role === 'student' && (
+                                        <div className="p-2 space-y-1">
+                                            <NavLink to="/student/profile" className="flex items-center gap-2 px-3 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg font-medium transition-colors">
+                                                <User size={16} /> My Profile
+                                            </NavLink>
+                                            <NavLink to="/student/courses" className="flex items-center gap-2 px-3 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg font-medium transition-colors">
+                                                <BookOpen size={16} /> My Courses
+                                            </NavLink>
+                                            <NavLink to="/student/progress" className="flex items-center gap-2 px-3 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg font-medium transition-colors">
+                                                <LineChart size={16} /> Progress
+                                            </NavLink>
+                                        </div>
+                                    )}
                                     <div className="border-t border-slate-100 dark:border-slate-700 p-2">
                                         <button onClick={logout} className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg font-medium transition-colors">
                                             <LogOut size={16} /> Logout

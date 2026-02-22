@@ -65,30 +65,48 @@ export default function Practice() {
         }
     }, [loading, activeTab, searchQuery]);
 
-    const handleMarkAsDone = async (problem, topicTitle) => {
+    const handleToggleDone = async (problem, topicTitle) => {
         const currentCategory = activeTab;
-        if (completedProblems[currentCategory]?.includes(problem.id)) return;
+        const isCompleted = completedProblems[currentCategory]?.includes(problem.id);
 
         try {
-            const res = await api.post('/students/complete-problem', {
-                problemId: problem.id,
-                problemTitle: problem.title,
-                topicTitle: topicTitle,
-                category: currentCategory
-            });
+            if (isCompleted) {
+                // Undo logic
+                await api.post('/students/uncomplete-problem', {
+                    problemId: problem.id,
+                    category: currentCategory
+                });
 
-            // Update local state for immediate feedback
-            setCompletedProblems(prev => ({
-                ...prev,
-                [currentCategory]: [...(prev[currentCategory] || []), problem.id]
-            }));
+                setCompletedProblems(prev => ({
+                    ...prev,
+                    [currentCategory]: prev[currentCategory].filter(id => id !== problem.id)
+                }));
 
-            setReadinessDetails(prev => ({
-                ...prev,
-                [currentCategory]: (prev[currentCategory] || 0) + 1
-            }));
+                setReadinessDetails(prev => ({
+                    ...prev,
+                    [currentCategory]: Math.max(0, (prev[currentCategory] || 0) - 1)
+                }));
+            } else {
+                // Mark logic
+                await api.post('/students/complete-problem', {
+                    problemId: problem.id,
+                    problemTitle: problem.title,
+                    topicTitle: topicTitle,
+                    category: currentCategory
+                });
+
+                setCompletedProblems(prev => ({
+                    ...prev,
+                    [currentCategory]: [...(prev[currentCategory] || []), problem.id]
+                }));
+
+                setReadinessDetails(prev => ({
+                    ...prev,
+                    [currentCategory]: (prev[currentCategory] || 0) + 1
+                }));
+            }
         } catch (error) {
-            console.error("Failed to mark as done:", error);
+            console.error("Failed to toggle problem:", error);
         }
     };
 
@@ -254,9 +272,9 @@ export default function Practice() {
                                                         </span>
                                                     </a>
                                                     <button
-                                                        onClick={() => handleMarkAsDone(prob, topic.title)}
-                                                        disabled={completedProblems[activeTab]?.includes(prob.id)}
-                                                        className={`p-1.5 rounded-lg transition-all ${completedProblems[activeTab]?.includes(prob.id) ? 'text-emerald-500' : 'text-slate-300 hover:text-emerald-500 active:scale-90'}`}
+                                                        onClick={() => handleToggleDone(prob, topic.title)}
+                                                        className={`p-1.5 rounded-lg transition-all ${completedProblems[activeTab]?.includes(prob.id) ? 'text-emerald-500 hover:text-emerald-600 dark:hover:text-emerald-400' : 'text-slate-300 hover:text-emerald-500 active:scale-90'}`}
+                                                        title={completedProblems[activeTab]?.includes(prob.id) ? "Mark as undone" : "Mark as done"}
                                                     >
                                                         <CheckCircle2 size={18} fill={completedProblems[activeTab]?.includes(prob.id) ? 'currentColor' : 'none'} />
                                                     </button>

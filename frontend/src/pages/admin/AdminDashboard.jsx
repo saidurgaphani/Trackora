@@ -13,11 +13,19 @@ export default function AdminDashboard() {
 
     const [analytics, setAnalytics] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
+    const [timeFrame, setTimeFrame] = useState('weekly');
+    const [customStart, setCustomStart] = useState('');
+    const [customEnd, setCustomEnd] = useState('');
 
     useEffect(() => {
         const fetchAnalytics = async () => {
             try {
-                const res = await api.get('/admin/analytics');
+                let url = `/admin/analytics?timeFrame=${timeFrame}`;
+                if (timeFrame === 'custom') {
+                    if (customStart) url += `&startDate=${customStart}`;
+                    if (customEnd) url += `&endDate=${customEnd}`;
+                }
+                const res = await api.get(url);
                 setAnalytics(res.data);
             } catch (error) {
                 console.error("Error fetching analytics:", error);
@@ -26,7 +34,7 @@ export default function AdminDashboard() {
             }
         };
         fetchAnalytics();
-    }, []);
+    }, [timeFrame, customStart, customEnd]);
 
     useGSAP(() => {
         if (isLoading) return;
@@ -83,7 +91,27 @@ export default function AdminDashboard() {
 
             <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                 <div className="admin-widget xl:col-span-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 p-6 shadow-sm min-h-[400px]">
-                    <ProgressChart title="Platform Engagement (Monthly)" />
+                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                        <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100">Platform Engagement</h3>
+                        <div className="flex flex-wrap items-center gap-3">
+                            {timeFrame === 'custom' && (
+                                <div className="flex items-center gap-2">
+                                    <input type="date" value={customStart} onChange={(e) => setCustomStart(e.target.value)} className="bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg focus:ring-[var(--color-primary-500)] py-1.5 px-2 dark:bg-slate-800 dark:border-slate-700 dark:text-white" />
+                                    <span className="text-slate-500">-</span>
+                                    <input type="date" value={customEnd} onChange={(e) => setCustomEnd(e.target.value)} className="bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg focus:ring-[var(--color-primary-500)] py-1.5 px-2 dark:bg-slate-800 dark:border-slate-700 dark:text-white" />
+                                </div>
+                            )}
+                            <select value={timeFrame} onChange={(e) => setTimeFrame(e.target.value)} className="bg-slate-50 border border-slate-200 text-slate-700 text-sm rounded-lg focus:ring-[var(--color-primary-500)] py-2 px-3 dark:bg-slate-800 dark:border-slate-700 dark:text-white font-medium cursor-pointer outline-none transition-all">
+                                <option value="weekly">Last 7 Days</option>
+                                <option value="monthly">Last 30 Days</option>
+                                <option value="yearly">Last 12 Months</option>
+                                <option value="custom">Custom Range</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className="h-[320px]">
+                        <ProgressChart data={analytics?.barChartData} type="bar" title=" " />
+                    </div>
                 </div>
 
                 <div className="admin-widget bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden flex flex-col">

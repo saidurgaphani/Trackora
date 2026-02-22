@@ -31,9 +31,42 @@ export default function StudentsList() {
 
     useGSAP(() => {
         if (!isLoading) {
-            gsap.from('.std-anim', { y: -20, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' });
+            gsap.fromTo('.std-anim',
+                { y: -20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }
+            );
         }
     }, [isLoading]);
+
+    const downloadCSV = () => {
+        if (!students || students.length === 0) return;
+
+        const headers = ['Name', 'Email', 'Branch', 'Score', 'Readiness', 'Eligibility', 'Status', 'Joined Date'];
+        const csvRows = students.map(row => {
+            const isEligible = row.score >= 75 ? 'Eligible' : 'Not Eligible';
+            const status = (row.score === 0 || !row.score) ? 'Inactive' : (row.isActive ? 'Active' : 'Inactive');
+            return [
+                `"${row.name || ''}"`,
+                `"${row.email || ''}"`,
+                `"${row.profile?.branch || 'N/A'}"`,
+                row.score || 0,
+                row.readiness || 'Low',
+                isEligible,
+                status,
+                new Date(row.createdAt).toLocaleDateString()
+            ].join(',');
+        });
+
+        const csvContent = [headers.join(','), ...csvRows].join('\n');
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'students_directory.csv');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
 
     const columns = [
         {
@@ -62,8 +95,33 @@ export default function StudentsList() {
             )
         },
         {
+            header: 'Readiness', render: (row) => {
+                const colors = {
+                    'Low': 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
+                    'Moderate': 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400',
+                    'High': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
+                    'Placement Ready': 'bg-primary-100 text-primary-700 dark:bg-primary-900/30 dark:text-primary-400'
+                };
+                return (
+                    <span className={`px-2.5 py-1 text-xs font-bold rounded-lg ${colors[row.readiness] || colors['Low']}`}>
+                        {row.readiness || 'Low'}
+                    </span>
+                );
+            }
+        },
+        {
+            header: 'Eligibility', render: (row) => {
+                const isEligible = row.score >= 75;
+                return (
+                    <Badge variant={isEligible ? 'success' : 'warning'} className="whitespace-nowrap">
+                        {isEligible ? 'Eligible' : 'Not Eligible'}
+                    </Badge>
+                );
+            }
+        },
+        {
             header: 'Status', render: (row) => {
-                const status = row.isActive ? 'active' : 'inactive';
+                const status = (row.score === 0 || !row.score) ? 'inactive' : (row.isActive ? 'active' : 'inactive');
                 return (
                     <Badge variant={status === 'active' ? 'success' : 'default'} className="capitalize">
                         {status}
@@ -107,7 +165,7 @@ export default function StudentsList() {
                     <button className="p-2 border border-slate-200 dark:border-slate-700 bg-transparent rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm cursor-pointer">
                         <SlidersHorizontal size={20} />
                     </button>
-                    <button className="p-2 border border-slate-200 dark:border-slate-700 bg-transparent text-slate-600 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm cursor-pointer">
+                    <button onClick={downloadCSV} className="p-2 border border-slate-200 dark:border-slate-700 bg-transparent text-slate-600 dark:text-slate-300 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors shadow-sm cursor-pointer">
                         <Download size={20} />
                     </button>
                 </div>

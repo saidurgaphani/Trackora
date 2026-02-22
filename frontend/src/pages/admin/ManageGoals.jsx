@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import Table from '../../components/Table';
 import Badge from '../../components/Badge';
 import Modal from '../../components/Modal';
-import { Plus, Search, CheckCircle2, MoreVertical, Loader2 } from 'lucide-react';
+import { Plus, Search, CheckCircle2, MoreVertical, Loader2, Pencil, Trash2 } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import api from '../../api';
@@ -18,7 +18,9 @@ export default function ManageGoals() {
     const [category, setCategory] = useState('coding');
     const [targetCount, setTargetCount] = useState('');
     const [deadline, setDeadline] = useState('');
+    const [isActive, setIsActive] = useState(true);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [editingGoal, setEditingGoal] = useState(null);
 
     useEffect(() => {
         fetchGoals();
@@ -38,7 +40,10 @@ export default function ManageGoals() {
 
     useGSAP(() => {
         if (!isLoading) {
-            gsap.from('.manage-anim', { y: -20, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out' });
+            gsap.fromTo('.manage-anim',
+                { y: -20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }
+            );
         }
     }, [isLoading]);
 
@@ -46,28 +51,59 @@ export default function ManageGoals() {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            await api.post('/admin/goals', {
+            const payload = {
                 title,
                 category,
                 targetCount: Number(targetCount),
                 deadline: new Date(deadline),
-                startDate: new Date(),
-                isActive: true
-            });
+                startDate: editingGoal ? editingGoal.startDate : new Date(),
+                isActive
+            };
+
+            if (editingGoal) {
+                const id = editingGoal._id || editingGoal.id;
+                await api.put(`/admin/goals/${id}`, payload);
+            } else {
+                await api.post('/admin/goals', payload);
+            }
+
             setIsModalOpen(false);
             // Reset form
+            setEditingGoal(null);
             setTitle('');
             setCategory('coding');
             setTargetCount('');
             setDeadline('');
+            setIsActive(true);
             // Refresh list
             fetchGoals();
         } catch (error) {
             console.error("Publish Error:", error);
             const errorMsg = error.response?.data?.message || error.message || "Unknown error";
-            alert(`Failed to publish goal: ${errorMsg}`);
+            alert(`Failed to save goal: ${errorMsg}`);
         } finally {
             setIsSubmitting(false);
+        }
+    };
+
+    const openEditModal = (goal) => {
+        setEditingGoal(goal);
+        setTitle(goal.title);
+        setCategory(goal.category);
+        setTargetCount(goal.targetCount);
+        setDeadline(new Date(goal.deadline).toISOString().split('T')[0]);
+        if (goal.isActive !== undefined) setIsActive(goal.isActive);
+        setIsModalOpen(true);
+    };
+
+    const handleDelete = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this goal? This cannot be undone.")) return;
+        try {
+            await api.delete(`/admin/goals/${id}`);
+            fetchGoals();
+        } catch (error) {
+            console.error("Delete Error:", error);
+            alert("Failed to delete goal.");
         }
     };
 
@@ -92,9 +128,14 @@ export default function ManageGoals() {
         },
         {
             header: 'Actions', render: (row) => (
-                <button className="p-2 text-slate-400 dark:text-slate-500 hover:text-[var(--color-primary-500)] rounded-full hover:bg-primary-50 transition-colors">
-                    <MoreVertical size={18} />
-                </button>
+                <div className="flex items-center space-x-2">
+                    <button onClick={() => openEditModal(row)} className="p-2 text-slate-400 dark:text-slate-500 hover:text-[var(--color-primary-500)] rounded-full hover:bg-primary-50 dark:hover:bg-primary-900/30 transition-colors">
+                        <Pencil size={18} />
+                    </button>
+                    <button onClick={() => handleDelete(row._id || row.id)} className="p-2 text-slate-400 dark:text-slate-500 hover:text-red-600 rounded-full hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors">
+                        <Trash2 size={18} />
+                    </button>
+                </div>
             )
         },
     ];
@@ -117,7 +158,15 @@ export default function ManageGoals() {
                     </div>
 
                     <button
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={() => {
+                            setEditingGoal(null);
+                            setTitle('');
+                            setCategory('coding');
+                            setTargetCount('');
+                            setDeadline('');
+                            setIsActive(true);
+                            setIsModalOpen(true);
+                        }}
                         className="flex items-center gap-2 bg-[var(--color-primary-500)] hover:bg-primary-800 text-white px-4 py-2 rounded-xl transition-colors font-medium text-sm whitespace-nowrap shadow-sm cursor-pointer"
                     >
                         <Plus size={18} />
@@ -136,7 +185,7 @@ export default function ManageGoals() {
                 </div>
             )}
 
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Create New Goal">
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title={editingGoal ? "Edit Goal" : "Create New Goal"}>
                 <form onSubmit={handlePublish} className="space-y-4">
                     <div>
                         <label className="text-sm font-medium mb-1 block">Goal Title</label>
@@ -185,12 +234,26 @@ export default function ManageGoals() {
                             className="w-full p-2.5 border border-slate-200 dark:border-slate-700 bg-transparent rounded-xl"
                         />
                     </div>
+                    {editingGoal && (
+                        <div className="flex items-center gap-2 mt-4 ml-1">
+                            <input
+                                type="checkbox"
+                                id="isActive"
+                                checked={isActive}
+                                onChange={(e) => setIsActive(e.target.checked)}
+                                className="w-4 h-4 text-primary-500 bg-slate-100 border-slate-300 rounded focus:ring-primary-500 cursor-pointer"
+                            />
+                            <label htmlFor="isActive" className="text-sm font-medium text-slate-700 dark:text-slate-300 cursor-pointer">
+                                Active Goal
+                            </label>
+                        </div>
+                    )}
                     <button
                         type="submit"
                         disabled={isSubmitting}
                         className="w-full flex justify-center items-center py-3 mt-4 bg-[var(--color-primary-500)] text-white font-semibold rounded-xl hover:bg-primary-800 transition-colors shadow-sm cursor-pointer disabled:opacity-50"
                     >
-                        {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : "Publish Goal"}
+                        {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : editingGoal ? "Update Goal" : "Publish Goal"}
                     </button>
                 </form>
             </Modal>

@@ -45,6 +45,7 @@ export default function StudentDetails() {
     const { student, progress } = data;
     const totalCount = progress.reduce((acc, curr) => acc + curr.totalCount, 0);
     const score = Math.min(totalCount, 100);
+    const studentStatus = score === 0 ? 'inactive' : (student.isActive ? 'active' : 'inactive');
 
     return (
         <div ref={containerRef} className="space-y-6 max-w-7xl mx-auto pb-10">
@@ -71,7 +72,7 @@ export default function StudentDetails() {
                         <div className="pb-2">
                             <div className="flex items-center gap-3">
                                 <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-50">{student.name}</h1>
-                                <Badge variant={student.isActive ? 'success' : 'default'}>{student.isActive ? 'Active' : 'Inactive'}</Badge>
+                                <Badge variant={studentStatus === 'active' ? 'success' : 'default'} className="capitalize">{studentStatus}</Badge>
                             </div>
                             <div className="flex items-center gap-4 text-slate-500 dark:text-slate-500 text-sm mt-2 font-medium">
                                 <span className="flex items-center gap-1"><Mail size={16} /> {student.email}</span>

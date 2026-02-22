@@ -1,6 +1,8 @@
 import {
     LineChart,
     Line,
+    BarChart,
+    Bar,
     XAxis,
     YAxis,
     CartesianGrid,
@@ -37,7 +39,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     return null;
 };
 
-export default function ProgressChart({ data = mockData, title }) {
+export default function ProgressChart({ data = mockData, title, type = 'line' }) {
     const chartRef = useRef();
 
     useGSAP(() => {
@@ -54,16 +56,29 @@ export default function ProgressChart({ data = mockData, title }) {
             <h3 className="text-lg font-bold text-slate-800 dark:text-slate-100 mb-6">{title || "Weekly Progress"}</h3>
             <div className="flex-1 w-full min-h-[300px]">
                 <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                        <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                        <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
-                        <CartesianGrid stroke="#e2e8f0" strokeDasharray="5 5" vertical={false} opacity={0.3} />
-                        <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#cbd5e1', strokeWidth: 1, strokeDasharray: '5 5' }} />
-                        <Line type="monotone" dataKey="coding" name="Coding" stroke="var(--color-primary-500)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
-                        <Line type="monotone" dataKey="aptitude" name="Aptitude" stroke="#3b82f6" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
-                        <Line type="monotone" dataKey="core" name="Core Concepts" stroke="#f59e0b" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
-                        <Line type="monotone" dataKey="softskills" name="Soft Skills" stroke="var(--color-success)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
-                    </LineChart>
+                    {type === 'bar' ? (
+                        <BarChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                            <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
+                            <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
+                            <CartesianGrid stroke="#e2e8f0" strokeDasharray="5 5" vertical={false} opacity={0.3} />
+                            <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.05)' }} />
+                            <Bar dataKey="coding" name="Coding" fill="var(--color-primary-500)" radius={[4, 4, 0, 0]} />
+                            <Bar dataKey="aptitude" name="Aptitude" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+                            <Bar dataKey="core" name="Core Concepts" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+                            <Bar dataKey="softskills" name="Soft Skills" fill="var(--color-success)" radius={[4, 4, 0, 0]} />
+                        </BarChart>
+                    ) : (
+                        <LineChart data={data} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                            <XAxis dataKey="name" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
+                            <YAxis stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
+                            <CartesianGrid stroke="#e2e8f0" strokeDasharray="5 5" vertical={false} opacity={0.3} />
+                            <Tooltip content={<CustomTooltip />} cursor={{ stroke: '#cbd5e1', strokeWidth: 1, strokeDasharray: '5 5' }} />
+                            <Line type="monotone" dataKey="coding" name="Coding" stroke="var(--color-primary-500)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                            <Line type="monotone" dataKey="aptitude" name="Aptitude" stroke="#3b82f6" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                            <Line type="monotone" dataKey="core" name="Core Concepts" stroke="#f59e0b" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                            <Line type="monotone" dataKey="softskills" name="Soft Skills" stroke="var(--color-success)" strokeWidth={3} dot={{ r: 4, strokeWidth: 2 }} activeDot={{ r: 6 }} />
+                        </LineChart>
+                    )}
                 </ResponsiveContainer>
             </div>
         </div>

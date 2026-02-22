@@ -21,6 +21,7 @@ export default function ActivityLog() {
     const [count, setCount] = useState('');
     const [durationMinutes, setDurationMinutes] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [editingActivity, setEditingActivity] = useState(null);
 
     useEffect(() => {
         const fetchActivities = async () => {
@@ -39,52 +40,96 @@ export default function ActivityLog() {
     useGSAP(() => {
         // cards scroll animation is handled when list populates.
         const ctx = gsap.context(() => {
-            gsap.from('.header-element', {
-                y: -20, opacity: 0, duration: 0.5, stagger: 0.1, ease: 'power2.out'
-            });
+            gsap.fromTo('.header-element',
+                { y: -20, opacity: 0 },
+                { y: 0, opacity: 1, duration: 0.5, stagger: 0.1, ease: 'power2.out' }
+            );
 
             const cards = gsap.utils.toArray('.activity-item');
             if (cards.length > 0) {
-                gsap.from(cards, {
-                    y: 40,
-                    opacity: 0,
-                    duration: 0.5,
-                    stagger: 0.05,
-                    ease: 'power3.out'
-                });
+                gsap.fromTo(cards,
+                    { y: 40, opacity: 0 },
+                    {
+                        y: 0,
+                        opacity: 1,
+                        duration: 0.5,
+                        stagger: 0.05,
+                        ease: 'power3.out'
+                    }
+                );
             }
         }, containerRef);
         return () => ctx.revert();
     }, { scope: containerRef, dependencies: [activities] });
 
-    const handleEdit = (activity) => console.log('Edit', activity);
-    const handleDelete = (id) => setActivities(activities.filter(a => (a._id || a.id) !== id));
+    const handleEdit = (activity) => {
+        setEditingActivity(activity);
+        setCategory(activity.category);
+        setSubCategory(activity.subCategory);
+        setCount(activity.count);
+        setDurationMinutes(activity.durationMinutes);
+        setIsModalOpen(true);
+    };
+
+    const handleDelete = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this activity?")) return;
+        const stringId = String(id);
+        console.log("Deleting activity with ID:", stringId);
+        try {
+            await api.delete(`/activities/${stringId}`);
+            setActivities(prev => prev.filter(a => String(a._id || a.id) !== stringId));
+        } catch (error) {
+            console.error("Failed to delete activity:", error);
+            alert("Failed to delete activity. Please try again.");
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
         try {
-            const res = await api.post('/activities', {
+            const payload = {
                 category: category.toLowerCase(),
                 subCategory,
                 count: Number(count),
                 durationMinutes: Number(durationMinutes),
-                source: 'Manual Log'
-            });
-            // Add new activity at the top
-            setActivities([res.data, ...activities]);
+                source: editingActivity ? editingActivity.source : 'Manual Log'
+            };
+
+            if (editingActivity) {
+                const id = String(editingActivity._id || editingActivity.id);
+                console.log("Updating activity with ID:", id);
+                const res = await api.put(`/activities/${id}`, payload);
+                setActivities(prev => prev.map(a => String(a._id || a.id) === id ? res.data : a));
+            } else {
+                console.log("Creating new activity");
+                const res = await api.post('/activities', payload);
+                // Add new activity at the top
+                setActivities(prev => [res.data, ...prev]);
+            }
+
             setIsModalOpen(false);
             // Reset Form Defaults
+            setEditingActivity(null);
             setSubCategory('');
             setCount('');
             setDurationMinutes('');
         } catch (error) {
-            console.error("Failed to add activity", error);
+            console.error("Failed to save activity", error);
             const errorMsg = error.response?.data?.message || error.message || "Unknown error occurred";
-            alert(`Error saving activity: ${errorMsg}\n\nAllowed categories are: coding, aptitude, core, softskills.`);
+            alert(`Error saving activity: ${errorMsg}`);
         } finally {
             setIsSubmitting(false);
         }
+    };
+
+    const openAddModal = () => {
+        setEditingActivity(null);
+        setCategory('coding');
+        setSubCategory('');
+        setCount('');
+        setDurationMinutes('');
+        setIsModalOpen(true);
     };
 
     return (
@@ -94,7 +139,7 @@ export default function ActivityLog() {
             <div className="flex flex-col md:flex-row md:justify-between md:items-end gap-4">
                 <div>
                     <h1 className="header-element text-3xl font-bold text-slate-900 dark:text-slate-50 tracking-tight">Activity Log</h1>
-                    <p className="header-element text-slate-500 dark:text-slate-500 mt-1">Record your daily preparation efforts.</p>
+                    <p className="header-element text-slate-500 dark:text-slate-400 mt-1">Record your daily preparation efforts.</p>
                 </div>
 
                 <div className="header-element flex items-center gap-3 w-full md:w-auto">
@@ -105,7 +150,7 @@ export default function ActivityLog() {
                         <input type="text" placeholder="Search logs..." className="w-full pl-9 pr-4 py-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl outline-none focus:ring-2 focus:ring-[var(--color-primary-500)] text-sm" />
                     </div>
                     <button
-                        onClick={() => setIsModalOpen(true)}
+                        onClick={openAddModal}
                         className="flex items-center gap-2 bg-[var(--color-primary-500)] hover:bg-primary-800 text-white px-4 py-2 rounded-xl transition-colors font-medium text-sm whitespace-nowrap cursor-pointer selection:bg-transparent"
                     >
                         <PlusCircle size={18} />
@@ -138,7 +183,7 @@ export default function ActivityLog() {
                 </div>
             )}
 
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Log New Activity">
+            <Modal isOpen={isModalOpen} onClose={() => { setIsModalOpen(false); setEditingActivity(null); }} title={editingActivity ? "Edit Activity" : "Log New Activity"}>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="space-y-1">
                         <label className="text-sm font-medium">Category</label>

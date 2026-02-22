@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { CalendarRange, Info, UserCheck, Video } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -16,6 +16,40 @@ export default function MockInterview() {
             ease: 'power2.out'
         });
     }, { scope: containerRef });
+
+    useEffect(() => {
+        (function (C, A, L) {
+            let p = function (a, ar) { a.q.push(ar); };
+            let d = C.document;
+            C.Cal = C.Cal || function () {
+                let cal = C.Cal;
+                let ar = arguments;
+                if (!cal.loaded) {
+                    cal.ns = {};
+                    cal.q = cal.q || [];
+                    let script = d.createElement("script");
+                    script.src = A;
+                    d.head.appendChild(script);
+                    cal.loaded = true;
+                }
+                if (ar[0] === L) {
+                    const api = function () { p(api, arguments); };
+                    const namespace = ar[1];
+                    api.q = api.q || [];
+                    if (typeof namespace === "string") {
+                        cal.ns[namespace] = cal.ns[namespace] || api;
+                        p(cal.ns[namespace], ar);
+                        p(cal, ["initNamespace", namespace]);
+                    } else p(cal, ar);
+                    return;
+                }
+                p(cal, ar);
+            };
+        })(window, "https://app.cal.com/embed/embed.js", "init");
+
+        window.Cal("init", "30min", { origin: "https://app.cal.com" });
+        window.Cal.ns["30min"]("ui", { "cssVarsPerTheme": { "dark": { "cal-brand": "#ff6600" } }, "hideEventTypeDetails": false, "layout": "month_view" });
+    }, []);
 
     const readinessScore = 78;
     const isEligible = readinessScore >= 75;
@@ -63,7 +97,12 @@ export default function MockInterview() {
                             <>
                                 <CalendarRange size={40} className="text-[var(--color-primary-500)]" />
                                 <h4 className="font-bold text-slate-800 dark:text-slate-100">Ready to proceed?</h4>
-                                <button className="w-full bg-[var(--color-primary-500)] hover:bg-primary-800 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                                <button
+                                    data-cal-link="sai-durga-phani/30min"
+                                    data-cal-namespace="30min"
+                                    data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'
+                                    className="w-full bg-[var(--color-primary-500)] hover:bg-primary-800 text-white font-semibold py-3 px-6 rounded-xl transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+                                >
                                     Request Schedule
                                 </button>
                             </>
